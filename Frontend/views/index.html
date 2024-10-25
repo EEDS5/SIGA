@@ -1,15 +1,98 @@
-<!-- frontend/views/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Página Principal</title>
+    <title>Sistema de Gestión Automotriz - SIGA</title>
+
+    <!-- Integrar Bootstrap para componentes adicionales -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Integrar Tailwind desde el archivo generado -->
+    <link href="/Frontend/css/output.css" rel="stylesheet">
+    
+    <style>
+        /* Estilos adicionales si son necesarios */
+        body {
+            background-color: #f8fafc; /* Fondo claro y limpio */
+        }
+        .header {
+            background-color: #1a202c; /* Fondo oscuro */
+            color: white;
+            padding: 20px;
+        }
+        .main-container {
+            margin-top: 50px;
+        }
+        .btn-custom {
+            background-color: #3490dc; /* Botón con color principal de Bootstrap */
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #2779bd; /* Cambio de color en hover */
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido</h1>
-    <p><a href="/auth/login">Iniciar sesión</a></p>
-    <p><a href="/auth/register">Registrarse</a></p>
+
+    <!-- Encabezado -->
+    <header class="header text-center">
+        <h1 class="text-4xl font-bold">Sistema de Gestión Automotriz</h1>
+        <p class="lead">Bienvenido a SIGA - Tu solución para gestionar vehículos y servicios</p>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container main-container text-center">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-2xl font-semibold mb-4">Bienvenido a SIGA</h2>
+                        <p>Administra eficientemente los vehículos y servicios automotrices con nuestro sistema moderno y fácil de usar.</p>
+                        <div class="mt-5">
+                            <a href="/auth/login" class="btn btn-custom btn-lg mx-2">Iniciar Sesión</a>
+                            <a href="/auth/register" class="btn btn-outline-primary btn-lg mx-2">Registrarse</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de información adicional -->
+    <section class="container text-center mt-5">
+        <h3 class="text-3xl font-semibold mb-3">Características del Sistema</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white shadow rounded-lg">
+                    <h4 class="font-semibold text-xl">Gestión de Clientes</h4>
+                    <p class="text-gray-600">Controla y organiza la información de tus clientes con facilidad.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white shadow rounded-lg">
+                    <h4 class="font-semibold text-xl">Control de Vehículos</h4>
+                    <p class="text-gray-600">Administra los vehículos de tus clientes y su historial de servicio.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-4 bg-white shadow rounded-lg">
+                    <h4 class="font-semibold text-xl">Gestión de Inventario</h4>
+                    <p class="text-gray-600">Mantén un seguimiento detallado del inventario de productos y repuestos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+        <p class="mb-0">&copy; 2024 Sistema de Gestión Automotriz (SIGA) - Todos los derechos reservados.</p>
+        <p>Desarrollado por el equipo de Ingeniería de Sistemas.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

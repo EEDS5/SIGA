@@ -3,52 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="bg-light">
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card shadow" style="width: 400px;">
-            <div class="card-body">
-                <h5 class="card-title text-center">Iniciar sesión</h5>
-                
-                <!-- Mostrar mensaje de error -->
-                <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
+    <title>Login - SIGA</title>
 
-                <form action="/auth/login" method="POST">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                </form>
-                <p class="text-center mt-2">¿No tienes cuenta? <a href="/auth/register">Registrarse</a></p>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+
+    <!-- Animaciones con Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .login-input {
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+        }
+        
+        .login-btn {
+            background-color: #3490dc;
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #2779bd;
+        }
+
+        .error-message {
+            display: none;
+            background-color: #ffcccc;
+            color: #b71c1c;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .login-container:hover {
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+
+    <!-- Container del Login -->
+    <div class="login-container animate__animated animate__fadeInUp">
+        <h5 class="text-center font-bold text-2xl mb-6">Iniciar sesión</h5>
+        
+        <!-- Mensaje de error -->
+        <div id="error-message" class="error-message" role="alert">Usuario o contraseña incorrectos.</div>
+
+        <!-- Formulario de login -->
+        <form action="/auth/login" method="POST">
+            <div class="form-group mb-5">
+                <input type="text" class="form-control login-input focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" name="username" placeholder="Nombre de usuario" required>
             </div>
-        </div>
+            <div class="form-group mb-6">
+                <input type="password" class="form-control login-input focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" name="password" placeholder="Contraseña" required>
+            </div>
+            <button type="submit" class="btn login-btn text-white w-full mb-4">Iniciar sesión</button>
+        </form>
+
+        <p class="text-center mt-2 text-sm">¿No tienes cuenta? <a href="/auth/register" class="text-blue-500 hover:text-blue-700">Regístrate aquí</a></p>
     </div>
-    
+
+    <!-- Scripts de jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
         // Función para mostrar el mensaje de error
         function showError(message) {
             const errorMessageDiv = document.getElementById('error-message');
             errorMessageDiv.textContent = message;
-            errorMessageDiv.classList.remove('d-none'); // Mostrar el div
+            errorMessageDiv.style.display = 'block'; // Mostrar el div
         }
 
-        // Obtener parámetros de la URL
+        // Obtener parámetros de la URL para mostrar el mensaje de error
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('error')) {
             const error = urlParams.get('error');
             showError(error);
         }
     </script>
+
 </body>
 </html>
-

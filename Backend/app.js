@@ -28,11 +28,13 @@ const registerRoutes = require('./routes/registerRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes'); // Ruta para el dashboard
 const productoRoutes = require('./routes/productoRoutes'); // Nueva ruta para productos
+const proveedorRoutes = require('./routes/proveedorRoutes'); // Nueva ruta para proveedores
 
 app.use('/auth', registerRoutes);
 app.use('/auth', loginRoutes);
 app.use('/dashboard', dashboardRoutes); // Ruta para el dashboard
 app.use('/productos', productoRoutes); // Agregar ruta para la gestión de productos
+app.use('/proveedores', proveedorRoutes); // Ruta para la gestión de proveedores
 
 // Página principal
 app.get('/', (req, res) => {

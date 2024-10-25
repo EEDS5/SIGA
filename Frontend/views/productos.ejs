@@ -1,18 +1,56 @@
-<!-- views/productos.ejs -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Productos</title>
+
+    <!-- Integrar Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Integrar Tailwind CSS -->
+    <link rel="stylesheet" href="/Frontend/css/output.css">
+
+    <style>
+        /* Estilos personalizados si es necesario */
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3490dc;
+        }
+        .btn-custom {
+            background-color: #3490dc;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #2779bd;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
+
+    <!-- Navbar (coherente con el dashboard) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <a class="navbar-brand" href="#">SIGA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/logout">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container mt-5">
         <h1>Lista de Productos</h1>
-        
+
         <!-- Botón para abrir el modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearProductoModal">
+        <button type="button" class="btn btn-primary btn-custom" data-toggle="modal" data-target="#crearProductoModal">
             Crear Producto
         </button>
 
@@ -25,7 +63,7 @@
                     <th>Categoría</th>
                     <th>Stock</th>
                     <th>Precio de Venta</th>
-                    <th>Acciones</th> <!-- Nueva columna para acciones -->
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,14 +74,13 @@
                         <td><%= producto.categoria %></td>
                         <td><%= producto.stock %></td>
                         <td>
-                            <% if (typeof producto.precio_venta === 'number') { %>
-                                <%= producto.precio_venta.toFixed(2) %> Bs
+                            <% if (producto.precio_venta !== null && producto.precio_venta !== '') { %>
+                                <%= parseFloat(producto.precio_venta).toFixed(2) %> Bs
                             <% } else { %>
                                 N/A
                             <% } %>
                         </td>
                         <td>
-                            <!-- Botón de eliminar -->
                             <button class="btn btn-danger eliminar-producto" data-id="<%= producto.id %>">Eliminar</button>
                         </td>
                     </tr>
@@ -86,16 +123,18 @@
                             <label for="precio_venta">Precio de Venta</label>
                             <input type="number" class="form-control" id="precio_venta" name="precio_venta" required step="0.01">
                         </div>
-                        <button type="submit" class="btn btn-primary">Crear Producto</button>
+                        <button type="submit" class="btn btn-primary btn-custom">Crear Producto</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Scripts de Bootstrap y jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         // Manejar la creación de producto
         $('#crearProductoForm').on('submit', function (e) {

@@ -4,17 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+
+    <!-- Integrar Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Si tienes un archivo de estilos -->
+    <!-- Integrar Tailwind CSS -->
+    <link rel="stylesheet" href="/Frontend/css/output.css">
+
+    <style>
+        /* Estilos personalizados si es necesario */
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3490dc;
+        }
+        .card-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #3490dc;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #2779bd;
+        }
+    </style>
 </head>
 <body class="bg-light">
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <a class="navbar-brand" href="#">Mi Aplicación</a>
+        <a class="navbar-brand" href="#">SIGA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/productos">Gestionar Productos</a> <!-- Botón para gestionar productos -->
+                    <a class="nav-link" href="/proveedores">Gestionar Proveedores</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/auth/logout">Cerrar sesión</a>
@@ -23,20 +50,20 @@
         </div>
     </nav>
 
+    <!-- Contenido del Dashboard -->
     <div class="container mt-5">
-        <div class="card shadow">
+        <div class="card shadow-sm">
             <div class="card-body">
                 <h1 class="card-title">Bienvenido al Dashboard</h1>
-                <p class="card-text" id="welcome-message">Hola, <%= userName %>!</p> <!-- Utiliza EJS para insertar el nombre -->
+                <p class="card-text" id="welcome-message">Hola, <%= userName %>!</p>
                 <p class="card-text">Solo los usuarios logueados pueden ver esta página.</p>
             </div>
         </div>
     </div>
 
+    <!-- Scripts de Bootstrap y jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-

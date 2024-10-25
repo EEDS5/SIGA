@@ -1,0 +1,267 @@
+-- Creación de la tabla 'cliente'
+CREATE TABLE cliente (
+    id SERIAL PRIMARY KEY, -- Identificador único del cliente
+    nombre VARCHAR(255) NOT NULL, -- Nombre completo del cliente
+    ci VARCHAR(20), -- Cédula de identidad del cliente
+    nit VARCHAR(20), -- Número de identificación tributaria (NIT) del cliente
+    telefono VARCHAR(15), -- Teléfono del cliente
+    email VARCHAR(100), -- Correo electrónico del cliente
+    direccion VARCHAR(255) -- Dirección del cliente
+);
+
+-- Creación de la tabla 'marca_vehiculo'
+CREATE TABLE marca_vehiculo (
+    id SERIAL PRIMARY KEY, -- Identificador único de la marca
+    nombre VARCHAR(100) NOT NULL, -- Nombre de la marca (ej. Toyota, Nissan)
+    casa_distribuidora VARCHAR(100), -- Casa distribuidora de la marca
+    pais_origen VARCHAR(100) -- País de origen de la marca
+);
+
+-- Creación de la tabla 'modelo_vehiculo'
+CREATE TABLE modelo_vehiculo (
+    id SERIAL PRIMARY KEY, -- Identificador único del modelo
+    nombre VARCHAR(100) NOT NULL, -- Nombre del modelo (ej. Hilux, Sentra)
+    descripcion TEXT, -- Descripción adicional del modelo
+    id_marca INT NOT NULL, -- Relación con la marca del vehículo
+    FOREIGN KEY (id_marca) REFERENCES marca_vehiculo(id) -- Llave foránea que referencia la tabla 'marca_vehiculo'
+);
+
+-- Creación de la tabla 'vehiculo' con detalles adicionales del vehículo
+CREATE TABLE vehiculo (
+    id SERIAL PRIMARY KEY, -- Identificador único del vehículo
+    cliente_id INT NOT NULL, -- Relación con el cliente propietario del vehículo
+    id_modelo INT NOT NULL, -- Relación con el modelo del vehículo
+    placa VARCHAR(15) NOT NULL, -- Número de placa del vehículo
+    ano INT, -- Año del vehículo
+    origen_fabricacion VARCHAR(100), -- Origen de fabricación del vehículo
+    color VARCHAR(50), -- Color del vehículo
+    transmision VARCHAR(50), -- Tipo de transmisión (automática, manual)
+    traccion VARCHAR(10), -- Tracción del vehículo (4x4 o 4x2)
+    tipo_neumatico VARCHAR(100), -- Tipo de neumático (ej. todo terreno, radial)
+    FOREIGN KEY (cliente_id) REFERENCES cliente(id), -- Llave foránea que referencia la tabla 'cliente'
+    FOREIGN KEY (id_modelo) REFERENCES modelo_vehiculo(id) -- Llave foránea que referencia la tabla 'modelo_vehiculo'
+);
+
+-- Creación de la tabla 'categoria'
+CREATE TABLE categoria (
+    id SERIAL PRIMARY KEY, -- Identificador único de la categoría
+    nombre VARCHAR(100) NOT NULL -- Nombre de la categoría (ej. repuesto, consumible)
+);
+
+-- Creación de la tabla 'producto'
+CREATE TABLE producto (
+    id SERIAL PRIMARY KEY, -- Identificador único del producto
+    nombre VARCHAR(255) NOT NULL, -- Nombre del producto
+    id_categoria INT NOT NULL, -- Relación con la categoría del producto
+    stock INT DEFAULT 0, -- Cantidad disponible del producto en el inventario
+    stock_minimo INT DEFAULT 5, -- Cantidad mínima antes de generar alertas de reabastecimiento
+    precio_venta DECIMAL(10, 2) NOT NULL, -- Precio de venta del producto
+    FOREIGN KEY (id_categoria) REFERENCES categoria(id) -- Llave foránea que referencia la tabla 'categoria'
+);
+
+-- Creación de la tabla 'proveedores'
+CREATE TABLE proveedores (
+    id SERIAL PRIMARY KEY, -- Identificador único del proveedor
+    nombre VARCHAR(255) NOT NULL, -- Nombre del proveedor
+    telefono VARCHAR(15), -- Teléfono del proveedor
+    email VARCHAR(100), -- Correo electrónico del proveedor
+    direccion VARCHAR(255) -- Dirección del proveedor
+);
+
+-- Creación de la tabla 'nro_compra' (Registro de la compra realizada a proveedores)
+CREATE TABLE nro_compra (
+    id SERIAL PRIMARY KEY, -- Identificador único de la compra
+    fecha DATE NOT NULL, -- Fecha de la compra
+    id_proveedor INT NOT NULL, -- Relación con el proveedor que realiza la venta
+    total DECIMAL(10, 2) DEFAULT 0.00, -- Total de la compra (calculado automáticamente)
+    FOREIGN KEY (id_proveedor) REFERENCES proveedores(id) -- Llave foránea que referencia la tabla 'proveedores'
+);
+
+-- Creación de la tabla 'detalle_compra' (Detalle de cada producto en la compra)
+CREATE TABLE detalle_compra (
+    id SERIAL PRIMARY KEY, -- Identificador único del detalle de la compra
+    id_nro_compra INT NOT NULL, -- Relación con la tabla 'nro_compra'
+    id_producto INT NOT NULL, -- Relación con el producto adquirido
+    cantidad INT NOT NULL, -- Cantidad del producto adquirida en la compra
+    precio_compra DECIMAL(10, 2) NOT NULL, -- Precio de compra del producto
+    subtotal DECIMAL(10, 2) GENERATED ALWAYS AS (cantidad * precio_compra) STORED, -- Subtotal calculado por la cantidad y precio de compra
+    FOREIGN KEY (id_nro_compra) REFERENCES nro_compra(id), -- Llave foránea que referencia la tabla 'nro_compra'
+    FOREIGN KEY (id_producto) REFERENCES producto(id) -- Llave foránea que referencia la tabla 'producto'
+);
+
+-- Creación de la tabla 'tipo_trabajo' para manejar los diferentes tipos de trabajos
+CREATE TABLE tipo_trabajo (
+    id SERIAL PRIMARY KEY, -- Identificador único del tipo de trabajo
+    nombre VARCHAR(255) NOT NULL, -- Nombre del tipo de trabajo (ej. cambio de aceite, revisión de frenos)
+    precio_base DECIMAL(10, 2) NOT NULL -- Precio base del tipo de trabajo
+);
+
+-- Creación de la tabla intermedia 'tipo_trabajo_producto' para manejar la relación M a N entre tipo_trabajo y producto
+CREATE TABLE tipo_trabajo_producto (
+    id SERIAL PRIMARY KEY, -- Identificador único del registro
+    id_tipo_trabajo INT NOT NULL, -- Relación con la tabla 'tipo_trabajo'
+    id_producto INT NOT NULL, -- Relación con la tabla 'producto'
+    cantidad INT NOT NULL, -- Cantidad de productos utilizados en este tipo de trabajo
+    FOREIGN KEY (id_tipo_trabajo) REFERENCES tipo_trabajo(id), -- Llave foránea que referencia la tabla 'tipo_trabajo'
+    FOREIGN KEY (id_producto) REFERENCES producto(id) -- Llave foránea que referencia la tabla 'producto'
+);
+
+-- Creación de la tabla 'orden_trabajo' con referencia a vehículo, sin relación directa con cliente
+CREATE TABLE orden_trabajo (
+    id SERIAL PRIMARY KEY, -- Identificador único de la orden de trabajo
+    id_vehiculo INT NOT NULL, -- Relación con el vehículo al que se le realizó el trabajo
+    fecha_recepcion DATE NOT NULL, -- Fecha en la que el vehículo fue recibido en el taller
+    fecha_entrega DATE, -- Fecha en la que el vehículo fue entregado al cliente (opcional, se puede agregar al finalizar el trabajo)
+    costo_total DECIMAL(10, 2) DEFAULT 0.00, -- Costo total del trabajo (calculado automáticamente)
+    FOREIGN KEY (id_vehiculo) REFERENCES vehiculo(id) -- Llave foránea que referencia la tabla 'vehiculo'
+);
+
+-- Creación de la tabla intermedia 'orden_trabajo_tipo_trabajo' sin subconsulta
+CREATE TABLE orden_trabajo_tipo_trabajo (
+    id SERIAL PRIMARY KEY, -- Identificador único del registro
+    id_orden_trabajo INT NOT NULL, -- Relación con la tabla 'orden_trabajo'
+    id_tipo_trabajo INT NOT NULL, -- Relación con la tabla 'tipo_trabajo'
+    cantidad INT NOT NULL, -- Cantidad de veces que se realizó este tipo de trabajo
+    subtotal DECIMAL(10, 2), -- Subtotal que será calculado automáticamente por el trigger
+    FOREIGN KEY (id_orden_trabajo) REFERENCES orden_trabajo(id), -- Llave foránea que referencia la tabla 'orden_trabajo'
+    FOREIGN KEY (id_tipo_trabajo) REFERENCES tipo_trabajo(id) -- Llave foránea que referencia la tabla 'tipo_trabajo'
+);
+
+-- Creación de la tabla 'producto_orden_trabajo' sin subconsulta
+CREATE TABLE producto_orden_trabajo (
+    id SERIAL PRIMARY KEY, -- Identificador único del registro
+    id_producto INT NOT NULL, -- Relación con el producto utilizado en la reparación
+    id_orden_trabajo INT NOT NULL, -- Relación con la orden de trabajo donde se utilizó el producto
+    cantidad_utilizada INT NOT NULL, -- Cantidad de producto utilizado en la reparación
+    subtotal DECIMAL(10, 2), -- Subtotal que será calculado por un trigger
+    FOREIGN KEY (id_producto) REFERENCES producto(id), -- Llave foránea que referencia la tabla 'producto'
+    FOREIGN KEY (id_orden_trabajo) REFERENCES orden_trabajo(id) -- Llave foránea que referencia la tabla 'orden_trabajo'
+);
+
+-- Creación de la tabla 'usuario' para gestionar el inicio de sesión
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY, -- Identificador único del usuario
+    username VARCHAR(100) NOT NULL UNIQUE, -- Nombre de usuario único
+    password_hash VARCHAR(255) NOT NULL, -- Contraseña hasheada para mayor seguridad
+    nombre_completo VARCHAR(255), -- Nombre completo del usuario
+    email VARCHAR(100) UNIQUE, -- Correo electrónico único del usuario
+    rol VARCHAR(50), -- Rol del usuario (ej. administrador, mecánico)
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Fecha de creación del usuario
+);
+
+-- Creación de la relación de usuarios con las tablas maestras
+ALTER TABLE cliente ADD COLUMN usuario_id INT, ADD FOREIGN KEY (usuario_id) REFERENCES usuario(id);
+ALTER TABLE proveedores ADD COLUMN usuario_id INT, ADD FOREIGN KEY (usuario_id) REFERENCES usuario(id);
+
+-- Inserciones iniciales
+
+-- Inserción de marcas
+INSERT INTO marca_vehiculo (nombre, casa_distribuidora, pais_origen) VALUES
+('Toyota', 'Toyota Motor Corporation', 'Japón'),
+('Nissan', 'Nissan Motor Co., Ltd.', 'Japón');
+
+-- Inserción de modelos
+INSERT INTO modelo_vehiculo (nombre, descripcion, id_marca) VALUES
+('Hilux', 'Pick-up todoterreno', 1),
+('Sentra', 'Sedán compacto', 2);
+
+-- Inserción de clientes
+INSERT INTO cliente (nombre, ci, nit, telefono, email, direccion) VALUES
+('Juan Pérez', '789456', '987654321', '78945612', 'juan.perez@gmail.com', 'Calle Falsa 123'),
+('Maria López', '753269', '123456789', '75326987', 'maria.lopez@hotmail.com', 'Av. Principal 456');
+
+-- Inserción de vehículos
+INSERT INTO vehiculo (cliente_id, id_modelo, placa, ano, origen_fabricacion, color, transmision, traccion, tipo_neumatico) VALUES
+(1, 1, '1234-ABC', 2019, 'Japón', 'Negro', 'Automática', '4x4', 'Radial'),
+(2, 2, '5678-XYZ', 2017, 'México', 'Blanco', 'Manual', '4x2', 'Todo Terreno');
+
+-- Inserción de categorías de productos
+INSERT INTO categoria (nombre) VALUES
+('Repuesto'),
+('Consumible');
+
+-- Inserción de productos
+INSERT INTO producto (nombre, id_categoria, stock, stock_minimo, precio_venta) VALUES
+('Filtro de aceite', 1, 20, 5, 25.00),
+('Pastilla de freno', 1, 10, 2, 70.00),
+('Aceite de motor 5W30', 2, 50, 10, 45.00),
+('Llanta radial 14 pulgadas', 1, 5, 2, 280.00);
+
+-- Inserción de proveedores
+INSERT INTO proveedores (nombre, telefono, email, direccion) VALUES
+('Proveeduría Automotriz La Paz', '78945612', 'contacto@proveeduria.com', 'Calle 1, Zona Industrial'),
+('Repuestos El Bólido', '75326987', 'ventas@elbolido.com', 'Av. Comercio 789');
+
+-- Inserción de compras y detalles de compra
+INSERT INTO nro_compra (fecha, id_proveedor, total) VALUES
+('2024-09-10', 1, 300.00),
+('2024-09-12', 2, 600.00);
+
+INSERT INTO detalle_compra (id_nro_compra, id_producto, cantidad, precio_compra) VALUES
+(1, 1, 15, 20.00), -- Compra de 15 filtros de aceite
+(1, 2, 5, 60.00),  -- Compra de 5 pastillas de freno
+(2, 3, 25, 30.00), -- Compra de 25 aceites de motor
+(2, 4, 3, 200.00); -- Compra de 3 llantas radiales
+
+-- Inserción de tipos de trabajo
+INSERT INTO tipo_trabajo (nombre, precio_base) VALUES
+('Cambio de Aceite', 100.00),
+('Revisión de Frenos', 150.00);
+
+-- Inserción de productos utilizados en los tipos de trabajo
+INSERT INTO tipo_trabajo_producto (id_tipo_trabajo, id_producto, cantidad) VALUES
+(1, 1, 1), -- Un filtro de aceite para cambio de aceite
+(2, 2, 4); -- Cuatro pastillas de freno para revisión de frenos
+
+-- Inserción de órdenes de trabajo
+INSERT INTO orden_trabajo (id_vehiculo, fecha_recepcion, fecha_entrega, costo_total) VALUES
+(1, '2024-09-25', '2024-09-28', 320.00),
+(2, '2024-09-26', '2024-09-29', 350.00);
+
+-- Inserción del uso de productos en órdenes de trabajo
+INSERT INTO producto_orden_trabajo (id_producto, id_orden_trabajo, cantidad_utilizada) VALUES
+(1, 1, 2), -- Se utilizaron 2 filtros de aceite en la orden de trabajo 1
+(2, 2, 4); -- Se utilizaron 4 pastillas de freno en la orden de trabajo 2
+
+-- Inserción de trabajos realizados en las órdenes
+INSERT INTO orden_trabajo_tipo_trabajo (id_orden_trabajo, id_tipo_trabajo, cantidad) VALUES
+(1, 1, 1), -- Se realizó 1 vez el trabajo de cambio de aceite en la orden 1
+(2, 2, 2); -- Se realizó 2 veces el trabajo de revisión de frenos en la orden 2
+
+-- Creación de la función del trigger para calcular el subtotal de productos en orden_trabajo
+CREATE OR REPLACE FUNCTION calcular_subtotal_producto()
+RETURNS TRIGGER AS $$
+BEGIN
+    SELECT precio_venta INTO NEW.subtotal
+    FROM producto
+    WHERE producto.id = NEW.id_producto;
+
+    NEW.subtotal := NEW.subtotal * NEW.cantidad_utilizada;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Creación del trigger que se ejecutará antes de la inserción o actualización en la tabla producto_orden_trabajo
+CREATE TRIGGER trigger_calcular_subtotal_producto
+BEFORE INSERT OR UPDATE ON producto_orden_trabajo
+FOR EACH ROW
+EXECUTE FUNCTION calcular_subtotal_producto();
+
+-- Creación de la función del trigger para calcular el subtotal de tipos de trabajo en orden_trabajo_tipo_trabajo
+CREATE OR REPLACE FUNCTION calcular_subtotal_trabajo()
+RETURNS TRIGGER AS $$
+BEGIN
+    SELECT precio_base INTO NEW.subtotal
+    FROM tipo_trabajo
+    WHERE tipo_trabajo.id = NEW.id_tipo_trabajo;
+
+    NEW.subtotal := NEW.subtotal * NEW.cantidad;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Creación del trigger que se ejecutará antes de la inserción o actualización en la tabla orden_trabajo_tipo_trabajo
+CREATE TRIGGER trigger_calcular_subtotal_trabajo
+BEFORE INSERT OR UPDATE ON orden_trabajo_tipo_trabajo
+FOR EACH ROW
+EXECUTE FUNCTION calcular_subtotal_trabajo();
