@@ -1,5 +1,6 @@
-// backend/models/db.js
-const pgp = require('pg-promise')();
+import pgPromise from 'pg-promise';
+
+const pgp = pgPromise();
 const db = pgp({
     host: 'localhost',
     port: 5432,
@@ -8,4 +9,4 @@ const db = pgp({
     password: 'holasoyelias',
 });
 
-module.exports = db;
+export default db;

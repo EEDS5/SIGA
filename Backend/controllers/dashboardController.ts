@@ -1,6 +1,13 @@
-const path = require('path');
+import path from 'path';
+import { Request, Response } from 'express';
 
-exports.showDashboard = (req, res) => {
+declare module 'express-session' {
+    interface Session {
+        user: { nombre_completo: string };
+    }
+}
+
+export const showDashboard = (req: Request, res: Response) => {
     if (req.session.user) {
         const userName = req.session.user.nombre_completo; // Obtener el nombre del usuario
         res.render('dashboard', { userName }); // Renderizar la vista dashboard.ejs
@@ -8,4 +15,3 @@ exports.showDashboard = (req, res) => {
         res.redirect('/auth/login');
     }
 };
-

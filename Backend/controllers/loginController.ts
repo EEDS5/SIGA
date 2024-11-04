@@ -1,14 +1,17 @@
-const bcrypt = require('bcrypt');
-const db = require('../models/db');
-const path = require('path');
+//controllers/loginController.ts
+import bcrypt from 'bcrypt';
+import { Request, Response } from 'express';
+import db from '../db';
+import path from 'path';
+
 
 // Mostrar formulario de login
-exports.showLogin = (req, res) => {
+export const showLogin = (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '../../Frontend/views/login.html'));
 };
 
 // Manejar el proceso de login
-exports.login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {
@@ -17,7 +20,7 @@ exports.login = async (req, res) => {
 
         if (!user) {
             console.log('Usuario no encontrado');
-            return res.redirect('/auth/login?error=Usuario o contraseña incorrectos.'); // Redirigir con error
+            return res.redirect('/auth/login?error=Usuario o contraseña incorrectos.');
         }
 
         // Comparar contraseñas
@@ -25,16 +28,15 @@ exports.login = async (req, res) => {
 
         if (!isMatch) {
             console.log('Contraseña incorrecta');
-            return res.redirect('/auth/login?error=Usuario o contraseña incorrectos.'); // Redirigir con error
+            return res.redirect('/auth/login?error=Usuario o contraseña incorrectos.');
         }
 
         // Si la contraseña es correcta, guardamos el usuario en la sesión
         req.session.user = user;
-        console.log('Usuario autenticado correctamente');
-        res.redirect('/dashboard'); // Redirigir al dashboard
+        res.redirect('/dashboard');
     } catch (error) {
-        console.log('Error durante el inicio de sesión:', error);
-        res.redirect('/auth/login?error=Error en el servidor'); // Redirigir con error
+        const errorMessage = (error as Error).message;
+        console.log('Error durante el inicio de sesión:', errorMessage);
+        res.redirect('/auth/login?error=Error en el servidor');
     }
 };
-
