@@ -9,7 +9,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Integrar Tailwind desde el archivo generado -->
-    <link href="/Frontend/css/output.css" rel="stylesheet">
+    <link href="../css/output.css" rel="stylesheet">
     
     <style>
         /* Estilos adicionales si son necesarios */
@@ -50,7 +50,8 @@
                         <h2 class="text-2xl font-semibold mb-4">Bienvenido a SIGA</h2>
                         <p>Administra eficientemente los vehículos y servicios automotrices con nuestro sistema moderno y fácil de usar.</p>
                         <div class="mt-5">
-                            <a href="/auth/login" class="btn btn-custom btn-lg mx-2">Iniciar Sesión</a>
+                            <!-- <a href="/auth/login" class="btn btn-custom btn-lg mx-2">Iniciar Sesión</a> -->
+                            <a href="#" onclick="showLogin()" class="btn btn-custom btn-lg mx-2">Iniciar Sesión</a>
                             <a href="/auth/register" class="btn btn-outline-primary btn-lg mx-2">Registrarse</a>
                         </div>
                     </div>
@@ -89,6 +90,9 @@
         <p class="mb-0">&copy; 2024 Sistema de Gestión Automotriz (SIGA) - Todos los derechos reservados.</p>
         <p>Desarrollado por el equipo de Ingeniería de Sistemas.</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="../public/js/main.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

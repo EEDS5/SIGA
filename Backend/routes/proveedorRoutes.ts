@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-    mostrarProveedores,
+    mostrarProveedor,
     crearProveedor,
     eliminarProveedor,
     obtenerProveedor,
@@ -10,7 +10,7 @@ import {
 const router = Router();
 
 // Ruta para mostrar todos los proveedores
-router.get('/', mostrarProveedores);
+router.get('/', mostrarProveedor);
 
 // Ruta para crear un nuevo proveedor
 router.post('/', crearProveedor);

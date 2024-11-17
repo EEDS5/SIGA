@@ -5,8 +5,13 @@ import { Request, Response } from 'express';
 import db from '../db';
 
 // Mostrar formulario de registro
-export const showRegister = (req: Request, res: Response) => {
+/* export const showRegister = (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '../../Frontend/views/register.html'));
+}; */
+
+// Mostrar mensaje de registro
+export const showRegister = (req: Request, res: Response) => {
+    res.status(200).json({ message: 'Endpoint para registrar usuarios' });
 };
 
 // Registrar un usuario

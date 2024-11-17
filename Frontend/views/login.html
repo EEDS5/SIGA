@@ -68,7 +68,7 @@
         <div id="error-message" class="error-message" role="alert">Usuario o contraseña incorrectos.</div>
 
         <!-- Formulario de login -->
-        <form action="/auth/login" method="POST">
+        <!-- <form action="/auth/login" method="POST">
             <div class="form-group mb-5">
                 <input type="text" class="form-control login-input focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" name="username" placeholder="Nombre de usuario" required>
             </div>
@@ -76,10 +76,22 @@
                 <input type="password" class="form-control login-input focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" name="password" placeholder="Contraseña" required>
             </div>
             <button type="submit" class="btn login-btn text-white w-full mb-4">Iniciar sesión</button>
+        </form> -->
+        <form id="loginForm">
+            <div class="form-group mb-5">
+                <input type="text" class="form-control login-input focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" id="username" placeholder="Nombre de usuario" required>
+            </div>
+            <div class="form-group mb-6">
+                <input type="password" class="form-control login-input focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" id="password" placeholder="Contraseña" required>
+            </div>
+            <button type="submit" class="btn login-btn text-white w-full mb-4">Iniciar sesión</button>
         </form>
 
         <p class="text-center mt-2 text-sm">¿No tienes cuenta? <a href="/auth/register" class="text-blue-500 hover:text-blue-700">Regístrate aquí</a></p>
     </div>
+
+    <!-- Scripts -->
+    <script src="../public/js/login.js"></script>
 
     <!-- Scripts de jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

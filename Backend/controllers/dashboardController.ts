@@ -1,3 +1,4 @@
+//controllers/dashboardController.ts
 import path from 'path';
 import { Request, Response } from 'express';
 
@@ -9,9 +10,9 @@ declare module 'express-session' {
 
 export const showDashboard = (req: Request, res: Response) => {
     if (req.session.user) {
-        const userName = req.session.user.nombre_completo; // Obtener el nombre del usuario
-        res.render('dashboard', { userName }); // Renderizar la vista dashboard.ejs
+        const userName = req.session.user.nombre_completo;
+        res.json({ userName });
     } else {
-        res.redirect('/auth/login');
+        res.status(401).json({ message: 'No autenticado' });
     }
 };

@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import Proveedor from '../models/proveedorModel';
 
 // Método para mostrar todos los proveedores
-export const mostrarProveedores = async (req: Request, res: Response) => {
+export const mostrarProveedor = async (req: Request, res: Response) => {
     try {
         const proveedores = await Proveedor.obtenerTodos();
-        res.render('proveedores', { proveedores });
+        res.render('proveedor', { proveedores });
     } catch (error) {
         console.error('Error al obtener los proveedores:', (error as Error).message);
         res.status(500).send('Error al obtener los proveedores');

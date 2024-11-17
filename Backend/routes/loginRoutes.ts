@@ -1,9 +1,10 @@
+//routes/loginRoutes.ts
 import { Router } from 'express';
 import { showLogin, login } from '../controllers/loginController';
 
 const router = Router();
 
-// Ruta para mostrar el formulario de login
+/* // Ruta para mostrar el formulario de login
 router.get('/login', showLogin);
 
 // Ruta para procesar el login
@@ -17,6 +18,12 @@ router.get('/logout', (req, res) => {
         }
         res.redirect('/auth/login');
     });
-});
+}); */
+
+// Ruta para mostrar el formulario de login (GET)
+router.get('/login', showLogin);
+
+// Ruta para manejar el proceso de login (POST)
+router.post('/login', login);
 
 export default router;

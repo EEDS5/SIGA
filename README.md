@@ -1,3 +1,4 @@
+
 # SIGA (Sistema de Gestión Automotriz)
 
 ## Descripción del Proyecto
@@ -77,11 +78,12 @@ psql -U postgres -d siga_db -f backend/database/siga_schema.sql
 
 ### 4. Configuración de la base de datos
 
-En lugar de un archivo `.env`, el proyecto utiliza un archivo `db.js` para gestionar la conexión a la base de datos. Este archivo se encuentra en `models/db.js` y contiene la siguiente configuración:
+En lugar de un archivo `.env`, el proyecto utiliza un archivo `db.ts` para gestionar la conexión a la base de datos. Este archivo se encuentra en la raíz del Backend y contiene la siguiente configuración:
 
-```js
-// backend/models/db.js
-const pgp = require('pg-promise')();
+```typescript
+import pgPromise from 'pg-promise';
+
+const pgp = pgPromise();
 const db = pgp({
     host: 'localhost',
     port: 5432,
@@ -90,7 +92,7 @@ const db = pgp({
     password: 'holasoyelias',
 });
 
-module.exports = db;
+export default db;
 ```
 
 Asegúrate de que los valores de configuración coincidan con tu entorno local.
@@ -148,6 +150,79 @@ Las **Órdenes de Trabajo** permiten gestionar las reparaciones realizadas en lo
 - El costo total del servicio.
 
 Los mecánicos pueden crear y cerrar órdenes de trabajo, registrando todos los detalles relevantes para el cliente y el taller.
+
+## Configuración de TypeScript y Herramientas de Desarrollo
+
+### Configuración de TypeScript
+
+El proyecto utiliza **TypeScript** para mejorar la robustez y mantenibilidad del código. A continuación, se detalla la configuración básica en el archivo `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "es2016", 
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts", "types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+### Instalación de Herramientas
+
+Además de TypeScript, se han instalado herramientas esenciales para mejorar el flujo de trabajo de desarrollo:
+
+```bash
+npm install --save-dev typescript nodemon ts-node
+```
+
+- **typescript**: Compilador que transforma los archivos `.ts` a JavaScript.
+- **nodemon**: Monitoriza los archivos del proyecto y reinicia el servidor automáticamente cuando se detectan cambios.
+- **ts-node**: Permite ejecutar archivos TypeScript directamente sin necesidad de compilarlos previamente.
+
+### Configuración de Nodemon
+
+Para integrar **nodemon** y **ts-node**, se utiliza un archivo `nodemon.json` con la siguiente configuración:
+
+```json
+{
+  "watch": ["."],
+  "ext": "ts",
+  "ignore": ["node_modules", "dist"],
+  "exec": "ts-node ./app.ts"
+}
+```
+
+Esta configuración asegura que **nodemon** monitorice los archivos `.ts` en la raíz del proyecto, ignorando los cambios en las carpetas `node_modules` y `dist`.
+
+### Scripts de Desarrollo
+
+En el archivo `package.json`, se define el script `start` para iniciar el servidor utilizando **nodemon**:
+
+```json
+{
+  "scripts": {
+    "start": "nodemon"
+  }
+}
+```
+
+### Inicio del Servidor
+
+Para iniciar el servidor en modo de desarrollo, simplemente ejecuta:
+
+```bash
+npm start
+```
+
+Este comando iniciará el servidor y se reiniciará automáticamente con cada cambio en el código fuente.
 
 ## Scripts Disponibles
 

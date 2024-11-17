@@ -1,3 +1,4 @@
+//routes/dashboardRoutes.ts
 import { Router } from 'express';
 import { showDashboard } from '../controllers/dashboardController';
 

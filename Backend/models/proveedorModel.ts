@@ -12,13 +12,13 @@ interface Proveedor {
 const ProveedorModel = {
   // Obtener todos los proveedores
   obtenerTodos: (): Promise<Proveedor[]> => {
-    const sql = "SELECT * FROM proveedores ORDER BY id ASC";
+    const sql = "SELECT * FROM proveedor ORDER BY id ASC";
     return dao.consultar<Proveedor>(sql);
   },
 
   // Obtener un proveedor por su ID
   obtenerPorId: (id: number): Promise<Proveedor> => {
-    const sql = "SELECT * FROM proveedores WHERE id = $1";
+    const sql = "SELECT * FROM proveedor WHERE id = $1";
     return dao.consultarUno<Proveedor>(sql, [id]);
   },
 
@@ -30,7 +30,7 @@ const ProveedorModel = {
     direccion: string
   ): Promise<{ id: number }> => {
     const sql =
-      "INSERT INTO proveedores(nombre, telefono, email, direccion) VALUES($1, $2, $3, $4) RETURNING id";
+      "INSERT INTO proveedor(nombre, telefono, email, direccion) VALUES($1, $2, $3, $4) RETURNING id";
     return dao.insertar<{ id: number }>(sql, [
       nombre,
       telefono,
@@ -48,13 +48,13 @@ const ProveedorModel = {
     direccion: string
   ): Promise<void> => {
     const sql =
-      "UPDATE proveedores SET nombre = $1, telefono = $2, email = $3, direccion = $4 WHERE id = $5";
+      "UPDATE proveedor SET nombre = $1, telefono = $2, email = $3, direccion = $4 WHERE id = $5";
     return dao.actualizar(sql, [nombre, telefono, email, direccion, id]);
   },
 
   // Eliminar un proveedor por ID
   eliminar: (id: number): Promise<void> => {
-    const sql = "DELETE FROM proveedores WHERE id = $1";
+    const sql = "DELETE FROM proveedor WHERE id = $1";
     return dao.eliminar(sql, [id]);
   },
 };
