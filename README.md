@@ -1,4 +1,3 @@
-
 # SIGA (Sistema de Gestión Automotriz)
 
 ## Descripción del Proyecto
@@ -22,30 +21,39 @@ Este proyecto utiliza diversas dependencias para su correcto funcionamiento, que
 {
   "autoprefixer": "^10.4.20",
   "bcrypt": "^5.1.1",
-  "ejs": "^3.1.10",
   "express": "^4.21.1",
   "express-session": "^1.18.1",
   "pg-promise": "^11.10.1",
   "postcss": "^8.4.47",
   "rimraf": "^6.0.1",
-  "tailwindcss": "^3.4.14"
+  "tailwindcss": "^3.4.14",
+  "connect-pg-simple": "^7.0.0",
+  "cors": "^2.8.5",
+  "typescript": "^4.0.0",
+  "nodemon": "^2.0.0",
+  "ts-node": "^10.0.0"
 }
 ```
 
 - **bcrypt**: Para el manejo seguro de contraseñas.
-- **ejs**: Utilizado para renderizar las vistas del lado del servidor.
 - **express**: Framework para crear el servidor y manejar rutas.
+- **express-session**: Manejo de sesiones en Express.
 - **pg-promise**: Para realizar consultas a la base de datos PostgreSQL.
 - **tailwindcss**: Framework de CSS para los estilos y diseño responsive.
+- **connect-pg-simple**: Almacena las sesiones de Express en PostgreSQL.
+- **cors**: Middleware para habilitar CORS.
+- **typescript**, **nodemon**, **ts-node**: Herramientas para el desarrollo con TypeScript.
 
 ## Requisitos del Sistema
-
-Antes de comenzar con la instalación, asegúrate de que tienes los siguientes requisitos:
 
 - **Node.js** (v14.0 o superior)
 - **PostgreSQL** (v12 o superior)
 - **NPM** (v6.0 o superior)
 - **Tailwind CSS**
+- **http-server**: Servidor web simple para el frontend.
+- **Certificados SSL**: Certificados válidos para localhost.
+- **mkcert**: Herramienta para generar certificados SSL locales.
+
 
 ## Instalación
 
@@ -53,18 +61,15 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 
 ### 1. Clonar el repositorio
 
-Clona el repositorio desde GitHub:
-
 ```bash
 git clone https://github.com/tu-usuario/siga.git
-cd siga/Backend
+cd siga
 ```
 
-### 2. Instalar las dependencias
-
-Instala las dependencias necesarias:
+### 2. Instalar las dependencias del Backend
 
 ```bash
+cd Backend
 npm install
 ```
 
@@ -73,169 +78,156 @@ npm install
 Asegúrate de tener **PostgreSQL** instalado y en ejecución. Crea una base de datos llamada `siga_db`. Luego, importa las tablas y datos iniciales ejecutando el script SQL:
 
 ```bash
-psql -U postgres -d siga_db -f backend/database/siga_schema.sql
+psql -U postgres -d siga_db -f database/siga_schema.sql
 ```
 
-### 4. Configuración de la base de datos
+Si tu usuario de PostgreSQL no es `postgres`, reemplázalo por el nombre de tu usuario.
 
-En lugar de un archivo `.env`, el proyecto utiliza un archivo `db.ts` para gestionar la conexión a la base de datos. Este archivo se encuentra en la raíz del Backend y contiene la siguiente configuración:
+### 4. Crear la tabla de sesiones en PostgreSQL
+
+```sql
+CREATE TABLE "session" (
+    "sid" VARCHAR NOT NULL COLLATE "default",
+    "sess" JSON NOT NULL,
+    "expire" TIMESTAMP(6) NOT NULL,
+    PRIMARY KEY ("sid")
+) WITH (OIDS=FALSE);
+
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+```
+
+### 5. Configuración de la base de datos
+
+En el archivo `db.ts`, configura la conexión a la base de datos. Este archivo se encuentra en la carpeta `Backend`:
 
 ```typescript
 import pgPromise from 'pg-promise';
+import { Pool } from 'pg';
 
+// Configuración para pg-promise
 const pgp = pgPromise();
 const db = pgp({
     host: 'localhost',
     port: 5432,
-    database: 'SIGA',
-    user: 'postgres',
-    password: 'holasoyelias',
+    database: 'siga_db',
+    user: 'tu_usuario',
+    password: 'tu_contraseña',
+});
+
+// Configuración para pg.Pool (exclusivo para sesiones)
+const sessionPool = new Pool({
+    host: 'localhost',
+    port: 5432,
+    database: 'siga_db',
+    user: 'tu_usuario',
+    password: 'tu_contraseña',
 });
 
 export default db;
+export { sessionPool };
 ```
 
-Asegúrate de que los valores de configuración coincidan con tu entorno local.
+### 6. Generar Certificados SSL
 
-### 5. Compilar Tailwind CSS
+Para habilitar HTTPS en el frontend y backend, necesitas certificados SSL válidos para localhost. Genera los certificados utilizando **mkcert**:
 
-Compila los estilos de **Tailwind CSS** con el siguiente comando:
+```bash
+mkcert localhost 127.0.0.1 ::1
+```
+
+Esto generará archivos como `localhost+2.pem` y `localhost+2-key.pem`. Copia los certificados a la carpeta `Backend`:
+
+```bash
+cp localhost+2.pem localhost+2-key.pem Backend/
+```
+
+### 7. Compilar Tailwind CSS
+
+Desde la carpeta raíz del proyecto, compila los estilos de **Tailwind CSS**:
 
 ```bash
 npm run build:css
 ```
 
-Este comando generará los archivos CSS necesarios para el frontend.
+### 8. Iniciar los servidores Frontend y Backend
 
-### 6. Iniciar el servidor
+El proyecto está dividido en dos partes: **Frontend** y **Backend**, que funcionan como aplicaciones separadas. Es necesario iniciar ambos servidores para que la aplicación funcione correctamente.
 
-Una vez configurado, inicia el servidor de desarrollo:
+#### 8.1 Iniciar el servidor Backend
 
-```bash
-npm start
-```
-
-El servidor estará corriendo en `http://localhost:3001`.
-
-## Uso del Sistema
-
-### 1. Registro e Inicio de Sesión
-
-Los usuarios pueden registrarse en el sistema a través de la pantalla de **Registro**. El sistema soporta roles como **admin** (administrador) y **user** (usuario regular). Dependiendo del rol, tendrán acceso a diferentes funcionalidades del sistema.
-
-### 2. Gestión de Productos
-
-Desde el **Dashboard**, los administradores pueden gestionar los productos del inventario. Esto incluye:
-
-- Crear productos nuevos.
-- Editar los productos existentes.
-- Eliminar productos del inventario.
-  
-El sistema realiza alertas automáticas cuando el stock de un producto cae por debajo del mínimo requerido.
-
-### 3. Gestión de Proveedores
-
-El módulo de **Proveedores** permite gestionar la información de todos los proveedores con los que trabaja el taller. Los usuarios pueden añadir, modificar y eliminar proveedores.
-
-### 4. Gestión de Clientes y Vehículos
-
-Cada cliente puede registrar uno o más vehículos. La información de estos vehículos incluye datos como el modelo, año, color, y más. Los mecánicos pueden acceder fácilmente a la información de los vehículos cuando gestionan órdenes de trabajo.
-
-### 5. Órdenes de Trabajo
-
-Las **Órdenes de Trabajo** permiten gestionar las reparaciones realizadas en los vehículos. Cada orden de trabajo incluye:
-
-- Los productos utilizados.
-- El servicio realizado (cambio de aceite, revisión de frenos, etc.).
-- El costo total del servicio.
-
-Los mecánicos pueden crear y cerrar órdenes de trabajo, registrando todos los detalles relevantes para el cliente y el taller.
-
-## Configuración de TypeScript y Herramientas de Desarrollo
-
-### Configuración de TypeScript
-
-El proyecto utiliza **TypeScript** para mejorar la robustez y mantenibilidad del código. A continuación, se detalla la configuración básica en el archivo `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    "target": "es2016", 
-    "module": "commonjs",
-    "rootDir": "./",
-    "outDir": "./dist",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
-  },
-  "include": ["**/*.ts", "types/**/*.d.ts"],
-  "exclude": ["node_modules", "dist"]
-}
-```
-
-### Instalación de Herramientas
-
-Además de TypeScript, se han instalado herramientas esenciales para mejorar el flujo de trabajo de desarrollo:
-
-```bash
-npm install --save-dev typescript nodemon ts-node
-```
-
-- **typescript**: Compilador que transforma los archivos `.ts` a JavaScript.
-- **nodemon**: Monitoriza los archivos del proyecto y reinicia el servidor automáticamente cuando se detectan cambios.
-- **ts-node**: Permite ejecutar archivos TypeScript directamente sin necesidad de compilarlos previamente.
-
-### Configuración de Nodemon
-
-Para integrar **nodemon** y **ts-node**, se utiliza un archivo `nodemon.json` con la siguiente configuración:
-
-```json
-{
-  "watch": ["."],
-  "ext": "ts",
-  "ignore": ["node_modules", "dist"],
-  "exec": "ts-node ./app.ts"
-}
-```
-
-Esta configuración asegura que **nodemon** monitorice los archivos `.ts` en la raíz del proyecto, ignorando los cambios en las carpetas `node_modules` y `dist`.
-
-### Scripts de Desarrollo
-
-En el archivo `package.json`, se define el script `start` para iniciar el servidor utilizando **nodemon**:
-
-```json
-{
-  "scripts": {
-    "start": "nodemon"
-  }
-}
-```
-
-### Inicio del Servidor
-
-Para iniciar el servidor en modo de desarrollo, simplemente ejecuta:
+Desde la carpeta `Backend`, inicia el servidor:
 
 ```bash
 npm start
 ```
 
-Este comando iniciará el servidor y se reiniciará automáticamente con cada cambio en el código fuente.
+El servidor Backend estará corriendo en `https://localhost:3001`.
 
-## Scripts Disponibles
+#### 8.2 Iniciar el servidor Frontend
 
-En el archivo `package.json`, se han definido algunos scripts para facilitar el desarrollo:
+Para servir el frontend, utiliza **http-server**. Asegúrate de tenerlo instalado globalmente o instálalo con:
 
-- `npm run build:css`: Compila los estilos de **Tailwind CSS** y genera el archivo `output.css`.
+```bash
+npm install -g http-server
+```
+
+Desde la carpeta raíz del proyecto (donde se encuentra el frontend), inicia el servidor Frontend:
+
+```bash
+http-server ./ -p 3000 --cors -S -C Backend/localhost+2.pem -K Backend/localhost+2-key.pem --host localhost
+```
+
+El servidor Frontend estará corriendo en `https://localhost:3000`.
+
+### 9. Acceder a la Aplicación
+
+Una vez que ambos servidores están en ejecución, puedes acceder a la aplicación en tu navegador: [https://localhost:3000](https://localhost:3000).
+
+---
+
+## Notas Adicionales
+
+- **Tabla de Sesiones en PostgreSQL:**
+
+  El proyecto utiliza una tabla llamada `session` en la base de datos para almacenar las sesiones de los usuarios. Asegúrate de ejecutar los comandos SQL proporcionados en el paso 4 para crear esta tabla e índice:
+
+  ```sql
+  CREATE TABLE "session" (
+      "sid" VARCHAR NOT NULL COLLATE "default",
+      "sess" JSON NOT NULL,
+      "expire" TIMESTAMP(6) NOT NULL,
+      PRIMARY KEY ("sid")
+  ) WITH (OIDS=FALSE);
+
+  CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+  ```
+
+- **Certificados SSL y Problemas de Sesiones:**
+
+  La configuración detallada en el paso 8 resuelve el problema de las sesiones que no se mantenían correctamente debido a que el navegador interpretaba el frontend y el backend como orígenes diferentes. Al utilizar el mismo dominio (`localhost`) y habilitar HTTPS con certificados SSL válidos, las cookies de sesión se comparten adecuadamente entre el frontend y el backend.
+
+- **Archivos JavaScript en el Frontend:**
+
+  Asegúrate de incluir los archivos JavaScript necesarios en el frontend:
+
+  - `public/js/dashboard.js`: Maneja la carga del dashboard y muestra el nombre del usuario.
+  - `public/js/login.js`: Gestiona el proceso de inicio de sesión.
+  - `public/js/main.js`: Controla la redirección al login y otras funcionalidades iniciales.
+
+- **Estructura del Proyecto:**
+
+  Mantén la estructura de carpetas organizada, separando el frontend y el backend para facilitar el desarrollo y mantenimiento.
+
+- **Ejecutar los Servidores:**
+
+  Recuerda siempre iniciar primero el backend y luego el frontend para asegurar que los servicios estén disponibles cuando el frontend intente conectarse al backend.
 
 ## Contribuciones
 
-Las contribuciones al proyecto son bienvenidas. Si deseas contribuir, sigue estos pasos:
+Las contribuciones al proyecto son bienvenidas. Sigue estos pasos:
 
 1. Haz un fork del repositorio.
-2. Crea una nueva rama para tus cambios: `git checkout -b mi-nueva-funcionalidad`.
+2. Crea una nueva rama: `git checkout -b mi-nueva-funcionalidad`.
 3. Realiza tus cambios y haz un commit: `git commit -m 'Añadir nueva funcionalidad'`.
 4. Sube tus cambios: `git push origin mi-nueva-funcionalidad`.
 5. Abre un Pull Request para que revisemos tus cambios.
