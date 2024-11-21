@@ -174,7 +174,7 @@ npm install -g http-server
 Desde la carpeta raíz del proyecto (donde se encuentra el frontend), inicia el servidor Frontend:
 
 ```bash
-http-server ./ -p 3000 --cors -S -C Backend/localhost+2.pem -K Backend/localhost+2-key.pem --host localhost
+http-server ./ -p 3000 --cors -S -C ../Backend/localhost+2.pem -K ../Backend/localhost+2-key.pem --host localhost
 ```
 
 El servidor Frontend estará corriendo en `https://localhost:3000`.
