@@ -64,7 +64,7 @@
         <h5 class="text-center font-bold text-2xl mb-6">Registrar Usuario</h5>
 
         <!-- Formulario de registro -->
-        <form action="/auth/register" method="POST" id="registrationForm">
+        <form id="registrationForm">
             <div class="form-group mb-4">
                 <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario:</label>
                 <input type="text" class="form-control register-input focus:ring-2 focus:ring-blue-500 focus:outline-none w-full" id="username" name="username" required>
@@ -92,8 +92,12 @@
             
         </form>
 
-        <p class="text-center mt-2 text-sm">¿Ya tienes cuenta? <a href="/auth/login" class="text-blue-500 hover:text-blue-700">Inicia sesión aquí</a></p>
+        <p class="text-center mt-2 text-sm">¿Ya tienes cuenta? <a href="#" onclick="showLogin()" class="text-blue-500 hover:text-blue-700">Inicia sesión aquí</a></p>
     </div>
+
+    <!-- Scripts -->
+    <script src="../public/js/register.js"></script>
+    <script src="../public/js/main.js"></script>
 
     <!-- Scripts de jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
