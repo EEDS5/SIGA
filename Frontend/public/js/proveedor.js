@@ -32,7 +32,7 @@
     }
 }); */
 
-document.addEventListener('DOMContentLoaded', async () => {
+/* document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -75,7 +75,47 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error('Error en proveedor.js:', error);
     }
+}); */
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    await obtenerProveedores(); // Cargar los proveedores
 });
+
+// Función para obtener los proveedores y renderizarlos
+async function obtenerProveedores() {
+    const token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch('https://localhost:3001/proveedores', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Proveedores desde backend:', data);
+
+            renderProveedores(data); // Muestra los datos en la página
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar proveedores:', response.status);
+        }
+    } catch (error) {
+        console.error('Error al obtener proveedores:', error);
+    }
+}
 
 // Función para renderizar los proveedores en el DOM
 /* function renderProveedores(proveedores) {
@@ -98,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Función para renderizar los proveedores en la tabla
 function renderProveedores(proveedores) {
     const container = document.getElementById('proveedores-container'); // Contenedor del <tbody>
-    
+
     if (!container) {
         console.error("Error: Contenedor 'proveedores-container' no encontrado en el DOM.");
         return;
@@ -118,7 +158,14 @@ function renderProveedores(proveedores) {
             <td>${proveedor.email || 'N/A'}</td>
             <td>${proveedor.direccion || 'N/A'}</td>
             <td>
-                <button class="btn btn-warning" onclick="cargarDatosProveedor('${proveedor.id}', '${proveedor.nombre}', '${proveedor.telefono}', '${proveedor.email}', '${proveedor.direccion}')" data-toggle="modal" data-target="#proveedorModal">
+                <button class="btn btn-warning editar-proveedor" 
+                    data-id="${proveedor.id}" 
+                    data-nombre="${encodeURIComponent(proveedor.nombre)}" 
+                    data-telefono="${encodeURIComponent(proveedor.telefono || '')}" 
+                    data-email="${encodeURIComponent(proveedor.email || '')}" 
+                    data-direccion="${encodeURIComponent(proveedor.direccion || '')}" 
+                    data-toggle="modal" 
+                    data-target="#proveedorModal">
                     <i class="fas fa-edit"></i> Editar
                 </button>
                 <button class="btn btn-danger eliminar-proveedor" data-id="${proveedor.id}">
@@ -130,9 +177,45 @@ function renderProveedores(proveedores) {
         // Agrega la fila al contenedor
         container.appendChild(row);
     });
+
+    // Añadir event listeners después de crear los elementos
+    // Para los botones de editar
+    const editButtons = document.querySelectorAll('.editar-proveedor');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const id = button.dataset.id;
+            const nombre = decodeURIComponent(button.dataset.nombre);
+            const telefono = decodeURIComponent(button.dataset.telefono);
+            const email = decodeURIComponent(button.dataset.email);
+            const direccion = decodeURIComponent(button.dataset.direccion);
+
+            cargarDatosProveedor(id, nombre, telefono, email, direccion);
+        });
+    });
+
+    // Para los botones de eliminar
+    const deleteButtons = document.querySelectorAll('.eliminar-proveedor');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const id = button.dataset.id;
+            eliminarProveedor(id);
+        });
+    });
 }
 
 // Nuevas funcionalidades - Añadido sin modificar lo existente
+
+// Función para cargar los datos en el modal para editar
+function cargarDatosProveedor(id, nombre, telefono, email, direccion) {
+    document.getElementById('proveedorId').value = id; // ID oculto
+    document.getElementById('nombre').value = nombre || '';
+    document.getElementById('telefono').value = telefono || '';
+    document.getElementById('email').value = email || '';
+    document.getElementById('direccion').value = direccion || '';
+
+    // Cambiar el título del modal
+    document.getElementById('proveedorModalLabel').textContent = 'Editar Proveedor';
+}
 
 // Función para limpiar el modal al crear un nuevo proveedor
 function limpiarModal() {
@@ -148,8 +231,8 @@ document.getElementById('proveedorForm').addEventListener('submit', async functi
     e.preventDefault();
 
     const id = document.getElementById('proveedorId').value; // ID oculto
-    const url = id ? `https://localhost:3001/proveedores/${id}` : 'https://localhost:3001/proveedores';
-    const method = id ? 'PUT' : 'POST';
+    const url = id ? `https://localhost:3001/proveedores/${id}/editar` : 'https://localhost:3001/proveedores';
+    const method = 'POST'; // Usamos POST para crear y editar, según las rutas del backend
 
     const data = {
         nombre: document.getElementById('nombre').value,
@@ -167,35 +250,31 @@ document.getElementById('proveedorForm').addEventListener('submit', async functi
             },
             body: JSON.stringify(data),
         });
-    
+
         if (response.ok) {
-            const contentType = response.headers.get('Content-Type');
-            if (contentType && contentType.includes('application/json')) {
-                const result = await response.json();
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Éxito!',
-                    text: id ? 'Proveedor actualizado correctamente.' : 'Proveedor creado correctamente.',
-                }).then(() => {
-                    location.reload();
-                });
-            } else {
-                // Manejar texto plano
-                const resultText = await response.text();
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Éxito!',
-                    text: resultText || 'Operación completada.',
-                }).then(() => {
-                    location.reload();
-                });
-            }
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: id ? 'Proveedor actualizado correctamente.' : 'Proveedor creado correctamente.',
+                showConfirmButton: false,
+                timer: 2000,
+            }).then(() => {
+                $('#proveedorModal').modal('hide'); // Ocultar el modal
+                obtenerProveedores(); // Actualizar la lista de proveedores
+            });
         } else {
-            const error = await response.json();
+            let errorMessage = 'No se pudo guardar el proveedor.';
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.message || errorMessage;
+            } catch (jsonError) {
+                const errorText = await response.text();
+                errorMessage = errorText || errorMessage;
+            }
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: error.message || 'No se pudo guardar el proveedor.',
+                text: errorMessage,
             });
         }
     } catch (error) {
@@ -208,21 +287,17 @@ document.getElementById('proveedorForm').addEventListener('submit', async functi
     }    
 });
 
-// Manejo de eliminación de proveedor
-document.addEventListener('click', async function (e) {
-    if (e.target.classList.contains('eliminar-proveedor')) {
-        const id = e.target.dataset.id;
-
-        const confirm = await Swal.fire({
-            title: '¿Estás seguro?',
-            text: 'Esta acción no se puede deshacer.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar',
-        });
-
-        if (confirm.isConfirmed) {
+// Función para eliminar un proveedor
+async function eliminarProveedor(id) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción no se puede deshacer.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+    }).then(async (result) => {
+        if (result.isConfirmed) {
             try {
                 const response = await fetch(`https://localhost:3001/proveedores/${id}`, {
                     method: 'DELETE',
@@ -236,14 +311,24 @@ document.addEventListener('click', async function (e) {
                         icon: 'success',
                         title: 'Eliminado',
                         text: 'Proveedor eliminado correctamente.',
+                        showConfirmButton: false,
+                        timer: 2000,
                     }).then(() => {
-                        location.reload(); // Recargar la tabla
+                        obtenerProveedores(); // Actualizar la lista de proveedores
                     });
                 } else {
+                    let errorMessage = 'No se pudo eliminar el proveedor.';
+                    try {
+                        const errorData = await response.json();
+                        errorMessage = errorData.message || errorMessage;
+                    } catch (jsonError) {
+                        const errorText = await response.text();
+                        errorMessage = errorText || errorMessage;
+                    }
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'No se pudo eliminar el proveedor.',
+                        text: errorMessage,
                     });
                 }
             } catch (error) {
@@ -255,16 +340,5 @@ document.addEventListener('click', async function (e) {
                 });
             }
         }
-    }
-});
-
-function cargarDatosProveedor(id, nombre, telefono, email, direccion) {
-    document.getElementById('proveedorId').value = id; // ID oculto
-    document.getElementById('nombre').value = nombre;
-    document.getElementById('telefono').value = telefono || ''; // Si no hay datos, deja el campo vacío
-    document.getElementById('email').value = email || '';
-    document.getElementById('direccion').value = direccion || '';
-
-    // Cambiar el título del modal
-    document.getElementById('proveedorModalLabel').textContent = 'Editar Proveedor';
+    });
 }
