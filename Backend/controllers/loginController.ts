@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import db from "../db";
 import path from "path";
+import jwt from "jsonwebtoken";
 
 // Mostrar formulario de login
 /* export const showLogin = (req: Request, res: Response) => {
@@ -45,7 +46,7 @@ export const showLogin = (req: Request, res: Response) => {
     }
 }; */
 
-export const login = async (req: Request, res: Response): Promise<void> => {
+/* export const login = async (req: Request, res: Response): Promise<void> => {
     const { username, password } = req.body;
 
     try {
@@ -74,6 +75,57 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         });
     } catch (error) {
         console.error('Error durante el inicio de sesión:', (error as Error).message);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+}; */
+
+const SECRET_KEY = "mi_secreto_seguro"; // Cambia esto por una clave segura en producción
+
+// Función para generar un token JWT
+const generarToken = (user: any): string => {
+    return jwt.sign(
+        {
+            id: user.id,
+            username: user.username,
+            rol: user.rol, // Puedes incluir más datos si son necesarios
+        },
+        SECRET_KEY,
+        { expiresIn: "1h" } // El token expira en 1 hora
+    );
+};
+
+// Manejar el proceso de login
+export const login = async (req: Request, res: Response): Promise<void> => {
+    const { username, password } = req.body;
+
+    try {
+        const user = await db.oneOrNone('SELECT * FROM usuario WHERE username = $1', [username]);
+
+        if (!user) {
+            res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
+            return;
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password_hash);
+
+        if (!isMatch) {
+            res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
+            return;
+        }
+
+        // Genera un token JWT utilizando la función generarToken
+        const token = generarToken(user);
+
+        // Asigna la sesión
+        req.session.user = user;
+
+        res.status(200).json({
+            message: 'Login exitoso',
+            redirectUrl: '/views/dashboard',
+            token, // Incluye el token en la respuesta
+        });
+    } catch (error) {
+        console.error('Error durante el inicio de sesión:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 };

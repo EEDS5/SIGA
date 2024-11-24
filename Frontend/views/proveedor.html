@@ -8,7 +8,7 @@
     <!-- Integrar Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Integrar Tailwind CSS -->
-    <link rel="stylesheet" href="/Frontend/css/output.css">
+    <link rel="stylesheet" href="../css/output.css">
     <!-- Librería de Animaciones Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- Font Awesome para los iconos -->
@@ -149,26 +149,26 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <% proveedores.forEach(proveedor => { %>
-                        <tr class="animate__animated animate__fadeInUp">
-                            <td><%= proveedor.id %></td>
+                <tbody id="proveedores-container">
+                    <!-- <% proveedores.forEach(proveedor => { %> -->
+                        <!-- <tr class="animate__animated animate__fadeInUp"> -->
+                            <!-- <td><%= proveedor.id %></td>
                             <td><%= proveedor.nombre %></td>
                             <td><%= proveedor.telefono %></td>
                             <td><%= proveedor.email %></td>
-                            <td><%= proveedor.direccion %></td>
-                            <td>
+                            <td><%= proveedor.direccion %></td> -->
+                            <!-- <td> -->
                                 <!-- Botón de editar proveedor -->
-                                <button class="btn btn-warning" onclick="cargarDatosProveedor(<%= proveedor.id %>, '<%= proveedor.nombre %>', '<%= proveedor.telefono %>', '<%= proveedor.email %>', '<%= proveedor.direccion %>')" data-toggle="modal" data-target="#proveedorModal">
+                                <!-- <button class="btn btn-warning" onclick="cargarDatosProveedor(<%= proveedor.id %>, '<%= proveedor.nombre %>', '<%= proveedor.telefono %>', '<%= proveedor.email %>', '<%= proveedor.direccion %>')" data-toggle="modal" data-target="#proveedorModal">
                                     <i class="fas fa-edit"></i> Editar
-                                </button>
+                                </button> -->
                                 <!-- Botón de eliminar proveedor -->
-                                <button class="btn btn-danger eliminar-proveedor" data-id="<%= proveedor.id %>">
+                                <!-- <button class="btn btn-danger eliminar-proveedor" data-id="<%= proveedor.id %>">
                                     <i class="fas fa-trash-alt"></i> Eliminar
-                                </button>
-                            </td>
-                        </tr>
-                    <% }) %>
+                                </button> -->
+                            <!-- </td>
+                        </tr> -->
+                    <!-- <% }) %> -->
                 </tbody>
             </table>
         </div>
@@ -223,7 +223,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
+    <!-- Scripts de JavaScript -->
+    <script src="../public/js/proveedor.js"></script>
+
+    <!-- <script>
         // Función para cargar los datos del proveedor en el modal para editar
         function cargarDatosProveedor(id, nombre, telefono, email, direccion) {
             $('#proveedorId').val(id);
@@ -314,6 +317,6 @@
                 }
             });
         });
-    </script>
+    </script> -->
 </body>
 </html>

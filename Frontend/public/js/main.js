@@ -26,3 +26,124 @@ async function showRegister() {
         console.error('Error al intentar acceder al registro:', error);
     }
 }
+
+/* // Función para gestionar proveedores
+async function showProveedores() {
+    try {
+        const response = await fetch('https://localhost:3001/proveedores', {
+            method: 'GET',
+            credentials: 'include', // Esto asegura que las cookies se envíen
+        });
+
+        if (response.ok) {
+            // Redirige solo después de una respuesta exitosa
+            window.location.href = 'proveedor.html';
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html'; // Redirige al login si no está autenticado
+        } else {
+            console.error('Error al cargar proveedores:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showProveedores:', error);
+    }
+} */
+
+
+// Función para gestionar proveedores
+// public/js/main.js
+
+/* async function showProveedores() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/proveedores', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+            // No es necesario 'credentials: include' si usas tokens
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Proveedores:', data);
+            // Almacena los datos si es necesario
+            window.location.href = 'proveedor.html'; // Redirige a la página de proveedores
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar proveedores:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showProveedores:', error);
+    }
+} */
+
+    async function showProveedores() {
+        const token = localStorage.getItem('token'); // Recupera el token almacenado
+    
+        console.log('Token obtenido de localStorage:', token); // Depuración
+    
+        if (!token) {
+            console.error('No se encontró un token');
+            window.location.href = 'login.html'; // Redirige al login si no hay token
+            return;
+        }
+    
+        try {
+            const response = await fetch('https://localhost:3001/proveedores', {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+                },
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Proveedores:', data);
+                // Almacenar los datos en localStorage o sessionStorage si los necesitas en proveedor.html
+                localStorage.setItem('proveedores', JSON.stringify(data));
+                window.location.href = 'proveedor.html'; // Redirige a la página de proveedores
+            } else if (response.status === 401) {
+                console.error('No autenticado');
+                window.location.href = 'login.html';
+            } else {
+                console.error('Error al cargar proveedores:', response.status);
+            }
+        } catch (error) {
+            console.error('Error en showProveedores:', error);
+        }
+    }    
+
+// Función para cerrar sesión
+async function showLogout() {
+    try {
+        const response = await fetch('https://localhost:3001/auth/logout', {
+            method: 'POST',
+            credentials: 'include', // Incluye cookies para autenticación
+        });
+
+        if (response.ok) {
+            console.log('Sesión cerrada exitosamente');
+            window.location.href = 'index.html';
+        } else {
+            console.error('Error al cerrar sesión:', response.status);
+        }
+    } catch (error) {
+        console.error('Error al intentar cerrar sesión:', error);
+    }
+}
+
+// Exportar al ámbito global si es necesario
+window.showProveedores = showProveedores;
+window.showLogout = showLogout;

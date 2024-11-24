@@ -52,7 +52,7 @@ app.use(session({
         secure: true, // HTTPS solo en producción
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24, // 1 día,
-        sameSite: 'lax', // O 'none' si es necesario
+        sameSite: 'none', // O 'none' si es necesario
     }
 }));
 

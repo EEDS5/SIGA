@@ -1,14 +1,26 @@
+//controllers/proveedorController.ts
+import path from 'path';
 import { Request, Response } from 'express';
 import Proveedor from '../models/proveedorModel';
 
 // Método para mostrar todos los proveedores
-export const mostrarProveedor = async (req: Request, res: Response) => {
+/* export const mostrarProveedor = async (req: Request, res: Response) => {
     try {
         const proveedores = await Proveedor.obtenerTodos();
         res.render('proveedor', { proveedores });
     } catch (error) {
         console.error('Error al obtener los proveedores:', (error as Error).message);
         res.status(500).send('Error al obtener los proveedores');
+    }
+}; */
+
+export const mostrarProveedor = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const proveedores = await Proveedor.obtenerTodos();
+        res.json(proveedores);
+    } catch (error) {
+        console.error('Error al obtener los proveedores:', error);
+        res.status(500).json({ message: 'Error al obtener los proveedores' });
     }
 };
 

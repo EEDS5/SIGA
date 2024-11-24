@@ -1,6 +1,7 @@
 //routes/loginRoutes.ts
 import { Router } from 'express';
 import { showLogin, login } from '../controllers/loginController';
+import { logout } from '../controllers/authController';
 
 const router = Router();
 
@@ -25,5 +26,8 @@ router.get('/login', showLogin);
 
 // Ruta para manejar el proceso de login (POST)
 router.post('/login', login);
+
+// Ruta para cerrar sesión (POST)
+router.post('/logout', logout);
 
 export default router;

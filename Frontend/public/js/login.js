@@ -19,12 +19,17 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),
-            credentials: 'include' // Enviar cookies
+            credentials: 'include',
         });
 
         if (response.ok) {
             const data = await response.json();
+            const token = data.token; // Extrae el token del servidor
+
             if (data.redirectUrl) {
+                // Guarda el token en localStorage para usarlo en solicitudes protegidas
+                localStorage.setItem('token', token);
+
                 alert(data.message);
                 window.location.href = data.redirectUrl;
             } else {
@@ -42,17 +47,3 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
         submitButton.textContent = 'Iniciar sesión';
     }
 });
-
-function showError(message) {
-    const errorMessageDiv = document.getElementById('error-message');
-    errorMessageDiv.textContent = message;
-    errorMessageDiv.style.display = 'block';
-}
-
-document.getElementById('username').addEventListener('input', clearError);
-document.getElementById('password').addEventListener('input', clearError);
-
-function clearError() {
-    const errorMessageDiv = document.getElementById('error-message');
-    errorMessageDiv.style.display = 'none';
-}
