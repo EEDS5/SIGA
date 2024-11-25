@@ -1,102 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestión Automotriz - SIGA</title>
 
-    <!-- Integrar Bootstrap para componentes adicionales -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Integrar Tailwind desde el archivo generado -->
-    <link href="../css/output.css" rel="stylesheet">
-    
-    <style>
-        /* Estilos adicionales si son necesarios */
-        body {
-            background-color: #f8fafc; /* Fondo claro y limpio */
-        }
-        .header {
-            background-color: #1a202c; /* Fondo oscuro */
-            color: white;
-            padding: 20px;
-        }
-        .main-container {
-            margin-top: 50px;
-        }
-        .btn-custom {
-            background-color: #3490dc; /* Botón con color principal de Bootstrap */
-            color: white;
-        }
-        .btn-custom:hover {
-            background-color: #2779bd; /* Cambio de color en hover */
-        }
-    </style>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../css/output.css">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
-<body>
 
-    <!-- Encabezado -->
-    <header class="header text-center">
-        <h1 class="text-4xl font-bold">Sistema de Gestión Automotriz</h1>
-        <p class="lead">Bienvenido a SIGA - Tu solución para gestionar vehículos y servicios</p>
+<body class="bg-background text-secondary font-sans">
+
+    <!-- Encabezado Ajustado con Mejor Contraste -->
+    <header class="relative bg-primary shadow-md">
+        <!-- Imagen del Banner -->
+        <img src="../public/img/Mecanica-Automotriz.webp" alt="Banner SIGA" class="w-full h-60 object-cover opacity-80">
+        <!-- Texto sobre el Banner -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/60 text-white text-center px-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+                Sistema de Gestión Automotriz
+            </h1>
+            <p class="text-base md:text-lg text-gray-200 drop-shadow-lg mt-2">
+                Bienvenido a SIGA - Tu solución para gestionar vehículos y servicios
+            </p>
+        </div>
     </header>
 
-    <!-- Contenido Principal -->
-    <div class="container main-container text-center">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h2 class="text-2xl font-semibold mb-4">Bienvenido a SIGA</h2>
-                        <p>Administra eficientemente los vehículos y servicios automotrices con nuestro sistema moderno y fácil de usar.</p>
-                        <div class="mt-5">
-                            <!-- <a href="/auth/login" class="btn btn-custom btn-lg mx-2">Iniciar Sesión</a> -->
-                            <a href="#" onclick="showLogin()" class="btn btn-custom btn-lg mx-2">Iniciar Sesión</a>
-                            <a href="#" onclick="showRegister()" class="btn btn-outline-primary btn-lg mx-2">Registrarse</a>
-                        </div>
+    <!-- Contenido principal -->
+    <main class="container mx-auto my-12 px-6">
+        <!-- Sección principal -->
+        <div class="flex flex-col items-center">
+            <div class="bg-section rounded-lg shadow-md p-8 text-center max-w-lg">
+                <h2 class="text-2xl font-semibold text-primary mb-4">Bienvenido a SIGA</h2>
+                <p class="text-secondary mb-6">
+                    Administra eficientemente los vehículos y servicios automotrices con nuestro sistema moderno y fácil
+                    de usar.
+                </p>
+                <div class="flex justify-center gap-4 mt-6">
+                    <a href="#" onclick="showLogin()"
+                        class="bg-primary text-white px-8 py-2 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center gap-2">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </a>
+                    <a href="#" onclick="showRegister()"
+                        class="bg-accent text-secondary px-8 py-2 rounded-lg hover:bg-gray-300 border border-primary transition duration-200 flex items-center gap-2">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Características del sistema -->
+        <section class="mt-16">
+            <h3 class="text-3xl font-bold text-primary text-center mb-10">Características del Sistema</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tarjeta 1 -->
+                <div class="bg-white shadow-md rounded-lg p-6 text-center">
+                    <img src="../public/img/clientes.jpg" alt="Gestión de Clientes" class="mx-auto mb-4 h-20 w-20">
+                    <h4 class="text-xl font-semibold text-primary mb-2">Gestión de Clientes</h4>
+                    <p class="text-secondary">Controla y organiza la información de tus clientes con facilidad.</p>
+                </div>
+                <!-- Tarjeta 2 -->
+                <div class="bg-white shadow-md rounded-lg p-6 text-center">
+                    <img src="../public/img/vehiculos.jpg" alt="Control de Vehículos" class="mx-auto mb-4 h-20 w-20">
+                    <h4 class="text-xl font-semibold text-primary mb-2">Control de Vehículos</h4>
+                    <p class="text-secondary">Administra los vehículos de tus clientes y su historial de servicio.</p>
+                </div>
+                <!-- Tarjeta 3 -->
+                <div class="bg-white shadow-md rounded-lg p-6 text-center">
+                    <img src="../public/img/inventario.jpg" alt="Gestión de Inventario" class="mx-auto mb-4 h-20 w-20">
+                    <h4 class="text-xl font-semibold text-primary mb-2">Gestión de Inventario</h4>
+                    <p class="text-secondary">Lleva un seguimiento detallado de productos y repuestos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de estadísticas -->
+        <section class="mt-16 bg-primary text-white py-12 rounded-lg shadow-md">
+            <div class="container mx-auto text-center">
+                <h3 class="text-3xl font-bold mb-6">Resultados Clave</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-4xl font-bold">+100</h4>
+                        <p>Clientes Satisfechos</p>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl font-bold">+500</h4>
+                        <p>Vehículos Gestionados</p>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl font-bold">+1,000</h4>
+                        <p>Productos en Inventario</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <!-- Sección de información adicional -->
-    <section class="container text-center mt-5">
-        <h3 class="text-3xl font-semibold mb-3">Características del Sistema</h3>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-white shadow rounded-lg">
-                    <h4 class="font-semibold text-xl">Gestión de Clientes</h4>
-                    <p class="text-gray-600">Controla y organiza la información de tus clientes con facilidad.</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-white shadow rounded-lg">
-                    <h4 class="font-semibold text-xl">Control de Vehículos</h4>
-                    <p class="text-gray-600">Administra los vehículos de tus clientes y su historial de servicio.</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="p-4 bg-white shadow rounded-lg">
-                    <h4 class="font-semibold text-xl">Gestión de Inventario</h4>
-                    <p class="text-gray-600">Mantén un seguimiento detallado del inventario de productos y repuestos.</p>
-                </div>
-            </div>
+    <!-- Pie de Página -->
+    <footer class="footer bg-secondary flex flex-col items-center gap-4 p-6">
+        <div class="flex items-center gap-2 text-xl font-bold text-primary">
+            <!-- Reemplazo del SVG por el logo -->
+            <img src="../public/img/Logo_Siga sin letras.PNG" alt="Logo SIGA" class="h-8 w-auto">
+            <span>SIGA</span>
         </div>
-    </section>
-
-    <!-- Pie de página -->
-    <footer class="bg-gray-800 text-white text-center py-4">
-        <p class="mb-0">&copy; 2024 Sistema de Gestión Automotriz (SIGA) - Todos los derechos reservados.</p>
-        <p>Desarrollado por el equipo de Ingeniería de Sistemas.</p>
+        <aside class="text-accent">
+            <p>&copy; 2024 Sistema de Gestión Automotriz - Todos los derechos reservados.</p>
+        </aside>
+        <nav class="text-accent grid-flow-col gap-4">
+            <a class="link link-hover text-accent hover:text-primary" href="#">Términos</a>
+            <a class="link link-hover text-accent hover:text-primary" href="#">Ayuda</a>
+            <a class="link link-hover text-accent hover:text-primary" href="#">Contacto</a>
+            <a class="link link-hover text-accent hover:text-primary" href="#">Políticas</a>
+        </nav>
     </footer>
 
     <!-- Scripts -->
     <script src="../public/js/main.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

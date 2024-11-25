@@ -1,6 +1,6 @@
 {
   "name": "siga",
-  "version": "1.0.3.1",
+  "version": "1.0.3.2",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,6 +22,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.1",
     "express-validator": "^7.2.0",
+    "flyonui": "^1.1.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1",
     "pg-promise": "^11.10.1",

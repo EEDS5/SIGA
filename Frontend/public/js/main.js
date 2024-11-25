@@ -135,6 +135,9 @@ async function showLogout() {
 
         if (response.ok) {
             console.log('Sesión cerrada exitosamente');
+            // Eliminar el token JWT de localStorage
+            localStorage.removeItem('token');
+            // Redirigir al usuario a la página de inicio de sesión o principal
             window.location.href = 'index.html';
         } else {
             console.error('Error al cerrar sesión:', response.status);
@@ -143,6 +146,22 @@ async function showLogout() {
         console.error('Error al intentar cerrar sesión:', error);
     }
 }
+
+// Lógica para el enlace "Cerrar sesión"
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleccionar el enlace de "Cerrar sesión"
+    const logoutLink = document.querySelector('.logout-link');
+
+    // Verificar si el enlace está presente
+    if (logoutLink) {
+        logoutLink.addEventListener('click', async (event) => {
+            event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+            await showLogout(); // Llamar a la función para cerrar sesión
+        });
+    } else {
+        console.log('El enlace de "Cerrar sesión" no está disponible en el DOM.');
+    }
+});
 
 // Exportar al ámbito global si es necesario
 window.showProveedores = showProveedores;

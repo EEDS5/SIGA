@@ -154,7 +154,7 @@ html,
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Roboto, sans-serif;
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
@@ -554,42 +554,2820 @@ video {
   display: none;
 }
 
+:root,
+[data-theme] {
+  background-color: var(--fallback-b1,oklch(var(--b1)/1));
+  color: var(--fallback-bc,oklch(var(--bc)/1));
+}
+
+@supports not (color: oklch(0 0 0)) {
+  :root {
+    color-scheme: light;
+    --fallback-p: #491eff;
+    --fallback-pc: #d4dbff;
+    --fallback-s: #ff41c7;
+    --fallback-sc: #fff9fc;
+    --fallback-a: #00cfbd;
+    --fallback-ac: #00100d;
+    --fallback-n: #2b3440;
+    --fallback-nc: #d7dde4;
+    --fallback-b1: #ffffff;
+    --fallback-b2: #e5e6e6;
+    --fallback-b3: #e5e6e6;
+    --fallback-bc: #1f2937;
+    --fallback-bs: #1f2937;
+    --fallback-in: #00b3f0;
+    --fallback-inc: #000000;
+    --fallback-su: #00ca92;
+    --fallback-suc: #000000;
+    --fallback-wa: #ffc22d;
+    --fallback-wac: #000000;
+    --fallback-er: #ff6f70;
+    --fallback-erc: #000000;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --fallback-p: #7582ff;
+      --fallback-pc: #050617;
+      --fallback-s: #ff71cf;
+      --fallback-sc: #190211;
+      --fallback-a: #00c7b5;
+      --fallback-ac: #000e0c;
+      --fallback-n: #2a323c;
+      --fallback-nc: #a6adbb;
+      --fallback-b1: #1d232a;
+      --fallback-b2: #191e24;
+      --fallback-b3: #15191e;
+      --fallback-bc: #a6adbb;
+      --fallback-bs: #989eab;
+      --fallback-in: #00b3f0;
+      --fallback-inc: #000000;
+      --fallback-su: #00ca92;
+      --fallback-suc: #000000;
+      --fallback-wa: #ffc22d;
+      --fallback-wac: #000000;
+      --fallback-er: #ff6f70;
+      --fallback-erc: #000000;
+    }
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+[class*="icon-[tabler--"] {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+:root {
+  color-scheme: light;
+  --rounded-box: 0.5rem ;
+  --rounded-btn: 0.375rem;
+  --rounded-tooltip: 0.25rem;
+  --animation-btn: 0.25s;
+  --animation-input: .2s;
+  --btn-focus-scale: 0.95;
+  --border-btn: 1px;
+  --tab-border: 1px;
+  --tab-radius: 0.5rem;
+  --p: 57.5934% 0.247012 287.240256;
+  --pc: 93.7482% 0.032368 291.504163;
+  --s: 55.7871% 0.022138 301.905408;
+  --sc: 95.0453% 0.002858 308.427423;
+  --a: 62.3083% 0.188015 259.814527;
+  --ac: 93.1918% 0.031591 255.585479;
+  --n: 40.6559% 0.025056 282.210785;
+  --nc: 97.6419% 0.001323 286.375536;
+  --b1: 100% 0 0;
+  --b2: 94.7244% 0.005338 286.297402;
+  --b3: 88.6277% 0.008239 278.622785;
+  --bc: 37.567% 0.022158 281.800147;
+  --bs: 37.567% 0.022158 281.800147;
+  --in: 71.4837% 0.125737 215.220903;
+  --inc: 95.6262% 0.044329 203.387778;
+  --su: 73.1062% 0.216656 147.043973;
+  --suc: 96.444% 0.02867 172.082912;
+  --wa: 79.8713% 0.164239 73.09399;
+  --wac: 98.4165% 0.02418 94.061776;
+  --er: 65.3932% 0.222085 25.863858;
+  --erc: 97.5752% 0.015143 61.349242;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --rounded-box: 0.5rem ;
+    --rounded-btn: 0.375rem;
+    --rounded-tooltip: 0.25rem;
+    --animation-btn: 0.25s;
+    --animation-input: .2s;
+    --btn-focus-scale: 0.95;
+    --border-btn: 1px;
+    --tab-border: 1px;
+    --tab-radius: 0.5rem;
+    --p: 57.5934% 0.247012 287.240256;
+    --pc: 93.7482% 0.032368 291.504163;
+    --s: 55.7871% 0.022138 301.905408;
+    --sc: 100% 0 0;
+    --a: 62.3083% 0.188015 259.814527;
+    --ac: 93.1918% 0.031591 255.585479;
+    --n: 65.7482% 0.022235 294.952787;
+    --nc: 18.5128% 0.016696 301.919165;
+    --b1: 26.8442% 0.028285 299.769973;
+    --b2: 22.6865% 0.023344 295.952775;
+    --b3: 39.9632% 0.030791 300.243852;
+    --bc: 78.094% 0.014175 295.24394;
+    --bs: 18.5128% 0.016696 301.919165;
+    --in: 71.4837% 0.125737 215.220903;
+    --inc: 95.6262% 0.044329 203.387778;
+    --su: 73.1062% 0.216656 147.043973;
+    --suc: 96.444% 0.02867 172.082912;
+    --wa: 79.8713% 0.164239 73.09399;
+    --wac: 98.4165% 0.02418 94.061776;
+    --er: 65.3932% 0.222085 25.863858;
+    --erc: 97.5752% 0.015143 61.349242;
+  }
+}
+
+[data-theme=light] {
+  color-scheme: light;
+  --rounded-box: 0.5rem ;
+  --rounded-btn: 0.375rem;
+  --rounded-tooltip: 0.25rem;
+  --animation-btn: 0.25s;
+  --animation-input: .2s;
+  --btn-focus-scale: 0.95;
+  --border-btn: 1px;
+  --tab-border: 1px;
+  --tab-radius: 0.5rem;
+  --p: 57.5934% 0.247012 287.240256;
+  --pc: 93.7482% 0.032368 291.504163;
+  --s: 55.7871% 0.022138 301.905408;
+  --sc: 95.0453% 0.002858 308.427423;
+  --a: 62.3083% 0.188015 259.814527;
+  --ac: 93.1918% 0.031591 255.585479;
+  --n: 40.6559% 0.025056 282.210785;
+  --nc: 97.6419% 0.001323 286.375536;
+  --b1: 100% 0 0;
+  --b2: 94.7244% 0.005338 286.297402;
+  --b3: 88.6277% 0.008239 278.622785;
+  --bc: 37.567% 0.022158 281.800147;
+  --bs: 37.567% 0.022158 281.800147;
+  --in: 71.4837% 0.125737 215.220903;
+  --inc: 95.6262% 0.044329 203.387778;
+  --su: 73.1062% 0.216656 147.043973;
+  --suc: 96.444% 0.02867 172.082912;
+  --wa: 79.8713% 0.164239 73.09399;
+  --wac: 98.4165% 0.02418 94.061776;
+  --er: 65.3932% 0.222085 25.863858;
+  --erc: 97.5752% 0.015143 61.349242;
+}
+
+[data-theme=dark] {
+  color-scheme: dark;
+  --rounded-box: 0.5rem ;
+  --rounded-btn: 0.375rem;
+  --rounded-tooltip: 0.25rem;
+  --animation-btn: 0.25s;
+  --animation-input: .2s;
+  --btn-focus-scale: 0.95;
+  --border-btn: 1px;
+  --tab-border: 1px;
+  --tab-radius: 0.5rem;
+  --p: 57.5934% 0.247012 287.240256;
+  --pc: 93.7482% 0.032368 291.504163;
+  --s: 55.7871% 0.022138 301.905408;
+  --sc: 100% 0 0;
+  --a: 62.3083% 0.188015 259.814527;
+  --ac: 93.1918% 0.031591 255.585479;
+  --n: 65.7482% 0.022235 294.952787;
+  --nc: 18.5128% 0.016696 301.919165;
+  --b1: 26.8442% 0.028285 299.769973;
+  --b2: 22.6865% 0.023344 295.952775;
+  --b3: 39.9632% 0.030791 300.243852;
+  --bc: 78.094% 0.014175 295.24394;
+  --bs: 18.5128% 0.016696 301.919165;
+  --in: 71.4837% 0.125737 215.220903;
+  --inc: 95.6262% 0.044329 203.387778;
+  --su: 73.1062% 0.216656 147.043973;
+  --suc: 96.444% 0.02867 172.082912;
+  --wa: 79.8713% 0.164239 73.09399;
+  --wac: 98.4165% 0.02418 94.061776;
+  --er: 65.3932% 0.222085 25.863858;
+  --erc: 97.5752% 0.015143 61.349242;
+}
+
+.\!container {
+  width: 100% !important;
+}
+
 .container {
   width: 100%;
 }
 
 @media (min-width: 640px) {
+  .\!container {
+    max-width: 640px !important;
+  }
+
   .container {
     max-width: 640px;
   }
 }
 
 @media (min-width: 768px) {
+  .\!container {
+    max-width: 768px !important;
+  }
+
   .container {
     max-width: 768px;
   }
 }
 
 @media (min-width: 1024px) {
+  .\!container {
+    max-width: 1024px !important;
+  }
+
   .container {
     max-width: 1024px;
   }
 }
 
 @media (min-width: 1280px) {
+  .\!container {
+    max-width: 1280px !important;
+  }
+
   .container {
     max-width: 1280px;
   }
 }
 
 @media (min-width: 1536px) {
+  .\!container {
+    max-width: 1536px !important;
+  }
+
   .container {
     max-width: 1536px;
   }
 }
 
+.alert {
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  border-radius: var(--rounded-box, 0.5rem);
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+  color: var(--fallback-bc,oklch(var(--bc)/0.8));
+}
+
+.avatar.placeholder > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  height: 2.375rem;
+  min-height: 2.375rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 500;
+  gap: 0.5rem;
+  border-radius: var(--rounded-btn, 0.375rem);
+  border-color: currentColor;
+  border-color: oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity));
+  text-decoration-line: none;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  border-width: var(--border-btn, 1px);
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  --tw-text-opacity: 1;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
+  --tw-shadow: 0 2px 4px 0 var(--fallback-bs,oklch(var(--bs)/0.26));
+  --tw-shadow-colored: 0 2px 4px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  outline-color: var(--fallback-bc,oklch(var(--bc)/1));
+  background-color: oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity));
+  --tw-bg-opacity: 1;
+  --tw-border-opacity: 1;
+}
+
+.btn-disabled,
+  .btn[disabled],
+  .btn:disabled {
+  pointer-events: none;
+}
+
+:where(.btn:is(input[type="checkbox"])),
+:where(.btn:is(input[type="radio"])) {
+  width: auto;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+.btn:is(input[type="checkbox"]):after,
+.btn:is(input[type="radio"]):after {
+  --tw-content: attr(aria-label);
+  content: var(--tw-content);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--rounded-box, 0.5rem);
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.4));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  color: var(--fallback-bc,oklch(var(--bc)/0.8));
+  box-shadow: var(--card-shadow, 0px 2px 4px 0px oklch(var(--bs) / 0.26));
+  border-width: var(--card-border, 0px);
+}
+
+.card:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.card-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  padding: var(--padding-card, 1.5rem);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: var(--fallback-bc,oklch(var(--bc)/0.9));
+}
+
+.card figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card.image-full {
+  display: grid;
+}
+
+.card.image-full:before {
+  position: relative;
+  content: "";
+  z-index: 10;
+  border-radius: var(--rounded-box, 0.5rem);
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.58) 100%);
+}
+
+.card.image-full:before,
+    .card.image-full > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.card.image-full > figure img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card.image-full > .card-body {
+  position: relative;
+  z-index: 20;
+  --tw-text-opacity: 1;
+  color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
+}
+
+:where(.card figure > *) {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .modal-dialog {
+    max-width: 32rem;
+  }
+}
+
+.card-group > .card {
+  flex: 1 0 0%;
+  border-radius: 0px;
+  --card-shadow: none;
+  --card-border: 0;
+}
+
+.collapse:not(td):not(tr):not(colgroup) {
+  visibility: visible;
+}
+
+.footer {
+  display: grid;
+  width: 100%;
+  grid-auto-flow: row;
+  place-items: start;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  row-gap: 2.5rem;
+  color: var(--fallback-bc,oklch(var(--bc)/0.8));
+}
+
+.footer > * {
+  display: grid;
+  place-items: start;
+  gap: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .footer {
+    grid-auto-flow: column;
+  }
+
+  .footer-center {
+    grid-auto-flow: row dense;
+  }
+}
+
+.form-control {
+  position: relative;
+  display: block;
+}
+
+.label {
+  display: flex;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem;
+  color: var(--fallback-bc,oklch(var(--bc)/0.8));
+}
+
+.input {
+  height: 2.375rem;
+  width: 100%;
+  flex-shrink: 1;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  border-radius: var(--rounded-btn, 0.375rem);
+  border-width: 1px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.4));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  color: var(--fallback-bc,oklch(var(--bc)/0.8));
+  transition: border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.input::file-selector-button {
+  margin-inline-end: 1rem;
+  display: inline-flex;
+  height: 100%;
+  flex-shrink: 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 1em;
+  border-start-start-radius: var(--rounded-btn, 0.375rem);
+  border-end-start-radius: var(--rounded-btn, 0.375rem);
+  border-width: 0px;
+  background-color: var(--fallback-bc,oklch(var(--bc)/0.2));
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--fallback-bc,oklch(var(--bc)/0.9));
+  text-decoration-line: none;
+}
+
+.input[type="number"]::-webkit-inner-spin-button {
+  margin-top: -0.25rem;
+  margin-bottom: -0.25rem;
+  margin-inline-end: -0.25rem;
+}
+
+.input[type="file"] {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.link {
+  display: inline-block;
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.link-hover {
+  text-decoration-line: none;
+}
+
+@media (hover:hover) {
+  .link-hover:hover {
+    text-decoration-line: underline;
+  }
+
+  .label a:hover {
+    --tw-text-opacity: 1;
+    color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
+  }
+
+  .table tr.hover:hover,
+  .table tr.hover:nth-child(even):hover {
+    background-color: var(--fallback-bc,oklch(var(--bc)/0.05));
+  }
+
+  .table-striped tr.hover,
+  .table-striped tr.hover:nth-child(even) {
+    background-color: var(--fallback-bc,oklch(var(--bc)/0.05));
+  }
+}
+
+.modal {
+  pointer-events: none;
+  position: fixed;
+  inset: 0px;
+  z-index: 80;
+  margin: 0px;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  justify-items: center;
+  padding: 1rem;
+  opacity: 0;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.modal-dialog {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  opacity: 0;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.modal-content {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  max-height: calc(100vh - 2rem);
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  --tw-shadow: 0 20px 25px -6px var(--fallback-bs,oklch(var(--bs)/0.38));
+  --tw-shadow-colored: 0 20px 25px -6px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 300ms;
+  overscroll-behavior: contain;
+}
+
+.modal-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.modal-header + .modal-body {
+  padding-top: 0;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  color: var(--fallback-bc,oklch(var(--bc)/0.9));
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.modal-body + .modal-footer {
+  padding-top: 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: var(--navbar-padding, 0.75rem 1.5rem);
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.select {
+  display: inline-flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 2.375rem;
+  width: 100%;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 1rem;
+  line-height: 2;
+  line-height: 1.375rem;
+  border-radius: var(--rounded-btn, 0.375rem);
+  border-width: 1px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.4));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  color: var(--fallback-bc,oklch(var(--bc)/0.8));
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'><path fill='none' stroke='%239293AE' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9l6 6l6-6'/></svg>");
+  background-size: 1.3em;
+  background-position: calc(100% - 1rem) center;
+  background-repeat: no-repeat;
+}
+
+.select[multiple] {
+  height: auto;
+}
+
+.select.select-floating.select-lg .select-floating-label {
+  margin-inline-start: 0.75rem;
+}
+
+.select.select-floating.select-lg .select-filled-label {
+  margin-inline-start: 1rem;
+}
+
+.table {
+  position: relative;
+  width: 100%;
+  border-radius: var(--rounded-box, 0.5rem);
+  text-align: left;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.table :where(.table-pin-rows thead tr) {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.table :where(.table-pin-rows tfoot tr) {
+  position: sticky;
+  bottom: 0px;
+  z-index: 1;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.table :where(.table-pin-cols tr th) {
+  position: sticky;
+  inset-inline-end: 0px;
+  inset-inline-start: 0px;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.disabled.advance-select-toggle {
+  pointer-events: none;
+  border-width: 0px;
+  background-color: var(--fallback-n,oklch(var(--n)/0.1));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--fallback-n,oklch(var(--n)/0.5));
+}
+
+.disabled .advance-select-toggle {
+  pointer-events: none;
+  border-width: 0px;
+  background-color: var(--fallback-n,oklch(var(--n)/0.1));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--fallback-n,oklch(var(--n)/0.5));
+}
+
+.validate .label:has(+ * > .is-valid) > *,
+.validate .advance-select:has(> select.is-valid) ~ .label,
+.validate .advance-select:has(> select.is-valid) ~ .label .label-text,
+.validate .label:has(~ .advance-select > * > .selected) > *,
+.validate .advance-select:has(> * > .selected) ~ .label,
+.validate .advance-select:has(> * > .selected) ~ .label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.validate .label:has(+ * > .is-invalid) > *,
+.validate .advance-select:has(> select.is-invalid) ~ .label,
+.validate .advance-select:has(> select.is-invalid) ~ .label .label-text,
+.validate .label:has(+ .advance-select:not(> .selected)) > *,
+.validate .advance-select:not(:has(> * > .selected)) ~ .label,
+.validate .advance-select:not(:has(> * > .selected)) ~ .label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.validate .label:has(+ * > .is-invalid) ~ * > .success-message,
+.validate .advance-select:has(> select.is-valid) ~ * > .success-message,
+.validate .advance-select:has(> select.is-valid) ~ .success-message {
+  display: block;
+}
+
+.validate .label ~ *:has(> select.is-invalid) ~ * > .error-message,
+.validate .advance-select:has(> select.is-invalid) ~ * > .error-message,
+.validate .advance-select:has(> select.is-invalid) ~ .error-message {
+  display: block;
+}
+
+.avatar-group :where(.avatar).placeholder > div {
+  border-radius: 9999px;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-border-opacity)));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn {
+    animation: button-pop var(--animation-btn, 0.25s) ease-out;
+  }
+}
+
+.btn:active:hover,
+  .btn:active:focus {
+  animation: button-pop 0s ease-out;
+  transform: scale(var(--btn-focus-scale, 0.97));
+}
+
+@supports not (color: oklch(0% 0 0)) {
+  .btn {
+    background-color: var(--btn-color, var(--fallback-b2));
+    border-color: var(--btn-color, var(--fallback-b2));
+  }
+
+  .btn:focus-visible {
+    background-color: var(--btn-color, var(--fallback-b2));
+    border-color: var(--btn-color, var(--fallback-b2));
+  }
+
+  .btn-primary {
+    --btn-color: var(--fallback-p);
+  }
+
+  .btn-secondary {
+    --btn-color: var(--fallback-s);
+  }
+
+  .btn-warning {
+    --btn-color: var(--fallback-wa);
+  }
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    --tw-shadow: 0 4px 6px -1px var(--fallback-bs,oklch(var(--bs)/0.2));
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .btn:hover {
+      background-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%,
+            black
+          );
+      border-color: color-mix(
+            in oklab,
+            oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%,
+            black
+          );
+    }
+  }
+
+  @supports not (color: oklch(0% 0 0)) {
+    .btn:hover {
+      background-color: var(--btn-color, var(--fallback-b2));
+      border-color: var(--btn-color, var(--fallback-b2));
+    }
+  }
+
+  .btn.glass:hover {
+    --glass-opacity: 25%;
+    --glass-border-opacity: 15%;
+  }
+
+  .btn-soft.btn-primary:hover {
+    background-color: var(--fallback-p,oklch(var(--p)/0.3));
+  }
+
+  .btn-soft.btn-secondary:hover {
+    background-color: var(--fallback-s,oklch(var(--s)/0.3));
+  }
+
+  .btn-soft.btn-warning:hover {
+    background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
+  }
+
+  .btn-outline.btn-primary:hover {
+    --tw-border-opacity: 1;
+    border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
+    background-color: var(--fallback-p,oklch(var(--p)/0.1));
+  }
+
+  .btn-outline.btn-secondary:hover {
+    --tw-border-opacity: 1;
+    border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
+    background-color: var(--fallback-s,oklch(var(--s)/0.1));
+  }
+
+  .btn-outline.btn-warning:hover {
+    --tw-border-opacity: 1;
+    border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
+    background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
+  }
+
+  .btn-text.btn-primary:hover {
+    background-color: var(--fallback-p,oklch(var(--p)/0.1));
+  }
+
+  .btn-text.btn-secondary:hover {
+    background-color: var(--fallback-s,oklch(var(--s)/0.1));
+  }
+
+  .btn-text.btn-warning:hover {
+    background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
+  }
+
+  .btn-disabled:hover,
+    .btn[disabled]:hover,
+    .btn:disabled:hover {
+    opacity: 0.5;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  @supports (color: color-mix(in oklab, black, black)) {
+    .btn:is(input[type="checkbox"]:checked):hover, .btn:is(input[type="radio"]:checked):hover {
+      background-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
+      border-color: color-mix(in oklab, var(--fallback-p,oklch(var(--p)/1)) 90%, black);
+    }
+  }
+}
+
+@supports (color: color-mix(in oklab, black, black)) {
+  .btn:focus-visible {
+    background-color: color-mix(in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%, black);
+    border-color: color-mix(in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%, black);
+  }
+}
+
+.btn:focus-visible {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 0px;
+}
+
+.btn-primary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-p,oklch(var(--p)/0.3));
+}
+
+@supports (color: oklch(0% 0 0)) {
+  .btn-primary {
+    --btn-color: var(--p);
+  }
+
+  .btn-secondary {
+    --btn-color: var(--s);
+  }
+
+  .btn-warning {
+    --btn-color: var(--wa);
+  }
+
+  .btn-gradient.btn-primary {
+    --light-shade: var(--p);
+  }
+
+  .btn-gradient.btn-secondary {
+    --light-shade: var(--s);
+  }
+
+  .btn-gradient.btn-warning {
+    --light-shade: var(--wa);
+  }
+}
+
+.btn-secondary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-s,oklch(var(--s)/0.3));
+}
+
+.btn-warning {
+  --tw-text-opacity: 1;
+  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-wa,oklch(var(--wa)/0.3));
+}
+
+.btn.glass {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  outline-color: currentColor;
+}
+
+.btn.glass:hover {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.btn.glass.btn-active {
+  --glass-opacity: 25%;
+  --glass-border-opacity: 15%;
+}
+
+.btn-soft.btn-primary {
+  background-color: var(--fallback-p,oklch(var(--p)/0.2));
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-p,oklch(var(--p)/0.5));
+}
+
+.btn-soft.btn-primary.btn-active {
+  background-color: var(--fallback-p,oklch(var(--p)/0.3));
+}
+
+.btn-soft.btn-primary:focus-visible {
+  background-color: var(--fallback-p,oklch(var(--p)/0.3));
+  outline-color: var(--fallback-p,oklch(var(--p)/0.5));
+}
+
+.btn-soft.btn-secondary {
+  background-color: var(--fallback-s,oklch(var(--s)/0.2));
+  --tw-text-opacity: 1;
+  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-s,oklch(var(--s)/0.5));
+}
+
+.btn-soft.btn-secondary.btn-active {
+  background-color: var(--fallback-s,oklch(var(--s)/0.3));
+}
+
+.btn-soft.btn-secondary:focus-visible {
+  background-color: var(--fallback-s,oklch(var(--s)/0.3));
+  outline-color: var(--fallback-s,oklch(var(--s)/0.5));
+}
+
+.btn-soft.btn-warning {
+  background-color: var(--fallback-wa,oklch(var(--wa)/0.2));
+  --tw-text-opacity: 1;
+  color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
+  outline-color: var(--fallback-wa,oklch(var(--wa)/0.5));
+}
+
+.btn-soft.btn-warning.btn-active {
+  background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
+}
+
+.btn-soft.btn-warning:focus-visible {
+  background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
+  outline-color: var(--fallback-wa,oklch(var(--wa)/0.5));
+}
+
+.btn-outline.btn-primary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+}
+
+.btn-outline.btn-primary.btn-active {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
+  background-color: var(--fallback-p,oklch(var(--p)/0.1));
+}
+
+.btn-outline.btn-primary:focus-visible {
+  background-color: var(--fallback-p,oklch(var(--p)/0.1));
+}
+
+.btn-outline.btn-secondary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
+}
+
+.btn-outline.btn-secondary.btn-active {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
+  background-color: var(--fallback-s,oklch(var(--s)/0.1));
+}
+
+.btn-outline.btn-secondary:focus-visible {
+  background-color: var(--fallback-s,oklch(var(--s)/0.1));
+}
+
+.btn-outline.btn-warning {
+  --tw-text-opacity: 1;
+  color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
+}
+
+.btn-outline.btn-warning.btn-active {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
+  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
+}
+
+.btn-outline.btn-warning:focus-visible {
+  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
+}
+
+.btn-text.btn-primary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+}
+
+.btn-text.btn-primary.btn-active {
+  background-color: var(--fallback-p,oklch(var(--p)/0.1));
+}
+
+.btn-text.btn-primary:focus-visible {
+  background-color: var(--fallback-p,oklch(var(--p)/0.1));
+}
+
+.btn-text.btn-secondary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
+}
+
+.btn-text.btn-secondary.btn-active {
+  background-color: var(--fallback-s,oklch(var(--s)/0.1));
+}
+
+.btn-text.btn-secondary:focus-visible {
+  background-color: var(--fallback-s,oklch(var(--s)/0.1));
+}
+
+.btn-text.btn-warning {
+  --tw-text-opacity: 1;
+  color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
+}
+
+.btn-text.btn-warning.btn-active {
+  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
+}
+
+.btn-text.btn-warning:focus-visible {
+  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
+}
+
+.btn-gradient.btn-primary {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
+  --tw-shadow-color: var(--fallback-p,oklch(var(--p)/0.26));
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.btn-gradient.btn-primary:hover {
+  --tw-shadow-color: var(--fallback-p,oklch(var(--p)/0.2));
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.btn-gradient.btn-primary:focus-visible {
+  outline-color: var(--fallback-p,oklch(var(--p)/0.3));
+  border-color: transparent;
+}
+
+.btn-gradient.btn-secondary {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
+  --tw-shadow-color: var(--fallback-s,oklch(var(--s)/0.26));
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.btn-gradient.btn-secondary:hover {
+  --tw-shadow-color: var(--fallback-s,oklch(var(--s)/0.2));
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.btn-gradient.btn-secondary:focus-visible {
+  outline-color: var(--fallback-s,oklch(var(--s)/0.3));
+  border-color: transparent;
+}
+
+.btn-gradient.btn-warning {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
+  --tw-shadow-color: var(--fallback-wa,oklch(var(--wa)/0.26));
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.btn-gradient.btn-warning:hover {
+  --tw-shadow-color: var(--fallback-wa,oklch(var(--wa)/0.2));
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.btn-gradient.btn-warning:focus-visible {
+  outline-color: var(--fallback-wa,oklch(var(--wa)/0.3));
+  border-color: transparent;
+}
+
+.btn.btn-disabled,
+  .btn[disabled],
+  .btn:disabled {
+  opacity: 0.5;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.btn:is(input[type="checkbox"]:checked),
+.btn:is(input[type="radio"]:checked) {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
+  --tw-text-opacity: 1;
+  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
+}
+
+.btn:is(input[type="checkbox"]:checked):focus-visible, .btn:is(input[type="radio"]:checked):focus-visible {
+  outline-color: var(--fallback-p,oklch(var(--p)/1));
+}
+
+@keyframes button-pop {
+  0% {
+    transform: scale(var(--btn-focus-scale, 0.98));
+  }
+
+  40% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card-header + .card-body {
+  padding-top: 0;
+}
+
+.card-body + .card-footer {
+  padding-top: 0;
+}
+
+.card :where(figure:first-child) {
+  overflow: hidden;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+  border-end-start-radius: unset;
+  border-end-end-radius: unset;
+}
+
+.card :where(figure:last-child) {
+  overflow: hidden;
+  border-start-start-radius: unset;
+  border-start-end-radius: unset;
+  border-end-start-radius: inherit;
+  border-end-end-radius: inherit;
+}
+
+.card.image-full :where(figure) {
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.card .alert {
+  border-radius: 0px;
+}
+
+.card .alert:first-child {
+  border-top-left-radius: var(--rounded-box, 0.5rem);
+  border-top-right-radius: var(--rounded-box, 0.5rem);
+}
+
+.card .alert:last-child {
+  border-bottom-right-radius: var(--rounded-box, 0.5rem);
+  border-bottom-left-radius: var(--rounded-box, 0.5rem);
+}
+
+.carousel-prev.disabled,
+.carousel-next.disabled {
+  pointer-events: none;
+  color: var(--fallback-bc,oklch(var(--bc)/0.3));
+}
+
+.checkbox.disabled,
+  .checkbox:disabled,
+  .checkbox[disabled] {
+  pointer-events: none;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  opacity: 0.4;
+}
+
+.checkbox.disabled:not(checked), .checkbox:disabled:not(checked), .checkbox[disabled]:not(checked) {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
+}
+
+@keyframes checkmark {
+  0% {
+    background-position-y: 5px;
+  }
+
+  50% {
+    background-position-y: -2px;
+  }
+
+  100% {
+    background-position-y: 0;
+  }
+}
+
+.validate .label:has(+ * > .checkbox:valid)>*,
+
+.validate .label~*:has(> .checkbox:valid)~.label .label-text-alt,
+
+.validate .label:has(~ .checkbox:valid)>*,
+.validate .label:has(~ .checkbox:valid) :where(.label-text),
+
+.validate .checkbox:valid~.label,
+.validate .checkbox:valid~.label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.validate .label:has(+ * > .checkbox:invalid)>*,
+
+.validate .label~*:has(> .checkbox:invalid)~.label .label-text-alt,
+
+.validate .label:has(~ .checkbox:invalid)>*,
+.validate .label:has(~ .checkbox:invalid) :where(.label-text),
+
+.validate .checkbox:invalid~.label,
+.validate .checkbox:invalid~.label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.validate *:has(> .checkbox:valid) ~ .success-message,
+.validate .label ~ *:has(> .checkbox:valid) ~ * > .success-message,
+.validate .checkbox:valid ~ * > .success-message,
+.validate .checkbox:valid ~ .success-message {
+  display: block;
+}
+
+.validate *:has(> .checkbox:invalid) ~ .error-message,
+.validate .label ~ *:has(> .checkbox:invalid) ~ * > .error-message,
+.validate .checkbox:invalid ~ * > .error-message,
+.validate .checkbox:invalid ~ .error-message {
+  display: block;
+}
+
+.nested-collapse-wrapper .collapse.open.nested-collapse,
+.nested-collapse-wrapper .collapse-toggle.open.nested-collapse {
+  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+}
+
+.nested-collapse-wrapper .collapse.open > .collapse-icon,
+.nested-collapse-wrapper .collapse-toggle.open > .collapse-icon {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.dropdown-item.disabled,
+  .dropdown-item:disabled,
+  .dropdown-item[disabled] {
+  pointer-events: none;
+  background-color: var(--fallback-n,oklch(var(--n)/0.05));
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.dropdown-item > .label {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  color: var(--fallback-bc,oklch(var(--bc)/0.8));
+}
+
+input {
+  background-color: transparent;
+}
+
+input:focus {
+  outline-width: 0px;
+  outline-color: transparent;
+}
+
+input:focus-visible {
+  outline: unset;
+}
+
+.input::-moz-placeholder {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.input::placeholder {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.input:hover {
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.6));
+}
+
+.input::file-selector-button:disabled {
+  background-color: var(--fallback-n,oklch(var(--n)/0.1));
+}
+
+.input:focus,
+  .input:focus-within {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
+  --tw-shadow: 0 1px 2px 0 var(--fallback-bs,oklch(var(--bs)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-shadow-color: var(--fallback-p,oklch(var(--p)/0.22));
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-p,oklch(var(--p)/var(--tw-ring-opacity)));
+}
+
+.input:-webkit-autofill,
+  .input:-webkit-autofill:focus {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  color: var(--fallback-bc,oklch(var(--bc)/0.9));
+}
+
+.input[list]::-webkit-calendar-picker-indicator {
+  line-height: 1em;
+}
+
+.input.disabled,
+  .input:disabled,
+  .input[disabled] {
+  pointer-events: none;
+  border-width: 0px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+  background-color: var(--fallback-n,oklch(var(--n)/0.1));
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.input::-webkit-date-and-time-value {
+  text-align: inherit;
+}
+
+.input.input-floating.disabled,
+    .input.input-floating:disabled,
+    .input.input-floating[disabled] {
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.input.input-floating.disabled ~ .input-floating-label, .input.input-floating:disabled ~ .input-floating-label, .input.input-floating[disabled] ~ .input-floating-label {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.input.input-filled.disabled,
+    .input.input-filled:disabled,
+    .input.input-filled[disabled] {
+  border-bottom-width: 1px;
+}
+
+.input.input-filled.disabled ~ .input-filled-label, .input.input-filled:disabled ~ .input-filled-label, .input.input-filled[disabled] ~ .input-filled-label {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.input.input-filled.input-sm:not(:-moz-placeholder-shown) {
+  padding-top: 0.5rem;
+}
+
+.input.input-filled.input-sm:focus,
+  .input.input-filled.input-sm:not(:placeholder-shown) {
+  padding-top: 0.5rem;
+}
+
+.input.input-filled:not(:-moz-placeholder-shown), .input.input-filled.input-lg:not(:-moz-placeholder-shown) {
+  padding-top: 0.75rem;
+}
+
+.input.input-filled:focus,
+  .input.input-filled.input-lg:focus,
+  .input.input-filled:not(:placeholder-shown),
+  .input.input-filled.input-lg:not(:placeholder-shown) {
+  padding-top: 0.75rem;
+}
+
+.input-group:has(input.disabled),
+  .input-group:has(input:disabled),
+  .input-group:has(input[disabled]) {
+  pointer-events: none;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+  background-color: var(--fallback-n,oklch(var(--n)/0.1));
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.input-group .input {
+  border-width: 0px;
+  background-color: transparent;
+}
+
+.input-group .input:focus,
+    .input-group .input:focus-within {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.input-group .input.disabled,
+    .input-group .input:disabled,
+    .input-group .input[disabled] {
+  background-color: transparent;
+}
+
+.input-group-filled .input {
+  border-width: 0px;
+  background-color: transparent;
+}
+
+.input-group-filled .input.disabled,
+    .input-group-filled .input:disabled,
+    .input-group-filled .input[disabled] {
+  background-color: transparent;
+}
+
+.input[type="file"].input-floating::file-selector-button {
+  border-inline-end-width: 1px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.25));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.input.is-valid,
+.validate .input:valid {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
+}
+
+.input.is-valid:focus,
+  .input.is-valid:focus-within,
+  .validate .input:valid:focus,
+  .validate .input:valid:focus-within {
+  --tw-shadow-color: var(--fallback-su,oklch(var(--su)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-su,oklch(var(--su)/var(--tw-ring-opacity)));
+}
+
+.input.is-valid.input-filled:focus,
+  .input.is-valid.input-filled:focus-within,
+  .validate .input:valid.input-filled:focus,
+  .validate .input:valid.input-filled:focus-within {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.input.is-valid ~ .input-floating-label,
+  .input.is-valid ~ .input-filled-label,
+  .validate .input:valid ~ .input-floating-label,
+  .validate .input:valid ~ .input-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.input.is-valid:focus ~ .input-filled-focused,
+  .input.is-valid:focus-within ~ .input-filled-focused,
+  .validate .input:valid:focus ~ .input-filled-focused,
+  .validate .input:valid:focus-within ~ .input-filled-focused {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity)));
+}
+
+.label:has(+ * > .is-valid) > *,
+
+.label ~ *:has(> .is-valid) ~ .label .label-text-alt,
+
+.label:has(~ .is-valid) > *,
+
+.is-valid ~ .label,
+.is-valid ~ .label .label-text,
+
+.validate .label:has(+ * > .input:valid) > *,
+.validate .label:has(+ * > .input:valid),
+.validate .label ~ *:has(> .input:valid) ~ .label .label-text-alt,
+.validate .label:has(~ .input:valid) > *,
+.validate .label:has(~ .input:valid),
+.validate .input:valid ~  .label,
+.validate .input:valid ~  .label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.input:focus.is-valid ~ .input-floating-label,
+.input:focus.is-valid ~ .input-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.input.is-invalid,
+.validate .input:invalid {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+}
+
+.input.is-invalid:focus,
+  .input.is-invalid:focus-within,
+  .validate .input:invalid:focus,
+  .validate .input:invalid:focus-within {
+  --tw-shadow-color: var(--fallback-er,oklch(var(--er)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-er,oklch(var(--er)/var(--tw-ring-opacity)));
+}
+
+.input.is-invalid.input-filled:focus,
+  .input.is-invalid.input-filled:focus-within,
+  .validate .input:invalid.input-filled:focus,
+  .validate .input:invalid.input-filled:focus-within {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.input.is-invalid ~ .input-floating-label,
+  .input.is-invalid ~ .input-filled-label,
+  .validate .input:invalid ~ .input-floating-label,
+  .validate .input:invalid ~ .input-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.input.is-invalid:focus ~ .input-filled-focused,
+  .input.is-invalid:focus-within ~ .input-filled-focused,
+  .validate .input:invalid:focus ~ .input-filled-focused,
+  .validate .input:invalid:focus-within ~ .input-filled-focused {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-er,oklch(var(--er)/var(--tw-bg-opacity)));
+}
+
+.label:has(+ * > .is-invalid) > *,
+
+.label ~ *:has(> .is-invalid) ~ .label .label-text-alt,
+
+.label:has(~ .is-invalid) > *,
+
+.is-invalid ~ .label,
+.is-invalid ~ .label .label-text,
+
+.validate .label:has(+ * > .input:invalid) > *,
+.validate .label:has(+ * > .input:invalid),
+.validate .label ~ *:has(> .input:invalid) ~ .label .label-text-alt,
+.validate .label:has(~ .input:invalid) > *,
+.validate .input:invalid ~ .label,
+.validate .input:invalid ~ .label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.input:focus.is-invalid ~ .input-floating-label,
+.input:focus.is-invalid ~ .input-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+*:has(> .is-valid) ~ .success-message,
+.validate *:has(> .input:valid) ~ .success-message,
+
+.is-valid ~ .success-message,
+.validate .input:valid ~ .success-message {
+  display: block;
+}
+
+.error-message {
+  display: none;
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+*:has(> .is-invalid) ~ .error-message,
+.validate *:has(> .input:invalid) ~ .error-message,
+
+.is-invalid ~ .error-message,
+.validate .input:invalid ~ .error-message {
+  display: block;
+}
+
+.validate .input-group > .input:valid,
+.input-group > .input:valid,
+.validate .input-group > .input:invalid,
+.input-group > .input:invalid,
+.validate .input-group > * > .input:valid,
+.input-group > * > .input:valid,
+.validate .input-group > * > .input:invalid,
+.input-group > * > .input:invalid,
+.input-group > .input.is-valid,
+.input-group > .input.is-invalid,
+.input-group > * > .input.is-valid,
+.input-group > * > .input.is-invalid {
+  border-width: 0px;
+}
+
+.validate .input-group > .input:valid:focus-within,
+.input-group > .input:valid:focus-within,
+.validate .input-group > .input:invalid:focus-within,
+.input-group > .input:invalid:focus-within,
+.validate .input-group > * > .input:valid:focus-within,
+.input-group > * > .input:valid:focus-within,
+.validate .input-group > * > .input:invalid:focus-within,
+.input-group > * > .input:invalid:focus-within,
+.input-group > .input.is-valid:focus-within,
+.input-group > .input.is-invalid:focus-within,
+.input-group > * > .input.is-valid:focus-within,
+.input-group > * > .input.is-invalid:focus-within {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.validate .input-group > .input:valid:focus,
+.input-group > .input:valid:focus,
+.validate .input-group > .input:invalid:focus,
+.input-group > .input:invalid:focus,
+.validate .input-group > * > .input:valid:focus,
+.input-group > * > .input:valid:focus,
+.validate .input-group > * > .input:invalid:focus,
+.input-group > * > .input:invalid:focus,
+.input-group > .input.is-valid:focus,
+.input-group > .input.is-invalid:focus,
+.input-group > * > .input.is-valid:focus,
+.input-group > * > .input.is-invalid:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.input-group:has(.is-valid),
+  .validate .input-group:has(.input:valid) {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
+}
+
+.input-group:has(.is-valid):has(:focus),
+    .input-group:has(.is-valid):has(:focus-within),
+    .validate .input-group:has(.input:valid):has(:focus),
+    .validate .input-group:has(.input:valid):has(:focus-within) {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
+  --tw-shadow: 0 1px 2px 0 var(--fallback-bs,oklch(var(--bs)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-shadow-color: var(--fallback-su,oklch(var(--su)/0.22));
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-su,oklch(var(--su)/var(--tw-ring-opacity)));
+}
+
+.input-group:has(.is-invalid),
+  .validate .input-group:has(.input:invalid) {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+}
+
+.input-group:has(.is-invalid):has(:focus),
+    .input-group:has(.is-invalid):has(:focus-within),
+    .validate .input-group:has(.input:invalid):has(:focus),
+    .validate .input-group:has(.input:invalid):has(:focus-within) {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+  --tw-shadow: 0 1px 2px 0 var(--fallback-bs,oklch(var(--bs)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-shadow-color: var(--fallback-er,oklch(var(--er)/0.22));
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-er,oklch(var(--er)/var(--tw-ring-opacity)));
+}
+
+.input-group-filled:has(.is-valid),
+  .validate .input-group-filled:has(.input:valid) {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
+}
+
+.input-group-filled:has(.is-valid):focus ~ .input-filled-focused,
+    .input-group-filled:has(.is-valid):focus-within ~ .input-filled-focused,
+    .validate .input-group-filled:has(.input:valid):focus ~ .input-filled-focused,
+    .validate .input-group-filled:has(.input:valid):focus-within ~ .input-filled-focused {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity)));
+}
+
+.input-group-filled:has(.is-invalid),
+  .validate .input-group-filled:has(.input:invalid) {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+}
+
+.input-group-filled:has(.is-invalid):focus ~ .input-filled-focused,
+    .input-group-filled:has(.is-invalid):focus-within ~ .input-filled-focused,
+    .validate .input-group-filled:has(.input:invalid):focus ~ .input-filled-focused,
+    .validate .input-group-filled:has(.input:invalid):focus-within ~ .input-filled-focused {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-er,oklch(var(--er)/var(--tw-bg-opacity)));
+}
+
+.join .btn {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.join > :where(*:not(:first-child)):is(.btn) {
+  margin-inline-start: calc(var(--border-btn) * -1);
+}
+
+.link:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.link.disabled,
+  .link[disabled],
+  .link:disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.menu li.disabled,
+.menu li:disabled,
+.menu li[disabled] {
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  opacity: 0.5;
+}
+
+.mockup-phone .display {
+  overflow: hidden;
+  border-radius: 40px;
+  margin-top: -25px;
+}
+
+.mockup-browser .mockup-browser-toolbar .input {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  height: 1.75rem;
+  width: 24rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline-start: 2rem;
+  padding-top: 0.125rem;
+}
+
+.mockup-browser .mockup-browser-toolbar .input:before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.5rem;
+  top: 50%;
+  aspect-ratio: 1 / 1;
+  height: 0.75rem;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  border-radius: 9999px;
+  border-width: 2px;
+  border-color: currentColor;
+  opacity: 0.6;
+}
+
+.mockup-browser .mockup-browser-toolbar .input:after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 1.25rem;
+  top: 50%;
+  height: 0.5rem;
+  --tw-translate-y: 25%;
+  --tw-rotate: -45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: currentColor;
+  opacity: 0.6;
+}
+
+.open.modal {
+  transition-duration: 500ms;
+}
+
+.open .modal {
+  transition-duration: 500ms;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background-color: var(--fallback-s,oklch(var(--s)/0.5));
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fallback-s,oklch(var(--s)/0.8));
+}
+
+.modal::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+}
+
+.modal::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.open.modal-dialog {
+  transition-duration: 500ms;
+}
+
+.open .modal-dialog {
+  transition-duration: 500ms;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: var(--fallback-s,oklch(var(--s)/0.5));
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fallback-s,oklch(var(--s)/0.8));
+}
+
+.modal-body::-webkit-scrollbar-track {
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+}
+
+.pin-input.disabled,
+  .pin-input:disabled,
+  .pin-input[disabled] {
+  pointer-events: none;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.25));
+  background-color: var(--fallback-bc,oklch(var(--bc)/0.05));
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.pin-input.disabled::-moz-placeholder, .pin-input:disabled::-moz-placeholder, .pin-input[disabled]::-moz-placeholder {
+  color: var(--fallback-bc,oklch(var(--bc)/0.4));
+  --tw-placeholder-opacity: 0.2;
+}
+
+.pin-input.disabled::placeholder,
+  .pin-input:disabled::placeholder,
+  .pin-input[disabled]::placeholder {
+  color: var(--fallback-bc,oklch(var(--bc)/0.4));
+  --tw-placeholder-opacity: 0.2;
+}
+
+@keyframes indeterminate-progress {
+  0% {
+    background-position-x: -75%;
+  }
+
+  50% {
+    background-position-x: 125%;
+  }
+
+  100% {
+    background-position-x: -75%;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 0.75rem;
+  }
+}
+
+.radio.disabled,
+  .radio:disabled,
+  .radio[disabled],
+  .radio-inset.disabled,
+  .radio-inset:disabled,
+  .radio-inset[disabled] {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.radio.disabled:hover, .radio:disabled:hover, .radio[disabled]:hover, .radio-inset.disabled:hover, .radio-inset:disabled:hover, .radio-inset[disabled]:hover {
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+@keyframes radiomark {
+  0% {
+    box-shadow: 0 0 0 9px var(--basebg) inset,
+      0 0 0 9px var(--basebg) inset;
+  }
+
+  50% {
+    box-shadow: 0 0 0 6px var(--basebg) inset,
+      0 0 0 6px var(--basebg) inset;
+  }
+
+  100% {
+    box-shadow: 0 0 0 3px var(--basebg) inset,
+      0 0 0 3px var(--basebg) inset;
+  }
+}
+
+@keyframes radioinsetmark {
+  0% {
+    border-width: 2px;
+  }
+
+  50% {
+    border-width: 4px;
+  }
+
+  100% {
+    border-width: 6px;
+  }
+}
+
+.custom-label-option .label, .custom-option .label {
+  padding: 0px;
+  font-size: 1rem;
+  line-height: 1.375rem;
+}
+
+.custom-label-option .label:first-of-type, .custom-option .label:first-of-type {
+  padding-bottom: 0.25rem;
+}
+
+.custom-label-option .label .label-text, .custom-option .label .label-text {
+  font-weight: 500;
+  color: var(--fallback-bc,oklch(var(--bc)/0.9));
+}
+
+.validate .label:has(+ * > .radio:valid) > *,
+
+.validate .label ~ *:has(> .radio:valid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .radio:valid) > *,
+.validate .label:has(~ .radio:valid) :where(.label-text),
+
+.validate .radio:valid ~  .label,
+.validate .radio:valid ~  .label .label-text {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity))) !important;
+}
+
+.validate .label:has(+ * > .radio:invalid) > *,
+
+.validate .label ~ *:has(> .radio:invalid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .radio:invalid) > *,
+.validate .label:has(~ .radio:invalid) :where(.label-text),
+
+.validate .radio:invalid ~ .label,
+.validate .radio:invalid ~ .label .label-text {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity))) !important;
+}
+
+.validate *:has(> .radio:valid) ~ .success-message,
+.validate .label ~ *:has(> .radio:valid) ~ * > .success-message,
+.validate .radio:valid ~ * > .success-message,
+.validate .radio:valid ~ .success-message {
+  display: block !important;
+}
+
+.validate *:has(> .radio:invalid) ~ .error-message,
+.validate .label ~ *:has(> .radio:invalid) ~ * > .error-message,
+.validate .radio:invalid ~ * > .error-message,
+.validate .radio:invalid ~ .error-message {
+  display: block !important;
+}
+
+.validate .label:has(+ * > .radio-inset:valid) > *,
+
+.validate .label ~ *:has(> .radio-inset:valid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .radio-inset:valid) > *,
+.validate .label:has(~ .radio-inset:valid) :where(.label-text),
+
+.validate .radio-inset:valid ~  .label,
+.validate .radio-inset:valid ~  .label .label-text {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity))) !important;
+}
+
+.validate .label:has(+ * > .radio-inset:invalid) > *,
+
+.validate .label ~ *:has(> .radio-inset:invalid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .radio-inset:invalid) > *,
+.validate .label:has(~ .radio-inset:invalid) :where(.label-text),
+
+.validate .radio-inset:invalid ~ .label,
+.validate .radio-inset:invalid ~ .label .label-text {
+  --tw-text-opacity: 1 !important;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity))) !important;
+}
+
+.validate *:has(> .radio-inset:valid) ~ .success-message,
+.validate .label ~ *:has(> .radio-inset:valid) ~ * > .success-message,
+.validate .radio-inset:valid ~ * > .success-message,
+.validate .radio-inset:valid ~ .success-message {
+  display: block !important;
+}
+
+.validate *:has(> .radio-inset:invalid) ~ .error-message,
+.validate .label ~ *:has(> .radio-inset:invalid) ~ * > .error-message,
+.validate .radio-inset:invalid ~ * > .error-message,
+.validate .radio-inset:invalid ~ .error-message {
+  display: block !important;
+}
+
+.range.disabled,
+  .range:disabled,
+  .range[disabled] {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.select:hover {
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.6));
+}
+
+.select:focus,
+  .select:focus-within {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
+  --tw-shadow: 0 1px 2px 0 var(--fallback-bs,oklch(var(--bs)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-shadow-color: var(--fallback-p,oklch(var(--p)/0.22));
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-p,oklch(var(--p)/var(--tw-ring-opacity)));
+}
+
+.select:focus ~ .select-floating-label,
+    .select:focus ~ .select-filled-label,
+    .select:focus-within ~ .select-floating-label,
+    .select:focus-within ~ .select-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+}
+
+.select:focus.is-valid ~ .select-floating-label,
+    .select:focus.is-valid ~ .select-filled-label,
+    .select:focus-within.is-valid ~ .select-floating-label,
+    .select:focus-within.is-valid ~ .select-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.select:focus.is-invalid ~ .select-floating-label,
+    .select:focus.is-invalid ~ .select-filled-label,
+    .select:focus-within.is-invalid ~ .select-floating-label,
+    .select:focus-within.is-invalid ~ .select-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.select:focus-visible {
+  outline: unset;
+}
+
+.select.disabled,
+  .select:disabled,
+  .select[disabled] {
+  pointer-events: none;
+  border-width: 0px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+  background-color: var(--fallback-n,oklch(var(--n)/0.1));
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.select.disabled::-moz-placeholder, .select:disabled::-moz-placeholder, .select[disabled]::-moz-placeholder {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.select.disabled::placeholder,
+  .select:disabled::placeholder,
+  .select[disabled]::placeholder {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.select-multiple,
+  .select[multiple],
+  .select[size].select:not([size="1"]) {
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-image: none;
+}
+
+.select-multiple::-webkit-scrollbar-thumb,
+  .select[multiple]::-webkit-scrollbar-thumb,
+  .select[size].select:not([size="1"])::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: var(--fallback-s,oklch(var(--s)/0.5));
+}
+
+.select-multiple::-webkit-scrollbar-thumb:hover,
+  .select[multiple]::-webkit-scrollbar-thumb:hover,
+  .select[size].select:not([size="1"])::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fallback-s,oklch(var(--s)/0.8));
+}
+
+.select-multiple::-webkit-scrollbar-track,
+  .select[multiple]::-webkit-scrollbar-track,
+  .select[size].select:not([size="1"])::-webkit-scrollbar-track {
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+}
+
+.select-multiple::-webkit-scrollbar,
+  .select[multiple]::-webkit-scrollbar,
+  .select[size].select:not([size="1"])::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.select.select-floating.disabled,
+    .select.select-floating:disabled,
+    .select.select-floating[disabled] {
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.select.select-floating ~ .select-floating-label {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.select.select-filled.disabled,
+    .select.select-filled:disabled,
+    .select.select-filled[disabled] {
+  border-bottom-width: 1px;
+}
+
+.select.select-filled ~ .select-filled-label {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+[dir="rtl"] .select {
+  background-position: calc(0% + 1.3em) center;
+}
+
+.select.select-floating.select-lg ~ .select-floating-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.select.select-filled.select-lg ~ .select-filled-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.input-group .select {
+  border-width: 0px;
+}
+
+.input-group .select:focus,
+    .input-group .select:focus-within {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.select.is-valid,
+.validate .select:valid {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
+}
+
+.select.is-valid:focus,
+  .select.is-valid:focus-within,
+  .validate .select:valid:focus,
+  .validate .select:valid:focus-within {
+  --tw-shadow-color: var(--fallback-su,oklch(var(--su)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-su,oklch(var(--su)/var(--tw-ring-opacity)));
+}
+
+.select.is-valid.select-filled:focus,
+  .select.is-valid.select-filled:focus-within,
+  .validate .select:valid.select-filled:focus,
+  .validate .select:valid.select-filled:focus-within {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.select.is-valid ~ .select-floating-label,
+  .select.is-valid ~ .select-filled-label,
+  .validate .select:valid ~ .select-floating-label,
+  .validate .select:valid ~ .select-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.select.is-valid:focus ~ .select-filled-focused,
+  .select.is-valid:focus-within ~ .select-filled-focused,
+  .validate .select:valid:focus ~ .select-filled-focused,
+  .validate .select:valid:focus-within ~ .select-filled-focused {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity)));
+}
+
+.select:focus.is-valid ~ .select-floating-label,
+.validate .select:focus:is-valid ~ .select-floating-label,
+.select:focus.is-valid ~ .select-filled-label,
+.validate .select:focus:is-valid ~ .select-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.select:focus.is-invalid ~ .select-floating-label,
+.validate .select:focus:is-invalid ~ .select-floating-label,
+.select:focus.is-invalid ~ .select-filled-label,
+.validate .select:focus:is-invalid ~ .select-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.select.is-invalid,
+.validate .select:invalid {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+}
+
+.select.is-invalid:focus,
+  .select.is-invalid:focus-within,
+  .validate .select:invalid:focus,
+  .validate .select:invalid:focus-within {
+  --tw-shadow-color: var(--fallback-er,oklch(var(--er)/0.22));
+  --tw-shadow: var(--tw-shadow-colored);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: var(--fallback-er,oklch(var(--er)/var(--tw-ring-opacity)));
+}
+
+.select.is-invalid.select-filled:focus,
+  .select.is-invalid.select-filled:focus-within,
+  .validate .select:invalid.select-filled:focus,
+  .validate .select:invalid.select-filled:focus-within {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.select.is-invalid ~ .select-floating-label,
+  .select.is-invalid ~ .select-filled-label,
+  .validate .select:invalid ~ .select-floating-label,
+  .validate .select:invalid ~ .select-filled-label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.select.is-invalid:focus ~ .select-filled-focused,
+  .select.is-invalid:focus-within ~ .select-filled-focused,
+  .validate .select:invalid:focus ~ .select-filled-focused,
+  .validate .select:invalid:focus-within ~ .select-filled-focused {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-er,oklch(var(--er)/var(--tw-bg-opacity)));
+}
+
+.validate .label:has(+ * > .select:valid) > *,
+.validate .label:has(+ * > .select:valid),
+
+.validate .label ~ *:has(> .select:valid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .select:valid) > *,
+.validate .label:has(~ .select:valid),
+.validate .label:has(~ .select:valid) :where(.label-text),
+
+.validate .select:valid ~  .label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.validate .label:has(+ * > .select:invalid) > *,
+.validate .label:has(+ * > .select:invalid),
+
+.validate .label ~ *:has(> .select:invalid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .select:invalid) > *,
+.validate .label:has(~ .select:invalid),
+.validate .label:has(~ .select:invalid) :where(.label-text),
+
+.validate .select:invalid ~ .label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.validate *:has(> .select:valid) ~ .success-message,
+.validate .select:valid ~ .success-message {
+  display: block;
+}
+
+.validate *:has(> .select:invalid) ~ .error-message,
+.validate .select:invalid ~ .error-message {
+  display: block;
+}
+
+@keyframes skeleton {
+  from {
+    background-position: 150%;
+  }
+
+  to {
+    background-position: -50%;
+  }
+}
+
+.switch.disabled,
+  .switch:disabled,
+  .switch[disabled] {
+  pointer-events: none;
+  background-color: transparent;
+  opacity: 0.4;
+}
+
+.switch-outline.disabled,
+    .switch-outline:disabled,
+    .switch-outline[disabled] {
+  pointer-events: none;
+  border-color: currentColor;
+  background-color: transparent;
+  opacity: 0.3;
+  --switchhandleborder: 0 0 0 3px var(--fallback-bc,oklch(var(--bc)/1)) inset,
+        var(--handleoffsetcalculator) 0 0 3px var(--fallback-bc,oklch(var(--bc)/1)) inset;
+}
+
+.validate .label:has(+ * > .switch:valid)>*,
+
+.validate .label~*:has(> .switch:valid)~.label .label-text-alt,
+
+.validate .label:has(~ .switch:valid)>*,
+.validate .label:has(~ .switch:valid) :where(.label-text),
+
+.validate .switch:valid~.label,
+.validate .switch:valid~.label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.validate .label:has(+ * > .switch:invalid)>*,
+
+.validate .label~*:has(> .switch:invalid)~.label .label-text-alt,
+
+.validate .label:has(~ .switch:invalid)>*,
+.validate .label:has(~ .switch:invalid) :where(.label-text),
+
+.validate .switch:invalid~.label,
+.validate .switch:invalid~.label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.validate *:has(> .switch:valid) ~ .success-message,
+.validate .label ~ *:has(> .switch:valid) ~ * > .success-message,
+.validate .switch:valid ~ * > .success-message,
+.validate .switch:valid ~ .success-message {
+  display: block;
+}
+
+.validate *:has(> .switch:invalid) ~ .error-message,
+.validate .label ~ *:has(> .switch:invalid) ~ * > .error-message,
+.validate .switch:invalid ~ * > .error-message,
+.validate .switch:invalid ~ .error-message {
+  display: block;
+}
+
+.validate .label:has(+ * > .switch-outline:valid)>*,
+
+.validate .label~*:has(> .switch-outline:valid)~.label .label-text-alt,
+
+.validate .label:has(~ .switch-outline:valid)>*,
+.validate .label:has(~ .switch-outline:valid) :where(.label-text),
+
+.validate .switch-outline:valid~.label,
+.validate .switch-outline:valid~.label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.validate .label:has(+ * > .switch-outline:invalid)>*,
+
+.validate .label~*:has(> .switch-outline:invalid)~.label .label-text-alt,
+
+.validate .label:has(~ .switch-outline:invalid)>*,
+.validate .label:has(~ .switch-outline:invalid) :where(.label-text),
+
+.validate .switch-outline:invalid~.label,
+.validate .switch-outline:invalid~.label .label-text {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.validate *:has(> .switch-outline:valid) ~ .success-message,
+.validate .label ~ *:has(> .switch-outline:valid) ~ * > .success-message,
+.validate .switch-outline:valid ~ * > .success-message,
+.validate .switch-outline:valid ~ .success-message {
+  display: block;
+}
+
+.validate *:has(> .switch-outline:invalid) ~ .error-message,
+.validate .label ~ *:has(> .switch-outline:invalid) ~ * > .error-message,
+.validate .switch-outline:invalid ~ * > .error-message,
+.validate .switch-outline:invalid ~ .error-message {
+  display: block;
+}
+
+.table:where([dir="rtl"], [dir="rtl"] *) {
+  text-align: right;
+}
+
+.table::-webkit-scrollbar-thumb {
+  background-color: var(--fallback-s,oklch(var(--s)/0.5));
+}
+
+.table::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fallback-s,oklch(var(--s)/0.8));
+}
+
+.table::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+}
+
+.table::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.table :where(th, td) {
+  text-wrap: nowrap;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+  vertical-align: middle;
+  font-size: 1rem;
+  line-height: 1.375rem;
+}
+
+.table :where(th) {
+  text-wrap: nowrap;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--fallback-bc,oklch(var(--bc)/0.9));
+  letter-spacing: 1px;
+}
+
+.table tr.active,
+  .table tr.active:nth-child(even),
+  .table-striped tbody tr:nth-child(even) {
+  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+}
+
+.table :where(thead, tbody) :where(tr:not(:last-child)),
+    .table :where(thead, tbody) :where(tr:first-child:last-child) {
+  border-bottom-width: 1px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.25));
+}
+
+.table :where(thead, tfoot, th) {
+  white-space: nowrap;
+  color: var(--fallback-bc,oklch(var(--bc)/0.9));
+}
+
+textarea {
+  background-color: transparent;
+}
+
+textarea:focus {
+  outline-width: 0px;
+  outline-color: transparent;
+}
+
+textarea:focus-visible {
+  outline: unset;
+}
+
+.textarea.disabled,
+  .textarea:disabled,
+  .textarea[disabled] {
+  pointer-events: none;
+  border-width: 0px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/0.1));
+  background-color: var(--fallback-n,oklch(var(--n)/0.1));
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.textarea.textarea-floating.disabled,
+    .textarea.textarea-floating:disabled,
+    .textarea.textarea-floating[disabled] {
+  border-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+}
+
+.textarea.textarea-floating.disabled ~ .textarea-floating-label, .textarea.textarea-floating:disabled ~ .textarea-floating-label, .textarea.textarea-floating[disabled] ~ .textarea-floating-label {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.textarea.textarea-filled.disabled,
+    .textarea.textarea-filled:disabled,
+    .textarea.textarea-filled[disabled] {
+  border-bottom-width: 1px;
+}
+
+.textarea.textarea-filled.disabled ~ .textarea-filled-label, .textarea.textarea-filled:disabled ~ .textarea-filled-label, .textarea.textarea-filled[disabled] ~ .textarea-filled-label {
+  color: var(--fallback-bc,oklch(var(--bc)/0.5));
+}
+
+.validate .label:has(+ * > .textarea:valid) > *,
+.validate .label:has(+ * > .textarea:valid),
+
+.validate .label ~ *:has(> .textarea:valid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .textarea:valid) > *,
+.validate .label:has(~ .textarea:valid),
+.validate .label:has(~ .textarea:valid) :where(.label-text),
+
+.validate .textarea:valid ~  .label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
+.validate .label:has(+ * > .textarea:invalid) > *,
+.validate .label:has(+ * > .textarea:invalid),
+
+.validate .label ~ *:has(> .textarea:invalid) ~ .label .label-text-alt,
+
+.validate .label:has(~ .textarea:invalid) > *,
+.validate .label:has(~ .textarea:invalid),
+.validate .label:has(~ .textarea:invalid) :where(.label-text),
+
+.validate .textarea:invalid ~ .label {
+  --tw-text-opacity: 1;
+  color: var(--fallback-er,oklch(var(--er)/var(--tw-text-opacity)));
+}
+
+.validate *:has(> .textarea:invalid) ~ * > .error-message,
+.validate *:has(> .textarea:invalid) ~ .error-message,
+.validate .textarea:invalid ~ * > .error-message,
+.validate .textarea:invalid ~ .error-message {
+  display: block;
+}
+
+.btn-lg {
+  height: 2.875rem;
+  min-height: 2.875rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-square:where(.btn-lg) {
+  height: 2.875rem;
+  width: 2.875rem;
+  padding: 0px;
+}
+
+.btn-circle:where(.btn-lg) {
+  height: 2.875rem;
+  width: 2.875rem;
+  border-radius: 9999px;
+  padding: 0px;
+}
+
+.menu-horizontal > li:not(.menu-title) > .collapse > ul {
+  position: absolute;
+}
+
+.menu-vertical > li:not(.menu-title) > .collapse > ul {
+  position: relative;
+}
+
+.card-compact .card-header + .card-body {
+  padding-top: 0;
+}
+
+.card-compact .card-body {
+  padding: 1rem;
+}
+
+.card-compact .card-title {
+  margin-bottom: 0.25rem;
+}
+
+.menu-horizontal > li:not(.menu-title) > .collapse > ul {
+  margin-inline-start: 0px;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-inline-end: 0.5rem;
+}
+
+.menu-horizontal > li > .collapse > ul:before {
+  content: none;
+}
+
+:where(.menu-horizontal > li:not(.menu-title) > .collapse > ul) {
+  border-radius: var(--rounded-box, 0.5rem);
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
+  --tw-shadow: 0 2px 4px 0 var(--fallback-bs,oklch(var(--bs)/0.26));
+  --tw-shadow-colored: 0 2px 4px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.menu-vertical > li:not(.menu-title) > .collapse > ul {
+  margin-inline-start: 1rem;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-inline-end: 0px;
+}
+
 .collapse {
   visibility: collapse;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.inset-0 {
+  inset: 0px;
 }
 
 .mx-2 {
@@ -597,20 +3375,14 @@ video {
   margin-right: 0.5rem;
 }
 
-.ml-auto {
+.mx-auto {
   margin-left: auto;
+  margin-right: auto;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .mb-0 {
@@ -625,17 +3397,154 @@ video {
   margin-bottom: 1rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.block {
+  display: block;
+}
+
+.flex {
+  display: flex;
+}
+
 .table {
   display: table;
+}
+
+.grid {
+  display: grid;
+}
+
+.hidden {
+  display: none;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-20 {
+  height: 5rem;
+}
+
+.h-60 {
+  height: 15rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.max-w-lg {
+  max-width: 32rem;
+}
+
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-8 {
+  gap: 2rem;
 }
 
 .rounded-lg {
   border-radius: 0.5rem;
 }
 
-.bg-white {
+.border {
+  border-width: 1px;
+}
+
+.border-primary {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 90 156 / var(--tw-border-opacity));
+}
+
+.bg-gray-100 {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
 .bg-gray-800 {
@@ -643,8 +3552,55 @@ video {
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-accent {
+  --tw-bg-opacity: 1;
+  background-color: rgb(207 207 207 / var(--tw-bg-opacity));
+}
+
+.bg-background {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-black\/60 {
+  background-color: rgb(0 0 0 / 0.6);
+}
+
+.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 90 156 / var(--tw-bg-opacity));
+}
+
+.bg-secondary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 26 26 / var(--tw-bg-opacity));
+}
+
+.bg-section {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245 / var(--tw-bg-opacity));
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .p-4 {
   padding: 1rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .py-4 {
@@ -652,8 +3608,32 @@ video {
   padding-bottom: 1rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .text-center {
   text-align: center;
+}
+
+.font-sans {
+  font-family: Roboto, sans-serif;
 }
 
 .text-2xl {
@@ -671,17 +3651,41 @@ video {
   line-height: 2.5rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-xl {
   font-size: 1.25rem;
-  line-height: 1.75rem;
+  line-height: 1.625rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.375rem;
 }
 
 .font-bold {
   font-weight: 700;
 }
 
+.font-medium {
+  font-weight: 500;
+}
+
 .font-semibold {
   font-weight: 600;
+}
+
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
 .text-gray-600 {
@@ -689,19 +3693,123 @@ video {
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-accent {
+  --tw-text-opacity: 1;
+  color: rgb(207 207 207 / var(--tw-text-opacity));
+}
+
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(0 90 156 / var(--tw-text-opacity));
+}
+
+.text-secondary {
+  --tw-text-opacity: 1;
+  color: rgb(26 26 26 / var(--tw-text-opacity));
+}
+
+.opacity-80 {
+  opacity: 0.8;
+}
+
 .shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  --tw-shadow: 0 2px 4px 0 var(--fallback-bs,oklch(var(--bs)/0.26));
+  --tw-shadow-colored: 0 2px 4px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-sm {
-  --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow: 0 1px 2px 0 var(--fallback-bs,oklch(var(--bs)/0.22));
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px var(--fallback-bs,oklch(var(--bs)/0.2));
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.drop-shadow-lg {
+  --tw-drop-shadow: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.hover\:bg-blue-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+.hover\:text-blue-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity));
+}
+
+.hover\:text-primary:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 90 156 / var(--tw-text-opacity));
+}
+
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
 }

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // Lógica para el enlace "Cerrar sesión"
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
     // Seleccionar el enlace de "Cerrar sesión"
     const logoutLink = document.querySelector('.nav-link[href="#"]');
 
@@ -54,4 +54,4 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.log('El enlace de "Cerrar sesión" no está disponible en el DOM.');
     }
-});
+}); */
