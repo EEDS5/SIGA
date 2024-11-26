@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="../css/output.css">
     <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1; /* Empuja el contenido principal hacia arriba, dejando el footer en el fondo */
+        }
+    </style>
 </head>
 
 <body class="bg-background text-secondary font-sans">
@@ -102,7 +114,6 @@
     <!-- Pie de Página -->
     <footer class="footer bg-secondary flex flex-col items-center gap-4 p-6">
         <div class="flex items-center gap-2 text-xl font-bold text-primary">
-            <!-- Reemplazo del SVG por el logo -->
             <img src="../public/img/Logo_Siga sin letras.PNG" alt="Logo SIGA" class="h-8 w-auto">
             <span>SIGA</span>
         </div>

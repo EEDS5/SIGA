@@ -6,72 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
 
-    <!-- Integrar Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Integrar Tailwind CSS -->
     <link rel="stylesheet" href="../css/output.css">
 
     <style>
-        /* Estilos personalizados si es necesario */
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #3490dc;
+        /* Estilos personalizados */
+        .logout-link {
+            cursor: pointer;
         }
 
-        .card-title {
-            font-size: 2rem;
-            font-weight: bold;
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .btn-custom {
-            background-color: #3490dc;
-            color: white;
-        }
-
-        .btn-custom:hover {
-            background-color: #2779bd;
+        main {
+            flex: 1;
+            /* Empuja el contenido para que el footer quede en la parte inferior */
         }
     </style>
 </head>
 
-<body class="bg-light">
+<body class="bg-background text-secondary font-sans">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <a class="navbar-brand" href="#">SIGA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto flex items-center justify-between py-4 px-6">
+            <!-- Logo y nombre -->
+            <a href="#" class="text-primary text-2xl font-bold">SIGA</a>
 
-        <!-- Gestionar Proveedores y Cerrar Sesión fuera del colapsable -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a href="#" onclick="showProveedores()" class="nav-link">Gestionar Proveedores</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link logout-link" href="#">Cerrar sesión</a>
-            </li>            
-        </ul>
-    </nav>
-
-    <!-- Contenido del Dashboard -->
-    <div class="container mt-5">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h1 class="card-title">Bienvenido al Dashboard</h1>
-                <!-- <p class="card-text" id="welcome-message">Hola, <%= userName %>!</p> -->
-                <p class="card-text" id="welcome-message">¡Hola, <span id="user-name"></span>!</p>
-                <p class="card-text">Solo los usuarios logueados pueden ver esta página.</p>
+            <!-- Menú -->
+            <div class="flex space-x-8">
+                <a href="#" onclick="showProveedores()"
+                    class="text-secondary hover:text-primary transition font-medium">Gestionar Proveedores</a>
+                <a class="logout-link text-secondary hover:text-error transition font-medium">Cerrar sesión</a>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- Scripts de Bootstrap y jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Contenido principal -->
+    <main>
+        <div class="container mx-auto mt-10 px-6">
+            <!-- Tarjeta de bienvenida -->
+            <div class="bg-section shadow-md rounded-lg p-6 mb-8">
+                <h1 class="text-3xl font-bold text-primary mb-4">Bienvenido al Dashboard</h1>
+                <p class="text-secondary mb-2">¡Hola, <span id="user-name"></span>!</p>
+                <p class="text-secondary">Solo los usuarios logueados pueden ver esta página.</p>
+            </div>
+
+            <!-- Contenedor de cards -->
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-accent">
+                    <!-- Card: Clientes registrados -->
+                    <div class="bg-white p-6 flex flex-col justify-between">
+                        <div>
+                            <h5 class="text-lg font-bold text-primary mb-2">Clientes Registrados</h5>
+                            <p class="text-secondary">Gestión de todos los clientes registrados en el sistema.</p>
+                        </div>
+                        <p class="text-secondary text-xl font-bold mt-4">42 Clientes</p>
+                        <div class="mt-4 text-sm text-secondary text-right">
+                            <a href="#" class="text-primary hover:underline">Ver detalles</a>
+                        </div>
+                    </div>
+
+                    <!-- Card: Productos en inventario -->
+                    <div class="bg-white p-6 flex flex-col justify-between">
+                        <div>
+                            <h5 class="text-lg font-bold text-primary mb-2">Productos en Inventario</h5>
+                            <p class="text-secondary">Monitorea los productos disponibles y el stock mínimo.</p>
+                        </div>
+                        <p class="text-secondary text-xl font-bold mt-4">128 Productos</p>
+                        <div class="mt-4 text-sm text-secondary text-right">
+                            <a href="#" class="text-primary hover:underline">Ver inventario</a>
+                        </div>
+                    </div>
+
+                    <!-- Card: Órdenes de trabajo pendientes -->
+                    <div class="bg-white p-6 flex flex-col justify-between">
+                        <div>
+                            <h5 class="text-lg font-bold text-primary mb-2">Órdenes de Trabajo Pendientes</h5>
+                            <p class="text-secondary">Consulta el progreso de las órdenes en curso.</p>
+                        </div>
+                        <p class="text-secondary text-xl font-bold mt-4">7 Órdenes</p>
+                        <div class="mt-4 text-sm text-secondary text-right">
+                            <a href="#" class="text-primary hover:underline">Ver órdenes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de Página Intermedio -->
+    <footer class="bg-secondary text-accent py-6">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+            <!-- Información principal -->
+            <p class="text-sm mb-4 md:mb-0">
+                &copy; 2024 SIGA - Administración. Todos los derechos reservados.
+            </p>
+
+            <!-- Frase motivadora o descriptiva -->
+            <p class="text-sm italic">
+                "Simplificando la gestión automotriz con tecnología de vanguardia."
+            </p>
+        </div>
+    </footer>
 
     <!-- Scripts de JavaScript -->
     <script src="../public/js/main.js"></script>
