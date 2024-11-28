@@ -1,4 +1,4 @@
-//types/express.d.ts
+//types/jwt/express.d.ts
 import * as express from 'express';
 
 declare global {
