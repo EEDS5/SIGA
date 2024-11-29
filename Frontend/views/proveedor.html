@@ -49,6 +49,17 @@
                 opacity: 1;
             }
         }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            /* Empuja el contenido para que el footer quede en la parte inferior */
+        }
     </style>
 </head>
 
@@ -123,25 +134,34 @@
                     <input type="hidden" id="proveedorId" name="proveedorId">
                     <div class="mb-4">
                         <label for="nombre" class="block text-gray-700 font-medium">Nombre</label>
-                        <input type="text" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="nombre" name="nombre" required>
+                        <input type="text"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="nombre" name="nombre" required>
                     </div>
                     <div class="mb-4">
                         <label for="telefono" class="block text-gray-700 font-medium">Teléfono</label>
-                        <input type="text" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="telefono" name="telefono" required>
+                        <input type="text"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="telefono" name="telefono" required>
                     </div>
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 font-medium">Email</label>
-                        <input type="email" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="email" name="email" required>
+                        <input type="email"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="email" name="email" required>
                     </div>
                     <div class="mb-4">
                         <label for="direccion" class="block text-gray-700 font-medium">Dirección</label>
-                        <input type="text" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="direccion" name="direccion" required>
+                        <input type="text"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="direccion" name="direccion" required>
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md">
                             <i class="fas fa-save"></i> Guardar
                         </button>
-                        <button type="button" onclick="cerrarModal()" class="ml-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
+                        <button type="button" onclick="cerrarModal()"
+                            class="ml-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
                             Cancelar
                         </button>
                     </div>
