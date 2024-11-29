@@ -21,7 +21,7 @@ const db = pgp({
     port: 5432,
     database: 'SIGA',
     user: 'postgres',
-    password: 'holasoyelias',
+    password: 'root',
 });
 
 // Configuración para pg.Pool (exclusivo para sesiones)
@@ -30,7 +30,7 @@ const sessionPool = new Pool({
     port: 5432,
     database: 'SIGA',
     user: 'postgres',
-    password: 'holasoyelias',
+    password: 'root',
 });
 
 export default db;

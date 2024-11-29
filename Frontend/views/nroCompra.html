@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Números de Compra</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Gestión de Números de Compra</h1>
+
+    <!-- Formulario para crear un nuevo número de compra -->
+    <div class="mb-4">
+        <h3>Nuevo Número de Compra</h3>
+        <form id="formNuevoNroCompra">
+            <div class="form-group">
+                <label for="proveedor_id">Proveedor</label>
+                <input type="number" id="proveedor_id" class="form-control" placeholder="ID del proveedor" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha_compra">Fecha de Compra</label>
+                <input type="date" id="fecha_compra" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="total">Total</label>
+                <input type="number" id="total" class="form-control" placeholder="Total de la compra" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Crear Número de Compra</button>
+        </form>
+    </div>
+
+    <!-- Tabla para mostrar todos los números de compra -->
+    <h3>Lista de Números de Compra</h3>
+    <table class="table" id="tablaNroCompra">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Proveedor</th>
+                <th>Fecha de Compra</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filas de números de compra -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal para editar un número de compra -->
+<div class="modal" id="modalEditarNroCompra" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarLabel">Editar Número de Compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editarProveedor">Proveedor</label>
+                    <input type="number" id="editarProveedor" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editarFecha">Fecha de Compra</label>
+                    <input type="date" id="editarFecha" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="editarTotal">Total</label>
+                    <input type="number" id="editarTotal" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap y Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="../js/nroCompra.js"></script>
+
+</body>
+</html>
