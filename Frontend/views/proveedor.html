@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proveedores</title>
 
-    <!-- Integrar Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Integrar Tailwind CSS -->
     <link rel="stylesheet" href="../css/output.css">
     <!-- Librería de Animaciones Animate.css -->
@@ -17,317 +14,123 @@
     <!-- SweetAlert2 para notificaciones -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- FlyonUI CSS (si es necesario para componentes interactivos) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.css" />
+
     <style>
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #3490dc;
-        }
-
-        .btn-custom {
-            background-color: #3490dc;
-            color: white;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .btn-custom:hover {
-            background-color: #2779bd;
-        }
-
+        /* Estilos personalizados */
         .fade-in {
             animation: fadeIn 1s ease forwards;
         }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
         .slide-in {
             animation: slideIn 0.5s ease forwards;
         }
-
         @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Estilos para la tabla con scroll */
-        .table-responsive {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        /* Fondo semitransparente para el modal */
-        .modal-content {
-            background-color: #fff;
-            border-radius: 15px;
-            animation: fadeInModal 0.5s ease;
-        }
-
-        @keyframes fadeInModal {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Ocultar los elementos de fondo al abrir el modal */
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.8) !important;
-        }
-
-        /* Mejora de distribución y paddings */
-        .container {
-            padding: 20px;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
-
-<body class="bg-light">
+<body class="bg-gray-100">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <a class="navbar-brand animate__animated animate__fadeInDown" href="#">SIGA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link animate__animated animate__fadeInDown" href="/dashboard">Dashboard</a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link animate__animated animate__fadeInDown" href="/productos">Gestionar Productos</a>
-                </li> -->
-                <li class="nav-item">
-                    <a class="nav-link animate__animated animate__fadeInDown" href="/auth/logout">Cerrar sesión</a>
-                </li>
-            </ul>
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <a class="text-2xl font-bold text-blue-600 animate__animated animate__fadeInDown" href="#">SIGA</a>
+            <div class="flex space-x-4">
+                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown" href="/dashboard">Dashboard</a>
+                <!-- <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown" href="/productos">Gestionar Productos</a> -->
+                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown" href="/auth/logout">Cerrar sesión</a>
+            </div>
         </div>
     </nav>
 
     <!-- Contenido de la página -->
-    <div class="container mt-5 fade-in">
-        <h1 class="text-center text-4xl font-bold text-blue-600 mb-4 animate__animated animate__fadeIn zoomIn">Lista de
-            Proveedores</h1>
+    <div class="container mx-auto mt-5 fade-in px-4">
+        <h1 class="text-center text-4xl font-bold text-blue-600 mb-4 animate__animated animate__fadeIn zoomIn">Lista de Proveedores</h1>
 
         <!-- Botón para abrir el modal de creación/edición -->
-        <div class="btn-container">
-            <button type="button" class="btn btn-primary btn-custom animate__animated animate__bounceIn"
-                data-toggle="modal" data-target="#proveedorModal" onclick="limpiarModal()">
+        <div class="flex justify-end mb-4">
+            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded-md animate__animated animate__bounceIn" onclick="limpiarModal()">
                 <i class="fas fa-plus-circle"></i> Crear Proveedor
             </button>
         </div>
 
         <!-- Tabla de proveedores con scroll -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover mt-3">
-                <thead>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded">
+                <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Teléfono</th>
-                        <th>Email</th>
-                        <th>Dirección</th>
-                        <th>Acciones</th>
+                        <th class="py-3 px-6 text-left">ID</th>
+                        <th class="py-3 px-6 text-left">Nombre</th>
+                        <th class="py-3 px-6 text-left">Teléfono</th>
+                        <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-6 text-left">Dirección</th>
+                        <th class="py-3 px-6 text-left">Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="proveedores-container">
-                    <!-- <% proveedores.forEach(proveedor => { %> -->
-                    <!-- <tr class="animate__animated animate__fadeInUp"> -->
-                    <!-- <td><%= proveedor.id %></td>
-                            <td><%= proveedor.nombre %></td>
-                            <td><%= proveedor.telefono %></td>
-                            <td><%= proveedor.email %></td>
-                            <td><%= proveedor.direccion %></td> -->
-                    <!-- <td> -->
-                    <!-- Botón de editar proveedor -->
-                    <!-- <button class="btn btn-warning" onclick="cargarDatosProveedor(<%= proveedor.id %>, '<%= proveedor.nombre %>', '<%= proveedor.telefono %>', '<%= proveedor.email %>', '<%= proveedor.direccion %>')" data-toggle="modal" data-target="#proveedorModal">
-                                    <i class="fas fa-edit"></i> Editar
-                                </button> -->
-                    <!-- Botón de eliminar proveedor -->
-                    <!-- <button class="btn btn-danger eliminar-proveedor" data-id="<%= proveedor.id %>">
-                                    <i class="fas fa-trash-alt"></i> Eliminar
-                                </button> -->
-                    <!-- </td>
-                        </tr> -->
-                    <!-- <% }) %> -->
+                <tbody id="proveedores-container" class="text-gray-700 text-sm font-light">
+                    <!-- Aquí se renderizarán los proveedores -->
                 </tbody>
             </table>
         </div>
 
-        <a href="/dashboard" class="btn btn-secondary btn-block mt-4 animate__animated animate__bounceIn">
+        <a href="/dashboard" class="block text-center bg-gray-500 text-white px-4 py-2 rounded-md mt-4 animate__animated animate__bounceIn">
             <i class="fas fa-arrow-left"></i> Volver al Dashboard
         </a>
     </div>
 
-    <!-- Modal para crear/editar proveedor con animación personalizada -->
-    <div class="modal fade" id="proveedorModal" tabindex="-1" role="dialog" aria-labelledby="proveedorModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content animate__animated animate__zoomIn">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="proveedorModalLabel">Proveedor</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="proveedorForm">
-                        <input type="hidden" id="proveedorId" name="proveedorId"> <!-- Campo oculto para el ID -->
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefono">Teléfono</label>
-                            <input type="text" class="form-control" id="telefono" name="telefono" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="direccion">Dirección</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-custom">
+    <!-- Modal para crear/editar proveedor -->
+    <div id="proveedorModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 animate__animated animate__zoomIn">
+            <div class="flex justify-between items-center bg-blue-600 text-white text-xl rounded-t-lg px-4 py-2">
+                <h5 id="proveedorModalLabel">Proveedor</h5>
+                <button type="button" onclick="cerrarModal()" class="text-white">&times;</button>
+            </div>
+            <div class="p-6">
+                <form id="proveedorForm">
+                    <input type="hidden" id="proveedorId" name="proveedorId">
+                    <div class="mb-4">
+                        <label for="nombre" class="block text-gray-700">Nombre</label>
+                        <input type="text" class="w-full px-3 py-2 border rounded-md" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="telefono" class="block text-gray-700">Teléfono</label>
+                        <input type="text" class="w-full px-3 py-2 border rounded-md" id="telefono" name="telefono" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700">Email</label>
+                        <input type="email" class="w-full px-3 py-2 border rounded-md" id="email" name="email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="direccion" class="block text-gray-700">Dirección</label>
+                        <input type="text" class="w-full px-3 py-2 border rounded-md" id="direccion" name="direccion" required>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">
                             <i class="fas fa-save"></i> Guardar
                         </button>
-                    </form>
-                </div>
+                        <button type="button" onclick="cerrarModal()" class="ml-2 bg-gray-500 text-white px-4 py-2 rounded-md">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
+        <!-- Fondo oscuro -->
+        <div class="fixed inset-0 bg-black opacity-50" onclick="cerrarModal()"></div>
     </div>
 
-    <!-- Scripts de Bootstrap y jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- Incluyendo Popper.js versión compatible (1.16.0) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <!-- Scripts -->
+    <!-- FlyonUI JS (si se utiliza para componentes interactivos) -->
+    <script src="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.js"></script>
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Scripts de JavaScript -->
+    <!-- Tu script de proveedores -->
     <script src="../public/js/proveedor.js"></script>
-
-    <!-- <script>
-        // Función para cargar los datos del proveedor en el modal para editar
-        function cargarDatosProveedor(id, nombre, telefono, email, direccion) {
-            $('#proveedorId').val(id);
-            $('#nombre').val(nombre);
-            $('#telefono').val(telefono);
-            $('#email').val(email);
-            $('#direccion').val(direccion);
-            $('#proveedorModalLabel').text('Editar Proveedor');
-        }
-
-        // Limpiar el modal para crear un nuevo proveedor
-        function limpiarModal() {
-            $('#proveedorId').val('');
-            $('#nombre').val('');
-            $('#telefono').val('');
-            $('#email').val('');
-            $('#direccion').val('');
-            $('#proveedorModalLabel').text('Crear Proveedor');
-        }
-
-        // Manejar la creación o edición de proveedor con SweetAlert2
-        $('#proveedorForm').on('submit', function (e) {
-            e.preventDefault(); // Evita el envío normal del formulario
-
-            const id = $('#proveedorId').val();
-            const url = id ? `/proveedores/${id}/editar` : '/proveedores'; // Si hay ID, es edición, si no, es creación
-            const method = id ? 'POST' : 'POST';
-
-            $.ajax({
-                type: method,
-                url: url,
-                data: $(this).serialize(),
-                success: function (response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Éxito!',
-                        text: id ? 'Proveedor actualizado con éxito.' : 'Proveedor creado con éxito.',
-                        showConfirmButton: false,
-                        timer: 2000
-                    }).then(() => {
-                        location.reload(); // Recargar la página para ver los cambios
-                    });
-                },
-                error: function (xhr) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Hubo un problema al guardar el proveedor.',
-                    });
-                }
-            });
-        });
-
-        // Manejar la eliminación de proveedor con SweetAlert2
-        $('.eliminar-proveedor').on('click', function () {
-            const id = $(this).data('id');
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: 'No podrás revertir esta acción',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: 'DELETE',
-                        url: `/proveedores/${id}`,
-                        success: function (response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Eliminado',
-                                text: 'Proveedor eliminado con éxito.',
-                                showConfirmButton: false,
-                                timer: 2000
-                            }).then(() => {
-                                location.reload(); // Recargar la página para ver los cambios
-                            });
-                        },
-                        error: function (xhr) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'Hubo un problema al eliminar el proveedor.',
-                            });
-                        }
-                    });
-                }
-            });
-        });
-    </script> -->
 </body>
-
 </html>

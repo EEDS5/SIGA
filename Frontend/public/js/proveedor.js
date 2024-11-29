@@ -117,24 +117,6 @@ async function obtenerProveedores() {
     }
 }
 
-// Función para renderizar los proveedores en el DOM
-/* function renderProveedores(proveedores) {
-    const container = document.getElementById('proveedores-container');
-    
-    if (!container) {
-        console.error("Error: Contenedor 'proveedores-container' no encontrado en el DOM.");
-        return; // Evita continuar si no existe el contenedor
-    }
-
-    container.innerHTML = ''; // Limpia el contenido previo
-
-    proveedores.forEach(proveedor => {
-        const div = document.createElement('div');
-        div.textContent = `Nombre: ${proveedor.nombre}, ID: ${proveedor.id}`;
-        container.appendChild(div);
-    });
-} */
-// Código existente - Respetado íntegramente
 // Función para renderizar los proveedores en la tabla
 function renderProveedores(proveedores) {
     const container = document.getElementById('proveedores-container'); // Contenedor del <tbody>
@@ -152,24 +134,22 @@ function renderProveedores(proveedores) {
 
         // Crea las celdas (columnas) de la fila
         row.innerHTML = `
-            <td>${proveedor.id}</td>
-            <td>${proveedor.nombre}</td>
-            <td>${proveedor.telefono || 'N/A'}</td>
-            <td>${proveedor.email || 'N/A'}</td>
-            <td>${proveedor.direccion || 'N/A'}</td>
-            <td>
-                <button class="btn btn-warning editar-proveedor" 
+            <td class="py-3 px-6">${proveedor.id}</td>
+            <td class="py-3 px-6">${proveedor.nombre}</td>
+            <td class="py-3 px-6">${proveedor.telefono || 'N/A'}</td>
+            <td class="py-3 px-6">${proveedor.email || 'N/A'}</td>
+            <td class="py-3 px-6">${proveedor.direccion || 'N/A'}</td>
+            <td class="py-3 px-6 flex space-x-2">
+                <button class="editar-proveedor bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md flex items-center" 
                     data-id="${proveedor.id}" 
                     data-nombre="${encodeURIComponent(proveedor.nombre)}" 
                     data-telefono="${encodeURIComponent(proveedor.telefono || '')}" 
                     data-email="${encodeURIComponent(proveedor.email || '')}" 
-                    data-direccion="${encodeURIComponent(proveedor.direccion || '')}" 
-                    data-toggle="modal" 
-                    data-target="#proveedorModal">
-                    <i class="fas fa-edit"></i> Editar
+                    data-direccion="${encodeURIComponent(proveedor.direccion || '')}">
+                    <i class="fas fa-edit mr-1"></i> Editar
                 </button>
-                <button class="btn btn-danger eliminar-proveedor" data-id="${proveedor.id}">
-                    <i class="fas fa-trash-alt"></i> Eliminar
+                <button class="eliminar-proveedor bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md flex items-center" data-id="${proveedor.id}">
+                    <i class="fas fa-trash-alt mr-1"></i> Eliminar
                 </button>
             </td>
         `;
@@ -203,27 +183,41 @@ function renderProveedores(proveedores) {
     });
 }
 
-// Nuevas funcionalidades - Añadido sin modificar lo existente
+// Función para abrir el modal
+function abrirModal() {
+    const modal = document.getElementById('proveedorModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+    const modal = document.getElementById('proveedorModal');
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+}
 
 // Función para cargar los datos en el modal para editar
 function cargarDatosProveedor(id, nombre, telefono, email, direccion) {
-    document.getElementById('proveedorId').value = id; // ID oculto
+    document.getElementById('proveedorId').value = id;
     document.getElementById('nombre').value = nombre || '';
     document.getElementById('telefono').value = telefono || '';
     document.getElementById('email').value = email || '';
     document.getElementById('direccion').value = direccion || '';
-
-    // Cambiar el título del modal
     document.getElementById('proveedorModalLabel').textContent = 'Editar Proveedor';
+
+    // Mostrar el modal manualmente
+    abrirModal();
 }
 
 // Función para limpiar el modal al crear un nuevo proveedor
 function limpiarModal() {
-    document.getElementById('proveedorForm').reset(); // Resetea los campos
-    document.getElementById('proveedorId').value = ''; // Limpia el ID oculto
-
-    // Cambiar el título del modal a "Crear Proveedor"
+    document.getElementById('proveedorForm').reset();
+    document.getElementById('proveedorId').value = '';
     document.getElementById('proveedorModalLabel').textContent = 'Crear Proveedor';
+
+    // Mostrar el modal manualmente
+    abrirModal();
 }
 
 // Manejo del formulario de creación/edición
@@ -259,7 +253,7 @@ document.getElementById('proveedorForm').addEventListener('submit', async functi
                 showConfirmButton: false,
                 timer: 2000,
             }).then(() => {
-                $('#proveedorModal').modal('hide'); // Ocultar el modal
+                cerrarModal(); // Ocultar el modal
                 obtenerProveedores(); // Actualizar la lista de proveedores
             });
         } else {
@@ -284,7 +278,7 @@ document.getElementById('proveedorForm').addEventListener('submit', async functi
             title: 'Error',
             text: 'Hubo un problema al guardar el proveedor.',
         });
-    }    
+    }
 });
 
 // Función para eliminar un proveedor
