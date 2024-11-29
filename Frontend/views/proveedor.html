@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,23 +19,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.css" />
 
     <style>
-        /* Estilos personalizados */
+        /* Tus estilos personalizados */
         .fade-in {
             animation: fadeIn 1s ease forwards;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         .slide-in {
             animation: slideIn 0.5s ease forwards;
         }
+
         @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body class="bg-gray-100">
 
     <!-- Navbar -->
@@ -42,20 +59,25 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
             <a class="text-2xl font-bold text-blue-600 animate__animated animate__fadeInDown" href="#">SIGA</a>
             <div class="flex space-x-4">
-                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown" href="/dashboard">Dashboard</a>
+                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
+                    href="/dashboard">Dashboard</a>
                 <!-- <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown" href="/productos">Gestionar Productos</a> -->
-                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown" href="/auth/logout">Cerrar sesión</a>
+                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
+                    href="/auth/logout">Cerrar sesión</a>
             </div>
         </div>
     </nav>
 
     <!-- Contenido de la página -->
     <div class="container mx-auto mt-5 fade-in px-4">
-        <h1 class="text-center text-4xl font-bold text-blue-600 mb-4 animate__animated animate__fadeIn zoomIn">Lista de Proveedores</h1>
+        <h1 class="text-center text-4xl font-bold text-blue-600 mb-4 animate__animated animate__fadeIn zoomIn">Lista de
+            Proveedores</h1>
 
         <!-- Botón para abrir el modal de creación/edición -->
         <div class="flex justify-end mb-4">
-            <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded-md animate__animated animate__bounceIn" onclick="limpiarModal()">
+            <button type="button"
+                class="bg-blue-600 text-white px-4 py-2 rounded-md animate__animated animate__bounceIn"
+                onclick="limpiarModal()">
                 <i class="fas fa-plus-circle"></i> Crear Proveedor
             </button>
         </div>
@@ -79,14 +101,19 @@
             </table>
         </div>
 
-        <a href="/dashboard" class="block text-center bg-gray-500 text-white px-4 py-2 rounded-md mt-4 animate__animated animate__bounceIn">
+        <a href="/dashboard"
+            class="block text-center bg-gray-500 text-white px-4 py-2 rounded-md mt-4 animate__animated animate__bounceIn">
             <i class="fas fa-arrow-left"></i> Volver al Dashboard
         </a>
     </div>
 
     <!-- Modal para crear/editar proveedor -->
     <div id="proveedorModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 animate__animated animate__zoomIn">
+        <!-- Fondo oscuro (overlay) -->
+        <div class="fixed inset-0 bg-black opacity-50 z-40" onclick="cerrarModal()"></div>
+
+        <!-- Contenido del modal -->
+        <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 animate__animated animate__zoomIn z-50">
             <div class="flex justify-between items-center bg-blue-600 text-white text-xl rounded-t-lg px-4 py-2">
                 <h5 id="proveedorModalLabel">Proveedor</h5>
                 <button type="button" onclick="cerrarModal()" class="text-white">&times;</button>
@@ -95,42 +122,40 @@
                 <form id="proveedorForm">
                     <input type="hidden" id="proveedorId" name="proveedorId">
                     <div class="mb-4">
-                        <label for="nombre" class="block text-gray-700">Nombre</label>
-                        <input type="text" class="w-full px-3 py-2 border rounded-md" id="nombre" name="nombre" required>
+                        <label for="nombre" class="block text-gray-700 font-medium">Nombre</label>
+                        <input type="text" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="nombre" name="nombre" required>
                     </div>
                     <div class="mb-4">
-                        <label for="telefono" class="block text-gray-700">Teléfono</label>
-                        <input type="text" class="w-full px-3 py-2 border rounded-md" id="telefono" name="telefono" required>
+                        <label for="telefono" class="block text-gray-700 font-medium">Teléfono</label>
+                        <input type="text" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="telefono" name="telefono" required>
                     </div>
                     <div class="mb-4">
-                        <label for="email" class="block text-gray-700">Email</label>
-                        <input type="email" class="w-full px-3 py-2 border rounded-md" id="email" name="email" required>
+                        <label for="email" class="block text-gray-700 font-medium">Email</label>
+                        <input type="email" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="email" name="email" required>
                     </div>
                     <div class="mb-4">
-                        <label for="direccion" class="block text-gray-700">Dirección</label>
-                        <input type="text" class="w-full px-3 py-2 border rounded-md" id="direccion" name="direccion" required>
+                        <label for="direccion" class="block text-gray-700 font-medium">Dirección</label>
+                        <input type="text" class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary" id="direccion" name="direccion" required>
                     </div>
                     <div class="flex justify-end">
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">
+                        <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md">
                             <i class="fas fa-save"></i> Guardar
                         </button>
-                        <button type="button" onclick="cerrarModal()" class="ml-2 bg-gray-500 text-white px-4 py-2 rounded-md">
+                        <button type="button" onclick="cerrarModal()" class="ml-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
                             Cancelar
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-        <!-- Fondo oscuro -->
-        <div class="fixed inset-0 bg-black opacity-50" onclick="cerrarModal()"></div>
-    </div>
 
-    <!-- Scripts -->
-    <!-- FlyonUI JS (si se utiliza para componentes interactivos) -->
-    <script src="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Tu script de proveedores -->
-    <script src="../public/js/proveedor.js"></script>
+        <!-- Scripts -->
+        <!-- FlyonUI JS (si se utiliza para componentes interactivos) -->
+        <script src="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.js"></script>
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Tu script de proveedores -->
+        <script src="../public/js/proveedor.js"></script>
 </body>
+
 </html>
