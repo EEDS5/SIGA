@@ -505,14 +505,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Exportar al ámbito global si es necesario
 window.showProveedores = showProveedores;
-<<<<<<< HEAD
 window.showLogout = showLogout;
 window.showDashboard = showDashboard;
-=======
 window.showDetalleCompra = showDetalleCompra;
 window.showLogout = showLogout;
-// Exportar al ámbito global si es necesario
 window.showProductos = showProductos;
->>>>>>> c4eba7e (tblCompraProducto)
-
 window.showProfile = showProfile;
