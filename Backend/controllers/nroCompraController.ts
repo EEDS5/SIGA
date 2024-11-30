@@ -15,16 +15,17 @@ export const mostrarNroCompra = async (req: Request, res: Response): Promise<voi
 
 // Método para crear un nuevo número de compra
 export const crearNroCompra = async (req: Request, res: Response): Promise<void> => {
-    const { proveedor_id, fecha_compra, total } = req.body;
+    const { id_proveedor, fecha, total } = req.body;
 
     try {
-        const nuevoNroCompra = await NroCompra.crear(proveedor_id, fecha_compra, total);
+        const nuevoNroCompra = await NroCompra.crear(id_proveedor, fecha, total);
         res.status(201).send(`Número de compra creado con éxito, ID: ${nuevoNroCompra.id}`);
     } catch (error) {
         console.error('Error al crear el número de compra:', error);
         res.status(500).send('Error al crear el número de compra');
     }
 };
+
 
 // Método para obtener un número de compra por ID (para editar)
 export const obtenerNroCompra = async (req: Request, res: Response): Promise<void> => {

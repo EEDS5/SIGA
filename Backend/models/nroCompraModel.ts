@@ -4,10 +4,11 @@ const dao = new DAO();
 
 interface NroCompra {
     id: number;
-    proveedor_id: number;
+    id_proveedor: number;  // <-- Aquí deberías usar `id_proveedor` para que coincida con la base de datos
     fecha_compra: string;
     total: number;
 }
+
 
 const NroCompraModel = {
     // Obtener todos los números de compra
@@ -29,7 +30,7 @@ const NroCompraModel = {
         total: number
     ): Promise<{ id: number }> => {
         const sql =
-            "INSERT INTO nro_compra(proveedor_id, fecha_compra, total) VALUES($1, $2, $3) RETURNING id";
+            "INSERT INTO nro_compra(id_proveedor, fecha_compra, total) VALUES($1, $2, $3) RETURNING id";
         return dao.insertar<{ id: number }>(sql, [proveedor_id, fecha_compra, total]);
     },
 
@@ -41,7 +42,7 @@ const NroCompraModel = {
         total: number
     ): Promise<void> => {
         const sql =
-            "UPDATE nro_compra SET proveedor_id = $1, fecha_compra = $2, total = $3 WHERE id = $4";
+            "UPDATE nro_compra SET id_proveedor = $1, fecha_compra = $2, total = $3 WHERE id = $4";
         return dao.actualizar(sql, [proveedor_id, fecha_compra, total, id]);
     },
 

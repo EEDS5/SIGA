@@ -75,12 +75,17 @@ import loginRoutes from './routes/loginRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
 import productoRoutes from './routes/productoRoutes';
 import proveedorRoutes from './routes/proveedorRoutes';
+import nroCompraRoutes from './routes/nroCompraRoutes'; // Importa las rutas de nro_compra
+import detalleCompraRoutes from './routes/detalleCompraRoutes';
+
 
 app.use('/auth', registerRoutes);
 app.use('/auth', loginRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/productos', productoRoutes);
 app.use('/proveedores', proveedorRoutes);
+app.use('/nro-compra', nroCompraRoutes); // Agrega la nueva ruta para nro_compra
+app.use('/detalle-compra', detalleCompraRoutes);
 
 // Página principal
 /* app.get('/', (req: Request, res: Response) => {

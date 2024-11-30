@@ -1097,12 +1097,6 @@ select {
   content: var(--tw-content);
 }
 
-@media (min-width: 640px) {
-  .modal-dialog {
-    max-width: 32rem;
-  }
-}
-
 .collapse:not(td):not(tr):not(colgroup) {
   visibility: visible;
 }
@@ -1235,11 +1229,6 @@ select {
   .table tr.hover:nth-child(even):hover {
     background-color: var(--fallback-bc,oklch(var(--bc)/0.05));
   }
-
-  .table-striped tr.hover,
-  .table-striped tr.hover:nth-child(even) {
-    background-color: var(--fallback-bc,oklch(var(--bc)/0.05));
-  }
 }
 
 .modal {
@@ -1257,81 +1246,6 @@ select {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-
-.modal-dialog {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  opacity: 0;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.modal-content {
-  pointer-events: auto;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.5rem;
-  max-height: calc(100vh - 2rem);
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
-  --tw-shadow: 0 20px 25px -6px var(--fallback-bs,oklch(var(--bs)/0.38));
-  --tw-shadow-colored: 0 20px 25px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 300ms;
-  overscroll-behavior: contain;
-}
-
-.modal-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem;
-}
-
-.modal-header + .modal-body {
-  padding-top: 0;
-}
-
-.modal-title {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 600;
-  color: var(--fallback-bc,oklch(var(--bc)/0.9));
-}
-
-.modal-body {
-  overflow-y: auto;
-  padding: 1.5rem;
-  font-size: 1rem;
-  line-height: 1.375rem;
-  font-weight: 400;
-  overflow-x: hidden;
-}
-
-.modal-body::-webkit-scrollbar {
-  width: 0.5rem;
-}
-
-.modal-body + .modal-footer {
-  padding-top: 0;
-}
-
-.modal-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  padding: 1.5rem;
 }
 
 .navbar {
@@ -1418,11 +1332,6 @@ select {
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
-.table-striped tbody tr:nth-child(even) :where(.table-pin-cols tr th) {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-}
-
 .disabled.advance-select-toggle {
   pointer-events: none;
   border-width: 0px;
@@ -1503,18 +1412,6 @@ select {
     border-color: var(--btn-color, var(--fallback-b2));
   }
 
-  .btn-primary {
-    --btn-color: var(--fallback-p);
-  }
-
-  .btn-secondary {
-    --btn-color: var(--fallback-s);
-  }
-
-  .btn-success {
-    --btn-color: var(--fallback-su);
-  }
-
   .btn-warning {
     --btn-color: var(--fallback-wa);
   }
@@ -1554,56 +1451,14 @@ select {
     --glass-border-opacity: 15%;
   }
 
-  .btn-soft.btn-primary:hover {
-    background-color: var(--fallback-p,oklch(var(--p)/0.3));
-  }
-
-  .btn-soft.btn-secondary:hover {
-    background-color: var(--fallback-s,oklch(var(--s)/0.3));
-  }
-
-  .btn-soft.btn-success:hover {
-    background-color: var(--fallback-su,oklch(var(--su)/0.3));
-  }
-
   .btn-soft.btn-warning:hover {
     background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
-  }
-
-  .btn-outline.btn-primary:hover {
-    --tw-border-opacity: 1;
-    border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
-    background-color: var(--fallback-p,oklch(var(--p)/0.1));
-  }
-
-  .btn-outline.btn-secondary:hover {
-    --tw-border-opacity: 1;
-    border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
-    background-color: var(--fallback-s,oklch(var(--s)/0.1));
-  }
-
-  .btn-outline.btn-success:hover {
-    --tw-border-opacity: 1;
-    border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
-    background-color: var(--fallback-su,oklch(var(--su)/0.1));
   }
 
   .btn-outline.btn-warning:hover {
     --tw-border-opacity: 1;
     border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
     background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-  }
-
-  .btn-text.btn-primary:hover {
-    background-color: var(--fallback-p,oklch(var(--p)/0.1));
-  }
-
-  .btn-text.btn-secondary:hover {
-    background-color: var(--fallback-s,oklch(var(--s)/0.1));
-  }
-
-  .btn-text.btn-success:hover {
-    background-color: var(--fallback-su,oklch(var(--su)/0.1));
   }
 
   .btn-text.btn-warning:hover {
@@ -1640,56 +1495,14 @@ select {
   outline-offset: 0px;
 }
 
-.btn-primary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-p,oklch(var(--p)/0.3));
-}
-
 @supports (color: oklch(0% 0 0)) {
-  .btn-primary {
-    --btn-color: var(--p);
-  }
-
-  .btn-secondary {
-    --btn-color: var(--s);
-  }
-
-  .btn-success {
-    --btn-color: var(--su);
-  }
-
   .btn-warning {
     --btn-color: var(--wa);
-  }
-
-  .btn-gradient.btn-primary {
-    --light-shade: var(--p);
-  }
-
-  .btn-gradient.btn-secondary {
-    --light-shade: var(--s);
-  }
-
-  .btn-gradient.btn-success {
-    --light-shade: var(--su);
   }
 
   .btn-gradient.btn-warning {
     --light-shade: var(--wa);
   }
-}
-
-.btn-secondary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-s,oklch(var(--s)/0.3));
-}
-
-.btn-success {
-  --tw-text-opacity: 1;
-  color: var(--fallback-suc,oklch(var(--suc)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-su,oklch(var(--su)/0.3));
 }
 
 .btn-warning {
@@ -1716,54 +1529,6 @@ select {
   --glass-border-opacity: 15%;
 }
 
-.btn-soft.btn-primary {
-  background-color: var(--fallback-p,oklch(var(--p)/0.2));
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-p,oklch(var(--p)/0.5));
-}
-
-.btn-soft.btn-primary.btn-active {
-  background-color: var(--fallback-p,oklch(var(--p)/0.3));
-}
-
-.btn-soft.btn-primary:focus-visible {
-  background-color: var(--fallback-p,oklch(var(--p)/0.3));
-  outline-color: var(--fallback-p,oklch(var(--p)/0.5));
-}
-
-.btn-soft.btn-secondary {
-  background-color: var(--fallback-s,oklch(var(--s)/0.2));
-  --tw-text-opacity: 1;
-  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-s,oklch(var(--s)/0.5));
-}
-
-.btn-soft.btn-secondary.btn-active {
-  background-color: var(--fallback-s,oklch(var(--s)/0.3));
-}
-
-.btn-soft.btn-secondary:focus-visible {
-  background-color: var(--fallback-s,oklch(var(--s)/0.3));
-  outline-color: var(--fallback-s,oklch(var(--s)/0.5));
-}
-
-.btn-soft.btn-success {
-  background-color: var(--fallback-su,oklch(var(--su)/0.2));
-  --tw-text-opacity: 1;
-  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-su,oklch(var(--su)/0.5));
-}
-
-.btn-soft.btn-success.btn-active {
-  background-color: var(--fallback-su,oklch(var(--su)/0.3));
-}
-
-.btn-soft.btn-success:focus-visible {
-  background-color: var(--fallback-su,oklch(var(--su)/0.3));
-  outline-color: var(--fallback-su,oklch(var(--su)/0.5));
-}
-
 .btn-soft.btn-warning {
   background-color: var(--fallback-wa,oklch(var(--wa)/0.2));
   --tw-text-opacity: 1;
@@ -1778,51 +1543,6 @@ select {
 .btn-soft.btn-warning:focus-visible {
   background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
   outline-color: var(--fallback-wa,oklch(var(--wa)/0.5));
-}
-
-.btn-outline.btn-primary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
-}
-
-.btn-outline.btn-primary.btn-active {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
-  background-color: var(--fallback-p,oklch(var(--p)/0.1));
-}
-
-.btn-outline.btn-primary:focus-visible {
-  background-color: var(--fallback-p,oklch(var(--p)/0.1));
-}
-
-.btn-outline.btn-secondary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
-}
-
-.btn-outline.btn-secondary.btn-active {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
-  background-color: var(--fallback-s,oklch(var(--s)/0.1));
-}
-
-.btn-outline.btn-secondary:focus-visible {
-  background-color: var(--fallback-s,oklch(var(--s)/0.1));
-}
-
-.btn-outline.btn-success {
-  --tw-text-opacity: 1;
-  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
-}
-
-.btn-outline.btn-success.btn-active {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
-  background-color: var(--fallback-su,oklch(var(--su)/0.1));
-}
-
-.btn-outline.btn-success:focus-visible {
-  background-color: var(--fallback-su,oklch(var(--su)/0.1));
 }
 
 .btn-outline.btn-warning {
@@ -1840,45 +1560,6 @@ select {
   background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
 }
 
-.btn-text.btn-primary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
-}
-
-.btn-text.btn-primary.btn-active {
-  background-color: var(--fallback-p,oklch(var(--p)/0.1));
-}
-
-.btn-text.btn-primary:focus-visible {
-  background-color: var(--fallback-p,oklch(var(--p)/0.1));
-}
-
-.btn-text.btn-secondary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
-}
-
-.btn-text.btn-secondary.btn-active {
-  background-color: var(--fallback-s,oklch(var(--s)/0.1));
-}
-
-.btn-text.btn-secondary:focus-visible {
-  background-color: var(--fallback-s,oklch(var(--s)/0.1));
-}
-
-.btn-text.btn-success {
-  --tw-text-opacity: 1;
-  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
-}
-
-.btn-text.btn-success.btn-active {
-  background-color: var(--fallback-su,oklch(var(--su)/0.1));
-}
-
-.btn-text.btn-success:focus-visible {
-  background-color: var(--fallback-su,oklch(var(--su)/0.1));
-}
-
 .btn-text.btn-warning {
   --tw-text-opacity: 1;
   color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
@@ -1890,63 +1571,6 @@ select {
 
 .btn-text.btn-warning:focus-visible {
   background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-}
-
-.btn-gradient.btn-primary {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
-  --tw-text-opacity: 1;
-  color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity)));
-  --tw-shadow-color: var(--fallback-p,oklch(var(--p)/0.26));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-primary:hover {
-  --tw-shadow-color: var(--fallback-p,oklch(var(--p)/0.2));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-primary:focus-visible {
-  outline-color: var(--fallback-p,oklch(var(--p)/0.3));
-  border-color: transparent;
-}
-
-.btn-gradient.btn-secondary {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
-  --tw-text-opacity: 1;
-  color: var(--fallback-sc,oklch(var(--sc)/var(--tw-text-opacity)));
-  --tw-shadow-color: var(--fallback-s,oklch(var(--s)/0.26));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-secondary:hover {
-  --tw-shadow-color: var(--fallback-s,oklch(var(--s)/0.2));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-secondary:focus-visible {
-  outline-color: var(--fallback-s,oklch(var(--s)/0.3));
-  border-color: transparent;
-}
-
-.btn-gradient.btn-success {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-su,oklch(var(--su)/var(--tw-border-opacity)));
-  --tw-text-opacity: 1;
-  color: var(--fallback-suc,oklch(var(--suc)/var(--tw-text-opacity)));
-  --tw-shadow-color: var(--fallback-su,oklch(var(--su)/0.26));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-success:hover {
-  --tw-shadow-color: var(--fallback-su,oklch(var(--su)/0.2));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-success:focus-visible {
-  outline-color: var(--fallback-su,oklch(var(--su)/0.3));
-  border-color: transparent;
 }
 
 .btn-gradient.btn-warning {
@@ -2700,29 +2324,6 @@ input:focus-visible {
   width: 0.5rem;
 }
 
-.open.modal-dialog {
-  transition-duration: 500ms;
-}
-
-.open .modal-dialog {
-  transition-duration: 500ms;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-  border-radius: 9999px;
-  background-color: var(--fallback-s,oklch(var(--s)/0.5));
-}
-
-.modal-body::-webkit-scrollbar-thumb:hover {
-  background-color: var(--fallback-s,oklch(var(--s)/0.8));
-}
-
-.modal-body::-webkit-scrollbar-track {
-  border-radius: 9999px;
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
-}
-
 .pin-input.disabled,
   .pin-input:disabled,
   .pin-input[disabled] {
@@ -3379,12 +2980,6 @@ input:focus-visible {
   background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
 }
 
-.table-striped tr.active,
-    .table-striped tr.active:nth-child(even),
-    .table-striped-striped tbody tr:nth-child(even) {
-  background-color: var(--fallback-bc,oklch(var(--bc)/0.1));
-}
-
 .table :where(thead, tbody) :where(tr:not(:last-child)),
     .table :where(thead, tbody) :where(tr:first-child:last-child) {
   border-bottom-width: 1px;
@@ -3559,10 +3154,6 @@ textarea:focus-visible {
   margin-bottom: 0.5rem;
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -3601,10 +3192,6 @@ textarea:focus-visible {
 
 .mt-2 {
   margin-top: 0.5rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
 }
 
 .mt-4 {

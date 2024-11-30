@@ -125,6 +125,41 @@ async function showProveedores() {
     }
 }
 
+    // Función para mostrar detalles de compra
+async function showDetalleCompra() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/detalle-compra', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Detalles de compra:', data);
+            localStorage.setItem('detalleCompra', JSON.stringify(data));
+            window.location.href = 'detalleCompra.html'; // Redirige a la página de detalle compra
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar detalles de compra:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showDetalleCompra:', error);
+    }
+}
+
+
     //nrocompra
     async function showNroCompra() {
         const token = localStorage.getItem('token'); // Recupera el token almacenado
@@ -138,7 +173,7 @@ async function showProveedores() {
         }
     
         try {
-            const response = await fetch('https://localhost:3001/nroCompra', {
+            const response = await fetch('https://localhost:3001/nro-compra', {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
@@ -161,7 +196,42 @@ async function showProveedores() {
             console.error('Error en showNroCompra:', error);
         }
     }
-    
+    // Función para gestionar productos
+async function showProductos() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/productos', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Productos:', data);
+            // Almacenar los productos en localStorage o sessionStorage si los necesitas en producto.html
+            localStorage.setItem('productos', JSON.stringify(data));
+            window.location.href = 'producto.html'; // Redirige a la página de productos
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar productos:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showProductos:', error);
+    }
+}
 
 // Función para cerrar sesión
 async function showLogout() {
@@ -236,5 +306,12 @@ async function showDashboard() {
 
 // Exportar al ámbito global si es necesario
 window.showProveedores = showProveedores;
+<<<<<<< HEAD
 window.showLogout = showLogout;
 window.showDashboard = showDashboard;
+=======
+window.showDetalleCompra = showDetalleCompra;
+window.showLogout = showLogout;
+// Exportar al ámbito global si es necesario
+window.showProductos = showProductos;
+>>>>>>> c4eba7e (tblCompraProducto)
