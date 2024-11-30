@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- FlyonUI CSS (si es necesario para componentes interactivos) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.css" /> -->
 
     <style>
         /* Tus estilos personalizados */
@@ -68,13 +68,16 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-            <a class="text-2xl font-bold text-blue-600 animate__animated animate__fadeInDown" href="#">SIGA</a>
+            <a class="text-2xl font-bold text-blue-600 animate__animated animate__fadeInDown" href="#" onclick="showDashboard()">SIGA</a>
             <div class="flex space-x-4">
-                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
-                    href="/dashboard">Dashboard</a>
+                <a href="#" onclick="showDashboard()"
+                    class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown">
+                    Dashboard
+                </a>
                 <!-- <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown" href="/productos">Gestionar Productos</a> -->
-                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
-                    href="/auth/logout">Cerrar sesión</a>
+                <a href="#" class="logout-link text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown">
+                    Cerrar sesión
+                </a>                
             </div>
         </div>
     </nav>
@@ -112,7 +115,7 @@
             </table>
         </div>
 
-        <a href="/dashboard"
+        <a href="#" onclick="showDashboard()"
             class="block text-center bg-gray-500 text-white px-4 py-2 rounded-md mt-4 animate__animated animate__bounceIn">
             <i class="fas fa-arrow-left"></i> Volver al Dashboard
         </a>
@@ -171,11 +174,12 @@
 
         <!-- Scripts -->
         <!-- FlyonUI JS (si se utiliza para componentes interactivos) -->
-        <script src="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.js"></script> -->
         <!-- SweetAlert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Tu script de proveedores -->
         <script src="../public/js/proveedor.js"></script>
+        <script src="../public/js/main.js"></script>
 </body>
 
 </html>

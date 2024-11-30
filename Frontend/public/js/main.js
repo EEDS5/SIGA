@@ -89,41 +89,41 @@ async function showProveedores() {
     }
 } */
 
-    async function showProveedores() {
-        const token = localStorage.getItem('token'); // Recupera el token almacenado
-    
-        console.log('Token obtenido de localStorage:', token); // Depuración
-    
-        if (!token) {
-            console.error('No se encontró un token');
-            window.location.href = 'login.html'; // Redirige al login si no hay token
-            return;
+async function showProveedores() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/proveedores', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Proveedores:', data);
+            // Almacenar los datos en localStorage o sessionStorage si los necesitas en proveedor.html
+            localStorage.setItem('proveedores', JSON.stringify(data));
+            window.location.href = 'proveedor.html'; // Redirige a la página de proveedores
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar proveedores:', response.status);
         }
-    
-        try {
-            const response = await fetch('https://localhost:3001/proveedores', {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
-                },
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Proveedores:', data);
-                // Almacenar los datos en localStorage o sessionStorage si los necesitas en proveedor.html
-                localStorage.setItem('proveedores', JSON.stringify(data));
-                window.location.href = 'proveedor.html'; // Redirige a la página de proveedores
-            } else if (response.status === 401) {
-                console.error('No autenticado');
-                window.location.href = 'login.html';
-            } else {
-                console.error('Error al cargar proveedores:', response.status);
-            }
-        } catch (error) {
-            console.error('Error en showProveedores:', error);
-        }
-    }    
+    } catch (error) {
+        console.error('Error en showProveedores:', error);
+    }
+}
 
 // Función para cerrar sesión
 async function showLogout() {
@@ -163,6 +163,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Función para redirigir al Dashboard
+async function showDashboard() {
+    const token = localStorage.getItem('token'); // Obtener el token del almacenamiento local
+
+    if (!token) {
+        console.error('No se encontró un token. Redirigiendo al login.');
+        window.location.href = 'login.html'; // Redirigir al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/dashboard', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en los encabezados
+            },
+            credentials: 'include', // Asegura que se envíen cookies y credenciales de sesión
+        });
+
+        if (response.ok) {
+            window.location.href = 'dashboard.html'; // Página del Dashboard
+        } else {
+            console.error('Error al redirigir al Dashboard:', response.status);
+            if (response.status === 401) {
+                console.error('Token o sesión no válidos. Redirigiendo al login.');
+                window.location.href = 'login.html'; // Redirigir al login si no está autorizado
+            }
+        }
+    } catch (error) {
+        console.error('Error al intentar acceder al Dashboard:', error);
+    }
+}
+
 // Exportar al ámbito global si es necesario
 window.showProveedores = showProveedores;
 window.showLogout = showLogout;
+window.showDashboard = showDashboard;
