@@ -19,12 +19,38 @@
         }
 
         main {
-            flex: 1; /* Empuja el contenido principal hacia arriba, dejando el footer en el fondo */
+            flex: 1;
+            /* Empuja el contenido principal hacia arriba, dejando el footer en el fondo */
         }
     </style>
 </head>
 
 <body class="bg-background text-secondary font-sans">
+
+    <nav class="bg-primary shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <!-- Logo -->
+            <a class="text-2xl font-bold text-white hover:text-gray-300" href="#" onclick="showDashboard()">SIGA</a>
+            <div class="flex items-center space-x-4">
+                <!-- Dashboard -->
+                <a href="#" id="dashboard-link" class="hidden text-white hover:text-gray-300 transition duration-200">
+                    Dashboard
+                </a>
+                <!-- Perfil -->
+                <a href="#" id="profile-link" class="hidden text-white hover:text-gray-300 transition duration-200">
+                    Mi Perfil
+                </a>
+                <!-- Cerrar sesión -->
+                <a href="#" id="logout-link" class="hidden text-white hover:text-gray-300 transition duration-200">
+                    Cerrar sesión
+                </a>
+                <!-- Iniciar sesión -->
+                <a href="#" id="login-link" class="text-white hover:text-gray-300 transition duration-200">
+                    Iniciar sesión
+                </a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Encabezado Ajustado con Mejor Contraste -->
     <header class="relative bg-primary shadow-md">

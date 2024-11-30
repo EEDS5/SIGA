@@ -3373,6 +3373,10 @@ textarea:focus-visible {
   margin-right: 0.25rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -3399,6 +3403,10 @@ textarea:focus-visible {
 
 .mt-6 {
   margin-top: 1.5rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
 }
 
 .block {
@@ -3441,6 +3449,10 @@ textarea:focus-visible {
   height: 100vh;
 }
 
+.min-h-screen {
+  min-height: 100vh;
+}
+
 .w-11\/12 {
   width: 91.666667%;
 }
@@ -3461,12 +3473,20 @@ textarea:focus-visible {
   min-width: 100%;
 }
 
+.max-w-2xl {
+  max-width: 42rem;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
 
 .max-w-lg {
   max-width: 32rem;
+}
+
+.flex-grow {
+  flex-grow: 1;
 }
 
 .transform {
@@ -3509,6 +3529,10 @@ textarea:focus-visible {
   gap: 1rem;
 }
 
+.gap-6 {
+  gap: 1.5rem;
+}
+
 .gap-8 {
   gap: 2rem;
 }
@@ -3535,6 +3559,12 @@ textarea:focus-visible {
   margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -3555,6 +3585,10 @@ textarea:focus-visible {
   border-radius: 0.375rem;
 }
 
+.rounded-xl {
+  border-radius: 20px;
+}
+
 .rounded-t-lg {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -3562,6 +3596,11 @@ textarea:focus-visible {
 
 .border {
   border-width: 1px;
+}
+
+.border-border {
+  --tw-border-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-border-opacity));
 }
 
 .border-primary {
@@ -3606,6 +3645,11 @@ textarea:focus-visible {
 .bg-gray-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
 .bg-primary {
@@ -3713,6 +3757,10 @@ textarea:focus-visible {
   text-align: right;
 }
 
+.font-heading {
+  font-family: Poppins, sans-serif;
+}
+
 .font-sans {
   font-family: Roboto, sans-serif;
 }
@@ -3798,6 +3846,11 @@ textarea:focus-visible {
 .text-gray-200 {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .text-gray-600 {
@@ -3918,6 +3971,11 @@ textarea:focus-visible {
   color: rgb(229 62 62 / var(--tw-text-opacity));
 }
 
+.hover\:text-gray-300:hover {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
 .hover\:text-primary:hover {
   --tw-text-opacity: 1;
   color: rgb(0 90 156 / var(--tw-text-opacity));
@@ -3962,6 +4020,10 @@ textarea:focus-visible {
 
   .md\:w-1\/2 {
     width: 50%;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:grid-cols-3 {

@@ -1,4 +1,12 @@
 //public/js/main.js
+
+function getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+        Authorization: `Bearer ${token}`,
+    };
+}
+
 async function showLogin() {
     try {
         const response = await fetch('https://localhost:3001/auth/login');
@@ -196,7 +204,199 @@ async function showDashboard() {
     }
 }
 
+async function showProfile() {
+    const token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch('https://localhost:3001/profile', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            credentials: 'include', // Enviar credenciales
+        });
+
+        if (response.ok) {
+            // Redirige a la página de perfil
+            window.location.href = 'profile.html';
+        } else {
+            console.error('No autenticado: Redirigiendo al login.');
+            window.location.href = 'login.html';
+        }
+    } catch (error) {
+        console.error('Error al acceder al perfil:', error);
+        window.location.href = 'login.html';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token'); // Obtener el token del almacenamiento local
+
+    // Obtener referencias a los enlaces
+    const dashboardLink = document.getElementById('dashboard-link');
+    const profileLink = document.getElementById('profile-link');
+    const logoutLink = document.getElementById('logout-link');
+    const loginLink = document.getElementById('login-link');
+
+    try {
+        // Verificar autenticación usando el endpoint /dashboard
+        const response = await fetch('https://localhost:3001/dashboard', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en los encabezados
+            },
+            credentials: 'include', // Enviar credenciales (cookies)
+        });
+
+        if (response.ok) {
+            // Usuario autenticado: Mostrar enlaces de usuario autenticado
+            dashboardLink?.classList.remove('hidden');
+            profileLink?.classList.remove('hidden');
+            logoutLink?.classList.remove('hidden');
+            loginLink?.classList.add('hidden');
+        } else {
+            // Usuario no autenticado o sesión expirada
+            hideAuthenticatedLinks();
+        }
+    } catch (error) {
+        console.error('Error al verificar la sesión:', error);
+        hideAuthenticatedLinks(); // Asumir que no está autenticado
+    }
+
+    // Asignar eventos a los enlaces
+    dashboardLink?.addEventListener('click', showDashboard);
+    profileLink?.addEventListener('click', showProfile);
+    logoutLink?.addEventListener('click', showLogout);
+    loginLink?.addEventListener('click', showLogin);
+});
+
+// Función para ocultar enlaces relacionados con el usuario autenticado
+function hideAuthenticatedLinks() {
+    const dashboardLink = document.getElementById('dashboard-link');
+    const profileLink = document.getElementById('profile-link');
+    const logoutLink = document.getElementById('logout-link');
+    const loginLink = document.getElementById('login-link');
+
+    dashboardLink?.classList.add('hidden');
+    profileLink?.classList.add('hidden');
+    logoutLink?.classList.add('hidden');
+    loginLink?.classList.remove('hidden');
+}
+
+// Función para cargar datos del perfil
+async function loadUserProfile() {
+    const token = localStorage.getItem('token');
+
+    try {
+        const response = await fetch('https://localhost:3001/profile', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const user = await response.json();
+            console.log('Perfil del usuario:', user);
+
+            // Actualizar la información en el encabezado del perfil
+            document.getElementById('profile-name').textContent = user.nombre_completo || user.username;
+            document.getElementById('profile-email').textContent = user.email || 'Sin información';
+            document.getElementById('profile-role').textContent = user.rol || 'Sin rol';
+
+            // Actualizar la información en la sección de detalles
+            document.getElementById('profile-fullname').textContent = user.nombre_completo || 'Sin información';
+            document.getElementById('profile-username').textContent = user.username;
+            document.getElementById('profile-email-detail').textContent = user.email || 'Sin información';
+            document.getElementById('profile-role-detail').textContent = user.rol || 'Sin rol';
+            document.getElementById('profile-created-at').textContent = new Date(user.creado_en).toLocaleString();
+
+        } else if (response.status === 404) {
+            Swal.fire('Usuario no encontrado', 'Por favor, verifica tus datos.', 'warning');
+        } else {
+            Swal.fire('Error', 'No se pudo cargar el perfil.', 'error');
+        }
+    } catch (error) {
+        console.error('Error al cargar el perfil:', error);
+        Swal.fire('Error', 'Hubo un problema al cargar el perfil.', 'error');
+    }
+}
+
+// Función para inicializar la navegación y manejar autenticación
+async function initializeNavigation() {
+    const token = localStorage.getItem('token');
+
+    // Obtener referencias a los enlaces
+    const dashboardLink = document.getElementById('dashboard-link');
+    const profileLink = document.getElementById('profile-link');
+    const logoutLink = document.getElementById('logout-link');
+    const loginLink = document.getElementById('login-link');
+
+    try {
+        // Verificar autenticación usando el endpoint /dashboard (o cualquier otro endpoint seguro)
+        const response = await fetch('https://localhost:3001/dashboard', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            // Usuario autenticado: Mostrar enlaces de usuario autenticado
+            dashboardLink?.classList.remove('hidden');
+            profileLink?.classList.remove('hidden');
+            logoutLink?.classList.remove('hidden');
+            loginLink?.classList.add('hidden');
+        } else {
+            // Usuario no autenticado o sesión expirada
+            hideAuthenticatedLinks();
+        }
+    } catch (error) {
+        console.error('Error al verificar la sesión:', error);
+        hideAuthenticatedLinks(); // Asumir que no está autenticado
+    }
+
+    // Asignar eventos a los enlaces
+    dashboardLink?.addEventListener('click', showDashboard);
+    profileLink?.addEventListener('click', showProfile);
+    logoutLink?.addEventListener('click', showLogout);
+    loginLink?.addEventListener('click', showLogin);
+}
+
+// Función para ocultar enlaces relacionados con el usuario autenticado
+function hideAuthenticatedLinks() {
+    const dashboardLink = document.getElementById('dashboard-link');
+    const profileLink = document.getElementById('profile-link');
+    const logoutLink = document.getElementById('logout-link');
+    const loginLink = document.getElementById('login-link');
+
+    dashboardLink?.classList.add('hidden');
+    profileLink?.classList.add('hidden');
+    logoutLink?.classList.add('hidden');
+    loginLink?.classList.remove('hidden');
+}
+
+// Evento que se ejecuta al cargar el DOM
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+
+    if (currentPath.endsWith('profile.html')) {
+        loadUserProfile();
+    }
+
+    // Inicializar navegación
+    initializeNavigation();
+
+    // Puedes agregar más condiciones para otras páginas
+    if (currentPath.endsWith('proveedor.html')) {
+        // Llamar a funciones específicas para proveedor.html
+    }
+});
+
 // Exportar al ámbito global si es necesario
 window.showProveedores = showProveedores;
 window.showLogout = showLogout;
 window.showDashboard = showDashboard;
+window.showProfile = showProfile;

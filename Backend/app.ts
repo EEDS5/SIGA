@@ -75,12 +75,14 @@ import loginRoutes from './routes/loginRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
 import productoRoutes from './routes/productoRoutes';
 import proveedorRoutes from './routes/proveedorRoutes';
+import profileRoutes from './routes/profileRoutes';
 
 app.use('/auth', registerRoutes);
 app.use('/auth', loginRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/productos', productoRoutes);
 app.use('/proveedores', proveedorRoutes);
+app.use('/', profileRoutes);
 
 // Página principal
 /* app.get('/', (req: Request, res: Response) => {
