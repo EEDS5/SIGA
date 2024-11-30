@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+
+    <!-- Integrar Tailwind CSS -->
+    <link rel="stylesheet" href="../css/output.css">
+    <!-- Librería de Animaciones Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- SweetAlert2 para notificaciones -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- FlyonUI CSS (si es necesario para componentes interactivos) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.css" />
+
+    <style>
+        /* Tus estilos personalizados */
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            /* Empuja el contenido para que el footer quede en la parte inferior */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <a class="text-2xl font-bold text-blue-600 animate__animated animate__fadeInDown" href="#">SIGA</a>
+            <div class="flex space-x-4">
+                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
+                    href="/dashboard">Dashboard</a>
+                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
+                    href="/auth/logout">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido de la página -->
+    <div class="container mx-auto mt-5 fade-in px-4">
+        <h1 class="text-center text-4xl font-bold text-blue-600 mb-4 animate__animated animate__fadeIn zoomIn">Lista de
+            Productos</h1>
+
+        <!-- Botón para abrir el modal de creación/edición -->
+        <div class="flex justify-end mb-4">
+            <button type="button"
+                class="bg-blue-600 text-white px-4 py-2 rounded-md animate__animated animate__bounceIn"
+                onclick="limpiarModal()">
+                <i class="fas fa-plus-circle"></i> Crear Producto
+            </button>
+        </div>
+
+        <!-- Tabla de productos con scroll -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded">
+                <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <tr>
+                        <th class="py-3 px-6 text-left">ID</th>
+                        <th class="py-3 px-6 text-left">Nombre</th>
+                        <th class="py-3 px-6 text-left">Descripción</th>
+                        <th class="py-3 px-6 text-left">Precio</th>
+                        <th class="py-3 px-6 text-left">Stock</th>
+                        <th class="py-3 px-6 text-left">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productos-container" class="text-gray-700 text-sm font-light">
+                    <!-- Aquí se renderizarán los productos -->
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/dashboard"
+            class="block text-center bg-gray-500 text-white px-4 py-2 rounded-md mt-4 animate__animated animate__bounceIn">
+            <i class="fas fa-arrow-left"></i> Volver al Dashboard
+        </a>
+    </div>
+
+    <!-- Modal para crear/editar producto -->
+    <div id="productoModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <!-- Fondo oscuro (overlay) -->
+        <div class="fixed inset-0 bg-black opacity-50 z-40" onclick="cerrarModal()"></div>
+
+        <!-- Contenido del modal -->
+        <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 animate__animated animate__zoomIn z-50">
+            <div class="flex justify-between items-center bg-blue-600 text-white text-xl rounded-t-lg px-4 py-2">
+                <h5 id="productoModalLabel">Producto</h5>
+                <button type="button" onclick="cerrarModal()" class="text-white">&times;</button>
+            </div>
+            <div class="p-6">
+                <form id="productoForm">
+                    <input type="hidden" id="productoId" name="productoId">
+                    <div class="mb-4">
+                        <label for="nombre" class="block text-gray-700 font-medium">Nombre</label>
+                        <input type="text"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="descripcion" class="block text-gray-700 font-medium">Descripción</label>
+                        <input type="text"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="descripcion" name="descripcion" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="precio" class="block text-gray-700 font-medium">Precio</label>
+                        <input type="number" step="0.01"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="precio" name="precio" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="stock" class="block text-gray-700 font-medium">Stock</label>
+                        <input type="number"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="stock" name="stock" required>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md">
+                            <i class="fas fa-save"></i> Guardar
+                        </button>
+                        <button type="button" onclick="cerrarModal()"
+                            class="ml-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <!-- FlyonUI JS (si se utiliza para componentes interactivos) -->
+        <script src="https://cdn.jsdelivr.net/npm/flyonui/dist/flyonui.min.js"></script>
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Tu script de productos -->
+        <script src="../public/js/producto.js"></script>
+</body>
+
+</html>

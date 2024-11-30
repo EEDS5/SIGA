@@ -1,43 +1,76 @@
 import { Request, Response } from 'express';
-import db from '../db';
+import ProductoModel from '../models/productoModel';
 
+// Método para mostrar todos los productos
 export const mostrarProductos = async (req: Request, res: Response): Promise<void> => {
     try {
-        const productos = await db.any(
-            'SELECT p.id, p.nombre, c.nombre AS categoria, p.stock, p.precio_venta FROM producto p JOIN categoria c ON p.id_categoria = c.id'
-        );
-        
-        const categorias = await db.any('SELECT id, nombre FROM categoria');
-
-        res.render('productos', { productos, categorias });
+        const productos = await ProductoModel.obtenerTodos();
+        res.json(productos); // Enviar los productos como respuesta JSON
     } catch (error) {
         console.error('Error al obtener los productos:', error);
-        res.status(500).send('Error al obtener los productos');
+        res.status(500).json({ message: 'Error al obtener los productos' });
     }
 };
 
+// Método para crear un nuevo producto
 export const crearProducto = async (req: Request, res: Response): Promise<void> => {
-    const { nombre, categoria, stock, precio_venta } = req.body;
+    const { nombre, id_categoria, stock, stock_minimo, precio_venta } = req.body;
 
     try {
-        await db.none('INSERT INTO producto(nombre, id_categoria, stock, precio_venta) VALUES($1, $2, $3, $4)', [
+        const nuevoProducto = await ProductoModel.crear(
             nombre,
-            categoria,
+            id_categoria,
             stock,
+            stock_minimo,
             precio_venta
-        ]);
-        res.status(201).send('Producto creado con éxito');
+        );
+        res.status(201).send(`Producto creado con éxito, ID: ${nuevoProducto.id}`);
     } catch (error) {
-        console.error('Error al crear producto:', error);
+        console.error('Error al crear el producto:', error);
         res.status(500).send('Error al crear el producto');
     }
 };
 
-export const eliminarProducto = async (req: Request, res: Response): Promise<void> => {
-    const id = parseInt(req.params.id, 10);
+// Método para obtener un producto por ID (para editar)
+export const obtenerProducto = async (req: Request, res: Response): Promise<void> => {
+    const id = parseInt(req.params.id, 10); // Convertir id a número
 
     try {
-        await db.none('DELETE FROM producto WHERE id = $1', [id]);
+        const producto = await ProductoModel.obtenerPorId(id);
+        res.json(producto); // Enviar el producto como respuesta JSON
+    } catch (error) {
+        console.error('Error al obtener el producto:', error);
+        res.status(500).send('Error al obtener el producto');
+    }
+};
+
+// Método para actualizar un producto
+export const actualizarProducto = async (req: Request, res: Response): Promise<void> => {
+    const id = parseInt(req.params.id, 10); // Convertir id a número
+    const { nombre, id_categoria, stock, stock_minimo, precio_venta } = req.body;
+
+    try {
+        await ProductoModel.actualizar(
+            id,
+            nombre,
+            id_categoria,
+            stock,
+            stock_minimo,
+            precio_venta
+        );
+        res.status(200).send('Producto actualizado con éxito');
+    } catch (error) {
+        console.error('Error al actualizar el producto:', error);
+        res.status(500).send('Error al actualizar el producto');
+    }
+};
+
+// Método para eliminar un producto
+export const eliminarProducto = async (req: Request, res: Response): Promise<void> => {
+    const id = parseInt(req.params.id, 10); // Convertir id a número
+
+    try {
+        await ProductoModel.eliminar(id);
         res.status(200).send('Producto eliminado correctamente');
     } catch (error) {
         console.error('Error al eliminar el producto:', error);
