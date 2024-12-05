@@ -5,15 +5,29 @@ interface DetalleCompra {
   id: number;
   id_nro_compra: number;
   id_producto: number;
+  nombre_producto: string; // Nuevo campo
   cantidad: number;
   precio_compra: number;
-  subtotal: number; // Campo calculado
+  subtotal: number;
 }
 
 const DetalleCompraModel = {
-  // Obtener todos los detalles de compra
   obtenerTodos: (): Promise<DetalleCompra[]> => {
-    const sql = 'SELECT * FROM detalle_compra ORDER BY id ASC';
+    const sql = `
+      SELECT 
+        detalle_compra.id,
+        detalle_compra.id_nro_compra,
+        detalle_compra.id_producto,
+        producto.nombre AS nombre_producto,
+        detalle_compra.cantidad,
+        detalle_compra.precio_compra,
+        detalle_compra.subtotal
+      FROM 
+        detalle_compra
+      INNER JOIN 
+        producto ON detalle_compra.id_producto = producto.id
+      ORDER BY detalle_compra.id ASC
+    `;
     return dao.consultar<DetalleCompra>(sql);
   },
 

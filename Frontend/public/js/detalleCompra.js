@@ -1,3 +1,4 @@
+//public/js/detalleCompra.js
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
 
@@ -56,21 +57,21 @@ function renderDetallesCompra(detalles) {
         // Crea las celdas (columnas) de la fila
         row.innerHTML = `
             <td class="py-3 px-6">${detalle.id}</td>
-            <td class="py-3 px-6">${detalle.nro_compra}</td>
-            <td class="py-3 px-6">${detalle.producto}</td>
+            <td class="py-3 px-6">${detalle.nombre_producto}</td>
             <td class="py-3 px-6">${detalle.cantidad}</td>
-            <td class="py-3 px-6">${detalle.precio_unitario}</td>
-            <td class="py-3 px-6">${detalle.total}</td>
+            <td class="py-3 px-6">${detalle.precio_compra}</td>
+            <td class="py-3 px-6">${detalle.subtotal}</td>
             <td class="py-3 px-6 flex space-x-2">
                 <button class="editar-detalle bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md flex items-center" 
                     data-id="${detalle.id}" 
-                    data-nro-compra="${encodeURIComponent(detalle.nro_compra)}" 
-                    data-producto="${encodeURIComponent(detalle.producto)}" 
-                    data-cantidad="${encodeURIComponent(detalle.cantidad)}" 
-                    data-precio-unitario="${encodeURIComponent(detalle.precio_unitario)}">
+                    data-id-producto="${detalle.id_producto}" 
+                    data-nro-compra="${detalle.nro_compra}" 
+                    data-cantidad="${detalle.cantidad}" 
+                    data-precio-compra="${detalle.precio_compra}">
                     <i class="fas fa-edit mr-1"></i> Editar
                 </button>
-                <button class="eliminar-detalle bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md flex items-center" data-id="${detalle.id}">
+                <button class="eliminar-detalle bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md flex items-center" 
+                    data-id="${detalle.id}">
                     <i class="fas fa-trash-alt mr-1"></i> Eliminar
                 </button>
             </td>
@@ -85,12 +86,12 @@ function renderDetallesCompra(detalles) {
     editButtons.forEach(button => {
         button.addEventListener('click', function () {
             const id = button.dataset.id;
-            const nroCompra = decodeURIComponent(button.dataset.nroCompra);
-            const producto = decodeURIComponent(button.dataset.producto);
-            const cantidad = decodeURIComponent(button.dataset.cantidad);
-            const precioUnitario = decodeURIComponent(button.dataset.precioUnitario);
+            const idProducto = button.dataset.idProducto;
+            const nroCompra = button.dataset.nroCompra;
+            const cantidad = button.dataset.cantidad;
+            const precioCompra = button.dataset.precioCompra;
 
-            cargarDatosDetalle(id, nroCompra, producto, cantidad, precioUnitario);
+            cargarDatosDetalle(id, idProducto, nroCompra, cantidad, precioCompra);
         });
     });
 
@@ -118,15 +119,18 @@ function cerrarModal() {
 }
 
 // Función para cargar los datos en el modal para editar
-function cargarDatosDetalle(id, nroCompra, producto, cantidad, precioUnitario) {
+function cargarDatosDetalle(id, idProducto, nroCompra, cantidad, precioCompra) {
     document.getElementById('detalleId').value = id;
-    document.getElementById('nroCompra').value = nroCompra || '';
-    document.getElementById('producto').value = producto || '';
+    document.getElementById('id_producto').value = idProducto || ''; // Mostrar el ID del producto
+    document.getElementById('id_nro_compra').value = nroCompra || ''; // Mostrar el ID de la compra
     document.getElementById('cantidad').value = cantidad || '';
-    document.getElementById('precioUnitario').value = precioUnitario || '';
-    document.getElementById('detalleCompraModalLabel').textContent = 'Editar Detalle de Compra';
+    document.getElementById('precio_compra').value = precioCompra || '';
 
-    // Mostrar el modal manualmente
+    // Bloquear listas desplegables para edición
+    document.getElementById('id_nro_compra').disabled = true;
+    document.getElementById('id_producto').disabled = true;
+
+    document.getElementById('detalleCompraModalLabel').textContent = 'Editar Detalle de Compra';
     abrirModal();
 }
 
@@ -145,14 +149,14 @@ document.getElementById('detalleCompraForm').addEventListener('submit', async fu
     e.preventDefault();
 
     const id = document.getElementById('detalleId').value; // ID oculto
-    const url = id ? `https://localhost:3001/detalle-compra/${id}/editar` : 'https://localhost:3001/detalle-compra';
-    const method = id ? 'PUT' : 'POST'; // Usamos PUT para editar y POST para crear, según las rutas del backend
+    const url = id ? `https://localhost:3001/detalle-compra/${id}` : 'https://localhost:3001/detalle-compra';
+    const method = id ? 'PUT' : 'POST'; // Usamos PUT para editar y POST para crear
 
     const data = {
-        nro_compra: document.getElementById('nroCompra').value,
-        producto: document.getElementById('producto').value,
+        id_nro_compra: document.getElementById('id_nro_compra').value,
+        id_producto: document.getElementById('id_producto').value,
         cantidad: document.getElementById('cantidad').value,
-        precio_unitario: document.getElementById('precioUnitario').value,
+        precio_compra: document.getElementById('precio_compra').value,
     };
 
     try {
@@ -178,13 +182,8 @@ document.getElementById('detalleCompraForm').addEventListener('submit', async fu
             });
         } else {
             let errorMessage = 'No se pudo guardar el detalle de compra.';
-            try {
-                const errorData = await response.json();
-                errorMessage = errorData.message || errorMessage;
-            } catch (jsonError) {
-                const errorText = await response.text();
-                errorMessage = errorText || errorMessage;
-            }
+            const errorData = await response.json();
+            errorMessage = errorData.message || errorMessage;
             Swal.fire({
                 icon: 'error',
                 title: 'Error',

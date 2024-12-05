@@ -1411,10 +1411,6 @@ select {
     background-color: var(--btn-color, var(--fallback-b2));
     border-color: var(--btn-color, var(--fallback-b2));
   }
-
-  .btn-warning {
-    --btn-color: var(--fallback-wa);
-  }
 }
 
 @media (hover: hover) {
@@ -1451,20 +1447,6 @@ select {
     --glass-border-opacity: 15%;
   }
 
-  .btn-soft.btn-warning:hover {
-    background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
-  }
-
-  .btn-outline.btn-warning:hover {
-    --tw-border-opacity: 1;
-    border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
-    background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-  }
-
-  .btn-text.btn-warning:hover {
-    background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-  }
-
   .btn-disabled:hover,
     .btn[disabled]:hover,
     .btn:disabled:hover {
@@ -1495,22 +1477,6 @@ select {
   outline-offset: 0px;
 }
 
-@supports (color: oklch(0% 0 0)) {
-  .btn-warning {
-    --btn-color: var(--wa);
-  }
-
-  .btn-gradient.btn-warning {
-    --light-shade: var(--wa);
-  }
-}
-
-.btn-warning {
-  --tw-text-opacity: 1;
-  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-wa,oklch(var(--wa)/0.3));
-}
-
 .btn.glass {
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
@@ -1527,69 +1493,6 @@ select {
 .btn.glass.btn-active {
   --glass-opacity: 25%;
   --glass-border-opacity: 15%;
-}
-
-.btn-soft.btn-warning {
-  background-color: var(--fallback-wa,oklch(var(--wa)/0.2));
-  --tw-text-opacity: 1;
-  color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
-  outline-color: var(--fallback-wa,oklch(var(--wa)/0.5));
-}
-
-.btn-soft.btn-warning.btn-active {
-  background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
-}
-
-.btn-soft.btn-warning:focus-visible {
-  background-color: var(--fallback-wa,oklch(var(--wa)/0.3));
-  outline-color: var(--fallback-wa,oklch(var(--wa)/0.5));
-}
-
-.btn-outline.btn-warning {
-  --tw-text-opacity: 1;
-  color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
-}
-
-.btn-outline.btn-warning.btn-active {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
-  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-}
-
-.btn-outline.btn-warning:focus-visible {
-  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-}
-
-.btn-text.btn-warning {
-  --tw-text-opacity: 1;
-  color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
-}
-
-.btn-text.btn-warning.btn-active {
-  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-}
-
-.btn-text.btn-warning:focus-visible {
-  background-color: var(--fallback-wa,oklch(var(--wa)/0.1));
-}
-
-.btn-gradient.btn-warning {
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
-  --tw-text-opacity: 1;
-  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
-  --tw-shadow-color: var(--fallback-wa,oklch(var(--wa)/0.26));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-warning:hover {
-  --tw-shadow-color: var(--fallback-wa,oklch(var(--wa)/0.2));
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.btn-gradient.btn-warning:focus-visible {
-  outline-color: var(--fallback-wa,oklch(var(--wa)/0.3));
-  border-color: transparent;
 }
 
 .btn.btn-disabled,
@@ -3405,7 +3308,7 @@ textarea:focus-visible {
 
 .border-border {
   --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+  border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));
 }
 
 .border-primary {
@@ -3454,7 +3357,7 @@ textarea:focus-visible {
 
 .bg-gray-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
 }
 
 .bg-primary {
@@ -3655,7 +3558,7 @@ textarea:focus-visible {
 
 .text-gray-500 {
   --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }
 
 .text-gray-600 {
@@ -3761,6 +3664,11 @@ textarea:focus-visible {
   background-color: rgb(202 138 4 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+}
+
 .hover\:text-blue-600:hover {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity, 1));
@@ -3778,7 +3686,7 @@ textarea:focus-visible {
 
 .hover\:text-gray-300:hover {
   --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
+  color: rgb(209 213 219 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-primary:hover {

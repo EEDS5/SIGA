@@ -1,3 +1,4 @@
+//controllers/productoController.ts
 import { Request, Response } from 'express';
 import ProductoModel from '../models/productoModel';
 

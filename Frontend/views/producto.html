@@ -68,12 +68,10 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-            <a class="text-2xl font-bold text-blue-600 animate__animated animate__fadeInDown" href="#">SIGA</a>
+            <a class="text-2xl font-bold text-blue-600 animate__animated animate__fadeInDown" href="index.html">SIGA</a>
             <div class="flex space-x-4">
-                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
-                    href="/dashboard">Dashboard</a>
-                <a class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown"
-                    href="/auth/logout">Cerrar sesión</a>
+                <a id="dashboard-link" class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown hidden" href="#" onclick="showDashboard()">Dashboard</a>
+                <a id="logout-link" class="text-gray-800 hover:text-blue-600 animate__animated animate__fadeInDown hidden" href="#" onclick="showLogout()">Cerrar sesión</a>
             </div>
         </div>
     </nav>
@@ -99,9 +97,10 @@
                     <tr>
                         <th class="py-3 px-6 text-left">ID</th>
                         <th class="py-3 px-6 text-left">Nombre</th>
-                        <th class="py-3 px-6 text-left">Descripción</th>
-                        <th class="py-3 px-6 text-left">Precio</th>
+                        <th class="py-3 px-6 text-left">Categoría</th>
+                        <th class="py-3 px-6 text-left">Precio Venta</th>
                         <th class="py-3 px-6 text-left">Stock</th>
+                        <th class="py-3 px-6 text-left">Stock Mínimo</th>
                         <th class="py-3 px-6 text-left">Acciones</th>
                     </tr>
                 </thead>
@@ -130,31 +129,50 @@
             </div>
             <div class="p-6">
                 <form id="productoForm">
+                    <!-- Campo oculto para el ID del producto -->
                     <input type="hidden" id="productoId" name="productoId">
+
+                    <!-- Campo para el nombre del producto -->
                     <div class="mb-4">
                         <label for="nombre" class="block text-gray-700 font-medium">Nombre</label>
                         <input type="text"
                             class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
                             id="nombre" name="nombre" required>
                     </div>
+
+                    <!-- Campo para la categoría del producto -->
                     <div class="mb-4">
-                        <label for="descripcion" class="block text-gray-700 font-medium">Descripción</label>
-                        <input type="text"
+                        <label for="id_categoria" class="block text-gray-700 font-medium">Categoría</label>
+                        <input type="number"
                             class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
-                            id="descripcion" name="descripcion" required>
+                            id="id_categoria" name="id_categoria" required>
                     </div>
+
+                    <!-- Campo para el precio de venta del producto -->
                     <div class="mb-4">
-                        <label for="precio" class="block text-gray-700 font-medium">Precio</label>
+                        <label for="precio_venta" class="block text-gray-700 font-medium">Precio de Venta</label>
                         <input type="number" step="0.01"
                             class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
-                            id="precio" name="precio" required>
+                            id="precio_venta" name="precio_venta" required>
                     </div>
+
+                    <!-- Campo para el stock actual del producto -->
                     <div class="mb-4">
                         <label for="stock" class="block text-gray-700 font-medium">Stock</label>
                         <input type="number"
                             class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
                             id="stock" name="stock" required>
                     </div>
+
+                    <!-- Campo para el stock mínimo del producto -->
+                    <div class="mb-4">
+                        <label for="stock_minimo" class="block text-gray-700 font-medium">Stock Mínimo</label>
+                        <input type="number"
+                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            id="stock_minimo" name="stock_minimo" required>
+                    </div>
+
+                    <!-- Botones para guardar o cancelar -->
                     <div class="flex justify-end">
                         <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md">
                             <i class="fas fa-save"></i> Guardar
@@ -175,6 +193,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Tu script de productos -->
         <script src="../public/js/producto.js"></script>
+        <script src="../public/js/main.js"></script>
 </body>
 
 </html>

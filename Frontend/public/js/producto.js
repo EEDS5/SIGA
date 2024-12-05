@@ -1,3 +1,4 @@
+//public/js/producto.js
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
 
@@ -24,9 +25,7 @@ async function obtenerProductos() {
 
         if (response.ok) {
             const data = await response.json();
-            console.log('Productos desde backend:', data);
-
-            renderProductos(data); // Muestra los datos en la página
+            renderProductos(data); // Renderizar productos en la tabla
         } else if (response.status === 401) {
             console.error('No autenticado');
             window.location.href = 'login.html';
@@ -53,23 +52,32 @@ function renderProductos(productos) {
         const row = document.createElement('tr'); // Crea una fila para cada producto
         row.className = 'animate__animated animate__fadeInUp'; // Clase de animación
 
+        // Verificar valores predeterminados
+        const categoria = producto.id_categoria || 'N/A';
+        const precioVenta = typeof producto.precio_venta === 'number' ? producto.precio_venta.toFixed(2) : '0.00';
+        const stock = producto.stock || 0;
+        const stockMinimo = producto.stock_minimo || 0;
+
         // Crea las celdas (columnas) de la fila
         row.innerHTML = `
             <td class="py-3 px-6">${producto.id}</td>
             <td class="py-3 px-6">${producto.nombre}</td>
-            <td class="py-3 px-6">${producto.categoria || 'N/A'}</td>
-            <td class="py-3 px-6">${producto.precio || 'N/A'}</td>
-            <td class="py-3 px-6">${producto.stock || 'N/A'}</td>
+            <td class="py-3 px-6">${categoria}</td>
+            <td class="py-3 px-6">${precioVenta}</td>
+            <td class="py-3 px-6">${stock}</td>
+            <td class="py-3 px-6">${stockMinimo}</td>
             <td class="py-3 px-6 flex space-x-2">
                 <button class="editar-producto bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md flex items-center" 
                     data-id="${producto.id}" 
                     data-nombre="${encodeURIComponent(producto.nombre)}" 
-                    data-categoria="${encodeURIComponent(producto.categoria || '')}" 
-                    data-precio="${encodeURIComponent(producto.precio || '')}" 
-                    data-stock="${encodeURIComponent(producto.stock || '')}">
+                    data-id_categoria="${producto.id_categoria}" 
+                    data-stock="${producto.stock}" 
+                    data-stock_minimo="${producto.stock_minimo}" 
+                    data-precio_venta="${producto.precio_venta}">
                     <i class="fas fa-edit mr-1"></i> Editar
                 </button>
-                <button class="eliminar-producto bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md flex items-center" data-id="${producto.id}">
+                <button class="eliminar-producto bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md flex items-center" 
+                    data-id="${producto.id}">
                     <i class="fas fa-trash-alt mr-1"></i> Eliminar
                 </button>
             </td>
@@ -80,21 +88,20 @@ function renderProductos(productos) {
     });
 
     // Añadir event listeners después de crear los elementos
-    // Para los botones de editar
     const editButtons = document.querySelectorAll('.editar-producto');
     editButtons.forEach(button => {
         button.addEventListener('click', function () {
             const id = button.dataset.id;
             const nombre = decodeURIComponent(button.dataset.nombre);
-            const categoria = decodeURIComponent(button.dataset.categoria);
-            const precio = decodeURIComponent(button.dataset.precio);
-            const stock = decodeURIComponent(button.dataset.stock);
+            const id_categoria = button.dataset.id_categoria;
+            const stock = button.dataset.stock;
+            const stock_minimo = button.dataset.stock_minimo;
+            const precio_venta = button.dataset.precio_venta;
 
-            cargarDatosProducto(id, nombre, categoria, precio, stock);
+            cargarDatosProducto(id, nombre, id_categoria, stock, stock_minimo, precio_venta);
         });
     });
 
-    // Para los botones de eliminar
     const deleteButtons = document.querySelectorAll('.eliminar-producto');
     deleteButtons.forEach(button => {
         button.addEventListener('click', function () {
@@ -119,15 +126,15 @@ function cerrarModal() {
 }
 
 // Función para cargar los datos en el modal para editar
-function cargarDatosProducto(id, nombre, categoria, precio, stock) {
+function cargarDatosProducto(id, nombre, id_categoria, stock, stock_minimo, precio_venta) {
     document.getElementById('productoId').value = id;
     document.getElementById('nombre').value = nombre || '';
-    document.getElementById('categoria').value = categoria || '';
-    document.getElementById('precio').value = precio || '';
+    document.getElementById('id_categoria').value = id_categoria || '';
     document.getElementById('stock').value = stock || '';
+    document.getElementById('stock_minimo').value = stock_minimo || '';
+    document.getElementById('precio_venta').value = parseFloat(precio_venta).toFixed(2);
     document.getElementById('productoModalLabel').textContent = 'Editar Producto';
 
-    // Mostrar el modal manualmente
     abrirModal();
 }
 
@@ -137,7 +144,6 @@ function limpiarModal() {
     document.getElementById('productoId').value = '';
     document.getElementById('productoModalLabel').textContent = 'Crear Producto';
 
-    // Mostrar el modal manualmente
     abrirModal();
 }
 
@@ -145,15 +151,16 @@ function limpiarModal() {
 document.getElementById('productoForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const id = document.getElementById('productoId').value; // ID oculto
+    const id = document.getElementById('productoId').value;
     const url = id ? `https://localhost:3001/productos/${id}/editar` : 'https://localhost:3001/productos';
-    const method = 'POST'; // Usamos POST para crear y editar, según las rutas del backend
+    const method = id ? 'POST' : 'POST';
 
     const data = {
         nombre: document.getElementById('nombre').value,
-        categoria: document.getElementById('categoria').value,
-        precio: document.getElementById('precio').value,
-        stock: document.getElementById('stock').value,
+        id_categoria: parseInt(document.getElementById('id_categoria').value, 10),
+        stock: parseInt(document.getElementById('stock').value, 10),
+        stock_minimo: parseInt(document.getElementById('stock_minimo').value, 10),
+        precio_venta: parseFloat(document.getElementById('precio_venta').value),
     };
 
     try {
@@ -174,30 +181,19 @@ document.getElementById('productoForm').addEventListener('submit', async functio
                 showConfirmButton: false,
                 timer: 2000,
             }).then(() => {
-                cerrarModal(); // Ocultar el modal
-                obtenerProductos(); // Actualizar la lista de productos
+                cerrarModal();
+                obtenerProductos();
             });
         } else {
-            let errorMessage = 'No se pudo guardar el producto.';
-            try {
-                const errorData = await response.json();
-                errorMessage = errorData.message || errorMessage;
-            } catch (jsonError) {
-                const errorText = await response.text();
-                errorMessage = errorText || errorMessage;
-            }
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: errorMessage,
-            });
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Error al guardar el producto');
         }
     } catch (error) {
         console.error('Error al guardar el producto:', error);
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Hubo un problema al guardar el producto.',
+            text: error.message,
         });
     }
 });
@@ -228,30 +224,17 @@ async function eliminarProducto(id) {
                         text: 'Producto eliminado correctamente.',
                         showConfirmButton: false,
                         timer: 2000,
-                    }).then(() => {
-                        obtenerProductos(); // Actualizar la lista de productos
-                    });
+                    }).then(() => obtenerProductos());
                 } else {
-                    let errorMessage = 'No se pudo eliminar el producto.';
-                    try {
-                        const errorData = await response.json();
-                        errorMessage = errorData.message || errorMessage;
-                    } catch (jsonError) {
-                        const errorText = await response.text();
-                        errorMessage = errorText || errorMessage;
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: errorMessage,
-                    });
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Error al eliminar el producto');
                 }
             } catch (error) {
                 console.error('Error al eliminar el producto:', error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Hubo un problema al eliminar el producto.',
+                    text: error.message,
                 });
             }
         }

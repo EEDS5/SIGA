@@ -1,3 +1,4 @@
+//models/productoModel.ts
 import DAO from "./dao";
 const dao = new DAO();
 

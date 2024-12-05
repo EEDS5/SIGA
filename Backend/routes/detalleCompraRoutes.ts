@@ -1,3 +1,4 @@
+//routes/detalleCompraRoutes.ts
 import { Router } from 'express';
 import {
   obtenerDetallesCompra,

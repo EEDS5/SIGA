@@ -1,3 +1,4 @@
+//controllers/detalleCompraController.ts
 import { Request, Response } from 'express';
 import DetalleCompraModel from '../models/detalleCompraModel';
 

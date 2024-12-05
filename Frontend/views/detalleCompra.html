@@ -103,24 +103,8 @@
                 </thead>
                 <tbody id="detalle-compra-container" class="text-gray-700 text-sm font-light">
                     <!-- Tabla de detalles de compra con scroll -->
-<div class="overflow-x-auto">
-    <table class="min-w-full bg-white shadow-md rounded">
-      <thead class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-        <tr>
-          <th class="py-3 px-6 text-left">ID</th>
-          <th class="py-3 px-6 text-left">Producto</th>
-          <th class="py-3 px-6 text-left">Cantidad</th>
-          <th class="py-3 px-6 text-left">Precio Unitario</th>
-          <th class="py-3 px-6 text-left">Subtotal</th>
-          <th class="py-3 px-6 text-left">Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="detalle-compra-container" class="text-gray-700 text-sm font-light">
-        <!-- Aquí se renderizarán los detalles de compra -->
-      </tbody>
-    </table>
-  </div>
-  
+                    
+
                 </tbody>
             </table>
         </div>
@@ -146,25 +130,27 @@
                 <form id="detalleCompraForm">
                     <input type="hidden" id="detalleId" name="detalleId">
                     <div class="mb-4">
-                        <label for="producto" class="block text-gray-700 font-medium">Producto</label>
-                        <input type="text"
-                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
-                            id="producto" name="producto" required>
+                        <label for="id_nro_compra" class="block text-gray-700 font-medium">Número de Compra</label>
+                        <input type="number" class="w-full px-3 py-2 border rounded-md" id="id_nro_compra"
+                            name="id_nro_compra" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_producto" class="block text-gray-700 font-medium">ID Producto</label>
+                        <input type="number" class="w-full px-3 py-2 border rounded-md" id="id_producto"
+                            name="id_producto" required>
                     </div>
                     <div class="mb-4">
                         <label for="cantidad" class="block text-gray-700 font-medium">Cantidad</label>
-                        <input type="number"
-                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
-                            id="cantidad" name="cantidad" required>
+                        <input type="number" class="w-full px-3 py-2 border rounded-md" id="cantidad" name="cantidad"
+                            required>
                     </div>
                     <div class="mb-4">
-                        <label for="precio" class="block text-gray-700 font-medium">Precio Unitario</label>
-                        <input type="number"
-                            class="w-full px-3 py-2 border rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
-                            id="precio" name="precio" step="0.01" required>
+                        <label for="precio_compra" class="block text-gray-700 font-medium">Precio de Compra</label>
+                        <input type="number" class="w-full px-3 py-2 border rounded-md" id="precio_compra"
+                            name="precio_compra" step="0.01" required>
                     </div>
                     <div class="flex justify-end">
-                        <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
                             <i class="fas fa-save"></i> Guardar
                         </button>
                         <button type="button" onclick="cerrarModal()"
@@ -176,6 +162,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Scripts -->
     <script src="../public/js/detalleCompra.js"></script>
