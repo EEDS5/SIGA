@@ -77,8 +77,17 @@ import productoRoutes from './routes/productoRoutes';
 import proveedorRoutes from './routes/proveedorRoutes';
 import nroCompraRoutes from './routes/nroCompraRoutes'; // Importa las rutas de nro_compra
 import detalleCompraRoutes from './routes/detalleCompraRoutes';
-
+import vehiculoRoutes from './routes/vehiculoRoutes';
+import marcaVehiculoRoutes from './routes/marcaVehiculoRoutes'; // Importa las rutas de marca_vehiculo
+import modeloVehiculoRoutes from './routes/modeloVehiculoRoutes'; // Importa las rutas de modelo_vehiculo
+import categoriaRoutes from './routes/categoriaRoutes'; // Importa las rutas de categoría
+import tipoTrabajoRoutes from './routes/tipoTrabajoRoutes'; // Importa las rutas de tipo_trabajo
+import tipoTrabajoProductoRoutes from './routes/tipoTrabajoProductoRoutes'; // Importa las rutas tipo_trabajo_producto
+import ordenTrabajoRoutes from './routes/ordenTrabajoRoutes'; // Importa las rutas orden_trabajo
+import ordenTrabajoTipoTrabajoRoutes from './routes/ordenTrabajoTipoTrabajoRoutes'; // Importa las rutas
+import productoOrdenTrabajoRoutes from './routes/productoOrdenTrabajoRoutes'; // Importa las rutas
 import profileRoutes from './routes/profileRoutes';
+
 
 app.use('/auth', registerRoutes);
 app.use('/auth', loginRoutes);
@@ -86,7 +95,16 @@ app.use('/dashboard', dashboardRoutes);
 app.use('/productos', productoRoutes);
 app.use('/proveedores', proveedorRoutes);
 app.use('/nro-compra', nroCompraRoutes); // Agrega la nueva ruta para nro_compra
+app.use('/vehiculos', vehiculoRoutes); // Agrega la nueva ruta para vehiculos
 app.use('/detalle-compra', detalleCompraRoutes);
+app.use('/marcas-vehiculos', marcaVehiculoRoutes); // Agrega la nueva ruta para marcas de vehículos
+app.use('/modelos-vehiculos', modeloVehiculoRoutes); // Agrega la nueva ruta para modelos de vehículos
+app.use('/categorias', categoriaRoutes); // Agrega la nueva ruta para categorías
+app.use('/tipos-trabajo', tipoTrabajoRoutes); // Agrega la nueva ruta para tipos de trabajo
+app.use('/tipos-trabajo-productos', tipoTrabajoProductoRoutes); // Agrega la nueva ruta para tipos de trabajo-productos
+app.use('/ordenes-trabajo', ordenTrabajoRoutes); // Agrega la nueva ruta para órdenes de trabajo
+app.use('/ordenes-trabajo-tipo-trabajo', ordenTrabajoTipoTrabajoRoutes); // Agrega la ruta
+app.use('/productos-orden-trabajo', productoOrdenTrabajoRoutes); // Agrega la ruta
 app.use('/', profileRoutes);
 
 // Página principal
