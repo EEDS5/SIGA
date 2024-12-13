@@ -133,6 +133,42 @@ async function showProveedores() {
     }
 }
 
+async function showModelovehiculo() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/modelos-vehiculos', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Modelos de vehículos:', data);
+            // Almacenar los datos en localStorage si los necesitas en modelovehiculo.html
+            localStorage.setItem('modelosVehiculos', JSON.stringify(data));
+            window.location.href = 'modelovehiculo.html'; // Redirige a la página de modelos de vehículos
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar modelos de vehículos:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showModelovehiculo:', error);
+    }
+}
+
     // Función para mostrar detalles de compra
 async function showDetalleCompra() {
     const token = localStorage.getItem('token'); // Recupera el token almacenado
@@ -240,6 +276,153 @@ async function showProductos() {
         console.error('Error en showProductos:', error);
     }
 }
+// Función para gestionar vehículos
+async function showVehiculos() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/vehiculos', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Vehículos:', data);
+            // Almacenar los vehículos en localStorage o sessionStorage si los necesitas en vehiculo.html
+            localStorage.setItem('vehiculos', JSON.stringify(data));
+            window.location.href = 'vehiculo.html'; // Redirige a la página de vehículos
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar vehículos:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showVehiculos:', error);
+    }
+}
+
+// Función para gestionar marcas de vehículos
+async function showMarcaVehiculos() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/marcaVehiculo', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Marcas de Vehículos:', data);
+            // Almacenar las marcas en localStorage o sessionStorage si las necesitas en marcaVehiculo.html
+            localStorage.setItem('marcaVehiculos', JSON.stringify(data));
+            window.location.href = 'marcaVehiculo.html'; // Redirige a la página de marcas de vehículos
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar marcas de vehículos:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showMarcaVehiculos:', error);
+    }
+}
+
+// Función para gestionar tipo de trabajo
+async function showTipoTrabajo() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/tipo-trabajo', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Tipos de trabajo:', data);
+            // Almacenar los tipos de trabajo en localStorage o sessionStorage si los necesitas en tipoTrabajo.html
+            localStorage.setItem('tipoTrabajo', JSON.stringify(data));
+            window.location.href = 'tipoTrabajo.html'; // Redirige a la página de tipos de trabajo
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar tipos de trabajo:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showTipoTrabajo:', error);
+    }
+}
+async function showOrdenesTrabajo() {
+    const token = localStorage.getItem('token'); // Recupera el token almacenado
+
+    console.log('Token obtenido de localStorage:', token); // Depuración
+
+    if (!token) {
+        console.error('No se encontró un token');
+        window.location.href = 'login.html'; // Redirige al login si no hay token
+        return;
+    }
+
+    try {
+        const response = await fetch('https://localhost:3001/ordenes-trabajo', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Órdenes de trabajo:', data);
+            // Almacenar los datos en localStorage o sessionStorage si los necesitas en ordenTrabajo.html
+            localStorage.setItem('ordenesTrabajo', JSON.stringify(data));
+            window.location.href = 'ordenTrabajo.html'; // Redirige a la página de órdenes de trabajo
+        } else if (response.status === 401) {
+            console.error('No autenticado');
+            window.location.href = 'login.html';
+        } else {
+            console.error('Error al cargar las órdenes de trabajo:', response.status);
+        }
+    } catch (error) {
+        console.error('Error en showOrdenesTrabajo:', error);
+    }
+}
+
+
 
 // Función para cerrar sesión
 async function showLogout() {
@@ -356,7 +539,41 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'include', // Enviar credenciales (cookies)
         });
 
-        if (response.ok) {
+        if (response.ok) {async function showModelovehiculo() {
+            const token = localStorage.getItem('token'); // Recupera el token almacenado
+        
+            console.log('Token obtenido de localStorage:', token); // Depuración
+        
+            if (!token) {
+                console.error('No se encontró un token');
+                window.location.href = 'login.html'; // Redirige al login si no hay token
+                return;
+            }
+        
+            try {
+                const response = await fetch('https://localhost:3001/modelos-vehiculos', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+                    },
+                });
+        
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Modelos de vehículos:', data);
+                    // Almacenar los datos en localStorage si los necesitas en modelovehiculo.html
+                    localStorage.setItem('modelosVehiculos', JSON.stringify(data));
+                    window.location.href = 'modelovehiculo.html'; // Redirige a la página de modelos de vehículos
+                } else if (response.status === 401) {
+                    console.error('No autenticado');
+                    window.location.href = 'login.html';
+                } else {
+                    console.error('Error al cargar modelos de vehículos:', response.status);
+                }
+            } catch (error) {
+                console.error('Error en showModelovehiculo:', error);
+            }
+        }
             // Usuario autenticado: Mostrar enlaces de usuario autenticado
             dashboardLink?.classList.remove('hidden');
             profileLink?.classList.remove('hidden');
@@ -511,3 +728,9 @@ window.showDetalleCompra = showDetalleCompra;
 window.showLogout = showLogout;
 window.showProductos = showProductos;
 window.showProfile = showProfile;
+window.showVehiculos = showVehiculos;
+// Exportar función para mostrar marcas de vehículos
+window.showMarcaVehiculos = showMarcaVehiculos;
+window.showTipoTrabajo = showTipoTrabajo;
+window.showOrdenesTrabajo = showOrdenesTrabajo;
+window.showModelovehiculo = showModelovehiculo;
